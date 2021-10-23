@@ -1,0 +1,88 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Show All Users</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%-include('include/top-showusers.ejs')%>
+    
+</head>
+
+<body>
+    <!-- Left Panel -->
+
+    <%-include('include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <%-include('include/header.ejs')%>
+        <!-- Header-->
+
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">All Users</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Criation Date</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(myUser of users) { %>
+                                        <tr>
+                                            <td>
+                                                <a href="/user-detail?userId=<%=myUser.id%>" 
+                                                title="Details">
+                                                    <%=myUser.id%>
+                                                </a> 
+                                            </td>
+                                            <td><%=myUser.email%></td>
+                                            <td><%=myUser.creationDate.toLocaleString()%></td>                                            
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <%-include('include/bottom-showusers.ejs')%>
+
+
+</body>
+
+</html>

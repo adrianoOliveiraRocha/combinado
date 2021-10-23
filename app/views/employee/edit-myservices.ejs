@@ -1,0 +1,94 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body onload="callNotifications()">
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+        <div class="content mt-3">    
+
+
+        <div class="card">
+          <div class="card-header">Meus Serviços</div>
+          <div class="card-body card-block">
+
+            <form method="POST"
+                action="/update-my-services">
+                
+                <div class="container">
+                    <% if(services.length > 0) { %>
+                    <div class="form-check">
+                        
+                        <% for(let service of services) { %>
+                        <div class="row">
+                            <div class="col-2">
+                                <input type="checkbox" class="form-check-input" name="<%=service.id%>"
+                                <%=isChecked(service.id)%>
+                                >
+                            </div>
+                            <div class="col">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    <%=service.name%>
+                                </label>    
+                            </div>                        
+                        </div>
+                        <% } %>
+
+                    </div> 
+                    <% } else { %>
+                    <div class="alert alert-info">
+                        <strong>Aviso!</strong> O usuário ainda não cadastrou nenhum serviço
+                    </div>
+                    <% } %>                   
+                </div> 
+              
+                <hr>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>              
+
+            </form>
+            
+          </div>
+        </div>           
+            
+            
+
+        </div> <!-- .content -->
+
+    </div><!-- /#right-panel -->
+
+    <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

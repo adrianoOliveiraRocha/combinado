@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  </head>
+  <body>
+    <table>  
+    
+    <% for(user of users) {%>    
+    <tr>
+      <td><%=user.username%></td>
+    <td>
+      <form action="/schedule" method="POST">
+        <input type="hidden" name="idUser" value="<%=user.id%>">
+        <input type="submit" value="Agendar">
+      </form>
+    </td>
+    </tr>
+    <% } %>
+    </table>
+  </body>
+  
+</html>

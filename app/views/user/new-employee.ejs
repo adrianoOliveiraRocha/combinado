@@ -1,0 +1,131 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body onload="callNotifications()">
+
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <% if(typeof message != 'undefined' && message != '') { %>
+        <div class="col-sm-12">
+          <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Success</span> <%=message%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <% } %>          
+
+        <div class="card"> 
+			<div class="card-header">
+				<strong>Novo Colaborador</strong>
+			</div>
+			<form action="/new-employee" method="post" class="form-horizontal">
+
+				<div class="card-body card-block">
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="name" class=" form-control-label">Nome</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="text" name="name" placeholder="Nome" class="form-control"
+								required>
+							<span class="form-text text-muted">
+							Digite o nome do novo colaborador</span>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="email" class=" form-control-label">Email</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="email" name="email" placeholder="Email" class="form-control"
+								required>
+							<span class="form-text text-muted">
+							Digite o email do novo colaborador</span>
+						</div>
+					</div>
+					<% if(services.length > 0 ) {  %>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="name" class=" form-control-label">Serviços</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<select name="service" class="form-control" multiple required>
+								<% for(service of services) {%>
+								<option value="<%=service.id%>">
+									<%=service.name%> 
+								</option>								
+								<% } %>
+							</select>
+							<span class="form-text text-muted">
+							Um colaborador pode prestar mais de um tipo de serviço</span>
+						</div>
+					</div>
+					<% } %>
+
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="pwd" class=" form-control-label">Senha</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="password" name="pwd" placeholder="Senha" class="form-control"
+								required>
+							<span class="form-text text-muted">
+							Essa senha será usado pelo colaborador para entrar no sistema.
+							Mas ele pode mudá-la a qualquer momento</span>
+						</div>
+					</div>				
+				</div>
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary btn-sm">
+						Salvar
+					</button>
+					<a type="reset" href="/user-home" class="btn btn-warning btn-sm">
+						Cancelar
+					</a>
+				</div>
+
+			</form>
+		</div>   
+
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Block Form</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body>
+
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        
+        <div class="card">
+			<div class="card-header">
+				<strong>Send Notification</strong>
+			</div>
+
+			<form action="/create-notyfication" method="post" class="form-horizontal">
+
+				<div class="card-body card-block">				
+
+					<input type="hidden" name="idToNotify" value="<%=idToNotify%>">
+					
+          <div class="row form-group">
+            <div class="col col-md-3">
+              <label for="message" class=" form-control-label">Message</label>
+            </div>
+            <div class="col-12 col-md-9">
+              <textarea rows="5" name="message" class="form-control"></textarea>
+              <span class="form-text text-muted">Message to user</span>
+            </div>
+          </div>				
+					
+				</div>
+
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary btn-sm">
+						Ok
+					</button>
+            <a class="btn btn-primary btn-sm" style="color: #fff"
+                href="/admin">
+						Cancel
+					</a>
+					
+				</div>
+			
+			</form>
+
+		</div>
+		
+		
+		
+			
+
+          
+
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

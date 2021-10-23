@@ -1,0 +1,40 @@
+{
+  "name": "queryschedulingsystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "combinado.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianoOliveiraRocha/QuerySchedulingSystem.git"
+  },
+  "author": "Adriano Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianoOliveiraRocha/QuerySchedulingSystem/issues"
+  },
+  "homepage": "https://github.com/adrianoOliveiraRocha/QuerySchedulingSystem#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "consign": "^0.1.6",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.5",
+    "express-mysql-session": "^2.1.0",
+    "express-session": "^1.16.2",
+    "express-validator": "^5.3.1",
+    "luxon": "^1.17.2",
+    "mysql": "^2.17.1",
+    "node-html-parser": "^1.1.15",
+    "nodemailer": "^6.3.1",
+    "nodemon": "^2.0.9",
+    "paypal-rest-sdk": "^1.8.1",
+    "request": "^2.88.0",
+    "require": "^0.4.4",
+    "simple-jscalendar": "^1.4.4",
+    "to": "^0.2.9",
+    "update": "^0.4.2"
+  }
+}

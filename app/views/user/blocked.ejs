@@ -1,0 +1,87 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body>
+
+
+    
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <div class="content mt-3">  
+
+            
+                
+        <div class="panel" style="text-align: center">
+
+            <div class="card">
+                <div class="card-header">
+                  <h4>Olá <%=user.username%>!</h4></div>
+                </div>                
+                                
+                <div class="card-body">
+
+                    <% if(notifications.length > 0) { %>
+                      <div class="alert alert-info">
+                        Você tem <%=notifications.length%> 
+                        <%=(notifications.length > 1 ? 'notificações': 'notificação')%>
+                      </div>
+                      <% for(let notification of notifications) {%>
+                      <div class="alert alert-warning">
+                        <%=notification.message%>
+                      </div>
+                      <% } %>                      
+                      
+                    <% } else { %>
+                      <div class="alert alert-warning">
+                        Conta bloqueada
+                      </div>
+                    <% } %> 
+                </div>
+                <div class="card-footer">                   
+
+                  <div class="btn-group-vertical" style="color: white">                    
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Opções
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/billingAgremment">Aderir ao Plano Mensal</a>
+                        <hr>
+                        <a class="dropdown-item" href="/logout">Sair</a>
+                      </div>
+                    </div>
+                  </div> 
+
+                </div>
+            </div>
+
+            
+          
+        </div>   
+
+      </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+
+    <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+
+
+https://www.hostinger.com.br/tutoriais/como-configurar-chaves-ssh/
+já gerou as chaves em /home/adriano/hostinger
+ssh root@93.188.165.239
+xclip -sel clip < ~/.ssh/id_rsa.pub
+
+take apach out :-/ sudo service apache2 stop sudo update-rc.d apache2 remove
+
+Problems with nodemon:
+ - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+MySQL
+ - sudo mysqldump --databases qss > qss.sql;
+
+ - alter table message add messageDate timestamp not null default current_timestamp;
+
+ - CREATE TABLE [IF NOT EXISTS] table_name(
+      column_list
+    ) ENGINE=storage_engine
+
+- update nameTable set nameColumn = value
+
+- ALTER TABLE user AUTO_INCREMENT = 1;
+
+- alter table tableName add column columnName typeColumn;
+
+- source qss.sql
+
+- create index _datetime on scheduling(_datetime)
+
+// select id, dayCode, employeeId, morningInit, morningEnd, afternoonInit, afternoonEnd from employee_day where employeeI
+
+
+Host para conexão: mysql.combinado.kinghost.net
+Host alternativo: mysql12-farm76.kinghost.net
+Usuário para conexão: (mesmo nome da base de dados)
+
+
+Javascript date
+
+var today = new Date().toLocaleDateString('pt-BR', {  
+	day : 'numeric',
+	month : 'short',
+	year : 'numeric'
+}) ;
+
+var today = new Date().toLocaleString('pt-BR', {
+	day: '2-digit', 
+	month: '2-digit', 
+	year: 'numeric'}
+);
+
+// https://king.host/wiki/artigo/deploy-nodejs/
+
+sart server: pm2 start index.js
+restart server pm2 start index.js -f
+
+pm2:
+Add your own code metrics: http://bit.ly/code-metrics
+Use `pm2 logs output [--lines 1000]` to display logs
+Use `pm2 env 2` to display environement variables
+Use `pm2 monit` to monitor CPU and Memory usage output
+
+ssl address
+https://www.combinado.kinghost.net:21095/
+
+https://www.combinado.kinghost.net/
+
+
+favicon:
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+
+mysq: 453231
+453231@W3s
+
+

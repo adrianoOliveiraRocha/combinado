@@ -1,0 +1,103 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Enviar Email</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body onload="callNotifications()">
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <div class="card">
+          <div class="card-header">Enviar Email</div>
+          <div class="card-body card-block">
+
+            <form method="POST" action="/send-email-message">
+
+              <div class="card-body card-block">              
+
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="email">Email do Cliente</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="email" class="form-control" name="email" 
+                    aria-describedby="Email do cliente" required readeonly
+                    value="<%=scheduling.clientEmail%>">
+                    <small id="emailHelp" class="form-text text-muted">
+                    Você não pode alterar esse campo</small>
+                  </div>                 
+                  
+                </div>  
+                
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="name">Assunto</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="subject" class="form-control" name="subject" 
+                    aria-describedby="Assunto">
+                  </div>                 
+                  
+                </div> 
+
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="name">Mensagem</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <textarea rows="" cols="" class="form-control"
+                     name="message" required ></textarea>
+                    
+                  </div>                 
+                  
+                </div>                
+
+                <hr>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>              
+              </div>
+            </form>
+            
+          </div>
+        </div>    
+
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+  <script src="phoneNumber.js"></script>
+</body>
+
+</html>

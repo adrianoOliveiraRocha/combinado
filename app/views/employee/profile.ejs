@@ -1,0 +1,185 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body onload="callNotifications()">
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <% if(typeof message != 'undefined' && message != '') { %>
+        <div class="col-sm-12">
+          <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <%=message%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <% } %>          
+
+        <div class="card">
+          <div class="card-header">Meus Dados</div>
+          <div class="card-body card-block">
+
+            <form method="POST" 
+              enctype="multipart/form-data" 
+              action="/edit-employee-profile">
+
+              <div class="card-body card-block">              
+
+                <input type="hidden" name="id" value="<%=employee.id%>">
+                <input type="hidden" name="currentImage" value="<%=employee.image%>">
+
+
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="name">Nome</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="text" class="form-control" name="name" 
+                    aria-describedby="Seu nome" placeholder="Nome" required
+                    value="<%=employee.name%>">
+                    <small id="nameHelp" class="form-text text-muted">
+                    Por favor, digite seu nome</small>
+                  </div>                 
+                  
+                </div>
+
+
+                <div class="row form-group">
+                  
+                  <div class="col col-md-3">
+                    <label for="email">Email</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="email" class="form-control" name="email" 
+                    aria-describedby="emailHelp" placeholder="Email" required
+                    value="<%=employee.email%>">
+                    <small id="emailHelp" class="form-text text-muted">
+                    ex: fulano@email.com</small>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col col-md-3">
+                    <label for="pwd">Senha</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="password" class="form-control" name="pwd" 
+                    placeholder="Senha" required value="<%=employee.pwdDecrypted%>">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col col-md-3">
+                    <label for="phone">Telefone</label>
+                  </div>  
+                  <div class="col-12 col-md-9">
+                    <input type="text" class="form-control" name="phone" 
+                    id="phone"
+                    aria-describedby="xx-xxxxx-xxxx" placeholder="Telefone"
+                    value="<%=employee.phone%>">
+                    <small id="phoneHelp" class="form-text text-muted">
+                    Somente números com DDD</small>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col col-md-3">
+                    <label for="address">Endereço</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="text" class="form-control" name="address" 
+                    aria-describedby="address" placeholder="Endereço"
+                    value="<%=employee.address%>">
+                    <small id="addressHelp" class="form-text text-muted">
+                    Endereço completo. Ex: Avenida 2, 89</small>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col col-md-3">
+                    <label for="address">Sobre mim</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <textarea class="form-control" name="aboutMe"><%=employee.aboutMe%></textarea>
+
+                    <small id="addressHelp" class="form-text text-muted">
+                    Fale sobre sua formação e experiência profissional</small>
+                  </div>
+                </div>
+                
+                <% if(typeof employee.image == 'undefined' || employee.image == null) { %>
+                <div class="row form-group">
+                  <div class="col col-md-3">
+                    <label for="image">Imagem</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="file" class="form-control-file" name="image">
+                    <span class="form-text text-muted">
+								      Por favor, selecione uma imagem</span>
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="row form-group">
+                  <div class="col col-md-3">
+                    <label for="image" class=" form-control-label">Imagem</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <img src="admin/images/profile_images/<%=employee.image%>" width="100px;">
+                    <hr>
+                    <label for="image">Substituir Imagem</label>
+                    <input type="file" class="form-control-file" name="image">
+                    <span class="form-text text-muted">
+								      Por favor, selecione uma imagem se você deseja substituir a imagem atual</span>                    
+                  </div>
+                <div>
+                <% } %>
+                <hr>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>              
+              </div>
+            </form>
+            
+          </div>
+        </div>    
+
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+  <script src="phoneNumber.js"></script>
+</body>
+
+</html>

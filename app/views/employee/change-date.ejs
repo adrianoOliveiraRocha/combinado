@@ -1,0 +1,56 @@
+<div class="card bg-info text-white" style="text-align: center">
+  <div class="card-body">
+    <strong><%=today.getDate()%>/<%=today.getMonth() + 1%>/<%=today.getFullYear()%></strong>
+  </div>
+</div>
+<div class="card" style="text-align: center">
+  <div class="card-body">Manhã</div>
+</div>
+<div class="row">  
+  <% if(morning != null) { %>  
+    <% for(time of morning) { %>            
+    <div class="col-sm-4">
+      <div class="card <%=isItBusy(time)%>" style="text-align: center">
+        <a href="/prepare-show-scheduling?date=<%=today%>&time=<%=time%>" 
+          style="color: #ffffff">
+          <div class="card-body">
+            <%=time%>
+          </div>
+        </a>
+      </div>
+    </div>
+    <% } %>  
+  <% } else { %>
+    <div class="col-sm-4">
+      <i style="color:red">Não configurado</i>
+    </div>    
+  <% } %>                       
+</div>
+
+<hr>
+
+<div class="card" style="text-align: center">
+  <div class="card-body">Tarde</div>
+</div>
+<div class="row">   
+  <% if(afternoon != null) {%>
+    <%for(time of afternoon) { %>            
+    <div class="col-sm-4">
+      <div class="card <%=isItBusy(time)%>" style="text-align: center">
+        <a href="/prepare-show-scheduling?date=<%=today%>&time=<%=time%>" 
+          style="color: #ffffff">
+          <div class="card-body">
+            <%=time%> 
+          </div>
+        </a>
+      </div>
+    </div>
+    <% } %>
+  <% } else { %>
+    <div class="col-sm-4">
+      <i style="color:red">Não configurado</i>
+    </div>
+  <% } %> 
+  
+</div>
+<hr>

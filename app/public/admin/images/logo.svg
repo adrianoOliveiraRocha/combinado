@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="119mm"
+   height="17mm"
+   viewBox="0 0 119 17"
+   version="1.1"
+   id="svg110"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs104" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="237.5"
+     inkscape:cy="17.142857"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g151"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="712"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata107">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-280)">
+    <g
+       id="g151">
+      <g
+         id="g4672">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:16.78860855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#800000;fill-opacity:1;stroke:none;stroke-width:0.41971517"
+           x="-0.054748289"
+           y="280.62598"
+           id="text114"
+           transform="scale(0.9503903,1.0521993)"><tspan
+             sodipodi:role="line"
+             id="tspan112"
+             x="-0.054748289"
+             y="280.62598"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:16.7887001px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#800000;stroke-width:0.41971517"><tspan
+               style="fill:#ffffff"
+               id="tspan143"><tspan
+   id="tspan155"
+   style="fill:#c8beb7">Combinado</tspan> </tspan><tspan
+               id="tspan153"
+               style="fill:#e9afaf">Admin</tspan></tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

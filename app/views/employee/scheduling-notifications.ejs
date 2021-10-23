@@ -1,0 +1,19 @@
+
+<button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-bell"></i>
+  <span class="count bg-success"><%=numberOfNotifications%></span>
+</button>
+<div class="dropdown-menu" aria-labelledby="notification" 
+  style="overflow: scroll; max-height: 250px;">
+  <p class="bg-info" style="color: #fff">Novos Agendamentos</p>
+  <%for(notification of notifications) {%>
+  <a class="dropdown-item media bg-flat-color-1" 
+    href="/show-scheduling?schedulingId=<%=notification.id%>">
+    <i class="fa fa-calendar"></i>
+    <p style="color: #000">
+      <%=notification._datetime.toLocaleString()%>
+    </p>
+  </a>
+  <% } %>  
+
+</div>

@@ -1,0 +1,17 @@
+<button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-bell"></i>
+  <span class="count bg-success"><%=Object.keys(todayPayments).length%></span>
+</button>
+<div class="dropdown-menu" aria-labelledby="notification" 
+  style="overflow: scroll; max-height: 250px;">
+  <p class="bg-info" style="color: #fff">Today Payments</p>
+  <%for(todayPayment of todayPayments) {%>
+  <a class="dropdown-item media bg-flat-color-1" 
+    href="/admin-see-user?userId=<%=todayPayment.id%>">
+    <i class="fa fa-calendar"></i>
+    <p style="color: #000">
+      <%=todayPayment.email%>
+    </p>
+  </a>
+  <% } %>  
+</div>

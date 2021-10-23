@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body>
+
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%=message.email%></h5>
+            <p class="card-text"><%=message._text%></p>
+            <a href="/delete-message?messageId=<%=message.id%>" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

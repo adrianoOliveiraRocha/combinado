@@ -1,0 +1,105 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Enviar WhatSapp</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body>
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <div class="card">
+          <div class="card-header">Enviar Credencials por WhatSapp</div>
+          <div class="card-body card-block">
+
+            <form method="POST" action="/send-login-pass">
+                <input type="hidden" name="name" value="<%=data.name%>">
+              <div class="card-body card-block">              
+
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="email">Email do Colaborador</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="email" class="form-control" value="<%=data.email%>" 
+                        name="email" readonly>
+                    <small id="emailHelp" class="form-text text-muted">
+                    Esse é email é o login do colaborador</small>
+                  </div>                 
+                  
+                </div>
+
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="pwd">Senha do Colaborador</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="text" class="form-control" value="<%=data.pwd%>" 
+                        name="pwd" readonly>
+                    <small id="emailHelp" class="form-text text-muted">
+                        O colaborador pode alterar essa senha</small>
+                  </div>                 
+                  
+                </div> 
+
+                <div class="row form-group">
+
+                  <div class="col col-md-3">
+                    <label for="phone">Telefone do Colaborador</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="text" class="form-control" value="<%=data.phone%>" 
+                        name="phone" id="phone">
+                    <small id="emailHelp" class="form-text text-muted">
+                        Somente númoros com DDD</small>
+                  </div>                 
+                  
+                </div> 
+                
+                <hr>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>              
+              </div>
+            </form>
+            
+          </div>
+        </div>    
+
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+  <script src="phoneNumber.js"></script>
+</body>
+
+</html>

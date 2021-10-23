@@ -1,0 +1,68 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body onload="callNotifications()">
+
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="breadcrumbs">
+        <div class="col-sm-4">
+          <div class="page-header float-left">
+            <div class="page-title">
+              <h1>Testar Link</h1>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="content mt-3">
+              
+
+         <!-- The text field -->
+        <div class="alert" style="text-align: center">
+            <p>Para testar seu link compartilhável, click no botão abaixo</p>
+            <br>
+            <a class="btn btn-primary" href="<%=link%>">Agendar</a>
+        </div> 
+            
+       
+        
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+    
+    <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

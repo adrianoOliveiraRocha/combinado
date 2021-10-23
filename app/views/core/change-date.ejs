@@ -1,0 +1,66 @@
+
+<div class="alert alert-secondary">
+  <strong><%=portuguesedateTime(currentDate).split(' ')[0]%></strong>
+</div>
+
+<% if(validDate) {%>
+<div class="form-control">
+  Manhã
+</div>
+
+<div class="d-flex flex-wrap">
+  <% if(morning != null) {%>
+  <%for(timeMorning of morning) { %>
+  
+  <div class="p-2">
+    <% if(isItBusyTime(timeMorning)) { %>
+    <a href="#" title="INDISPONÍVEL" onclick="unAvailable();"
+      class="btn btn-danger"><%=timeMorning%></a>
+    <% } else { %>
+    <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=currentDate.getFullYear()%>-<%=currentDate.getMonth() + 1%>-<%=currentDate.getDate()%>&_time=<%=timeMorning%>" 
+      class="btn btn-primary"><%=timeMorning%></a>
+    <% } %>
+  </div>
+
+  <% } %>
+  <% } else { %>
+   <i style="color:red">Indisponível</i>
+  <% } %>             
+</div>
+
+<div class="form-control">
+  Tarde
+</div>
+
+<div class="d-flex flex-wrap">
+  <% if(afternoon != null) {%>
+  <%for(timeAfternoon of afternoon) { %>
+  
+  <div class="p-2">
+    <% if(isItBusyTime(timeAfternoon)) { %>
+    <a href="#" title="INDISPONÍVEL" onclick="unAvailable();"
+      class="btn btn-danger"><%=timeAfternoon%></a>
+    <% } else { %>
+    <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=currentDate.getFullYear()%>-<%=currentDate.getMonth() + 1%>-<%=currentDate.getDate()%>&_time=<%=timeAfternoon%>" 
+      class="btn btn-primary"><%=timeAfternoon%></a>
+    <% } %>
+  </div>
+
+  <% } %>
+  <% } else { %>
+   <i style="color:red">Indisponível</i>
+  <% } %>             
+</div>
+
+<% } else {%>
+  <div class="alert alert-warning d-flex justify-content-center">
+    A data precisa ser igual ou superior a hoje
+  </div>
+<% } %>
+
+<script>
+  function unAvailable() {
+    alert('INDISPONÍVEL');
+  }
+</script>
+

@@ -1,0 +1,53 @@
+<div class="section-container contact-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <div class="section-container-spacer">
+          <h2 class="text-center">Envie-nos uma mensagem</h2>
+          <p class="text-center">Críticas e sugestões serão bem-vindas.</p>
+        </div>
+        <div class="card-container">
+          <div class="card card-shadow col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 reveal">
+
+            <form action="/client-message" class="reveal-content" method="post">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email" 
+                      required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="subject" placeholder="Assunto">
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Digite sua mensagem" name="message"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                <div class="col-md-5">
+                  <ul class="list-unstyled address-container">
+                    <li>
+                      Ou                      
+                      <a href="/client-message-wapp"><strong style="color: #25d366">
+                        <img src="core/assets/images/wapp-logo.png" alt="whatsapp"
+                        style="width: 30px;"> WhatsApp</strong></a>
+                        <p>
+                          <div class="alert alert-warning" role="alert" 
+                            style="font-size: 15px;">
+                            Somente para dispositivos móveis 
+                          </div>
+                        </p>
+                    </li>                    
+                    
+                  </ul>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>

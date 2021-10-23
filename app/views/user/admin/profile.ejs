@@ -1,0 +1,165 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body>
+
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <% if(typeof message != 'undefined' && message != '') { %>
+        <div class="col-sm-12">
+          <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Success</span> <%=message%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <% } %>  
+
+
+        <div class="card">
+			<div class="card-header">
+				<strong>Meus Dados</strong>
+			</div>
+
+			<form action="/edit-profile" method="post" class="form-horizontal"
+					enctype="multipart/form-data">
+
+				<div class="card-body card-block">				
+
+					<input type="hidden" name="id" value="<%=user.id%>">
+					<input type="hidden" name="currentImage" value="<%=user.image%>">
+
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="username" class=" form-control-label">Nome</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="text" name="username" placeholder="Nome" class="form-control"
+								value="<%=user.username%>" required />
+							<span class="form-text text-muted">Por favor, digite seu nome</span>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="email" class=" form-control-label">Email</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="email" name="email" placeholder="Email" class="form-control"
+								value="<%=user.email%>" />
+							<span class="form-text text-muted">Por favor, digite seu email</span>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="pwd" class=" form-control-label">Senha</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="password" name="pwd" placeholder="Senha" class="form-control"
+								value="<%=user.pwdDecrypted%>" required />
+							<span class="form-text text-muted">Por favor, digite sua senha</span>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="website" class=" form-control-label">Site</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="url" name="website" placeholder="Digite o endereço do seu site"
+							 class="form-control" value="<%=user.website%>"/>
+							<span class="form-text text-muted">
+								https://www.seusite.com.br</span>
+						</div>
+					</div>					
+
+					<% if(typeof user.image == 'undefined' || user.image == null) { %>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="image" class=" form-control-label">Imagem</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="file" name="image" class="form-control"/>
+							<span class="form-text text-muted">
+								Por favor, selecione uma imagem</span>
+						</div>
+					</div>
+					<% } else { %>
+					
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="image" class=" form-control-label">Imagem</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<img src="admin/images/profile_images/<%=user.image%>" width="100px;" />
+							<hr>
+							<label for="image" class="form-control-label">Substituir Imagem</label>	
+							<hr>					
+							<input type="file" name="image"/>
+							<span class="form-text text-muted">
+								Por favor, selecione uma imagem se você deseja substituir a imagem atual</span>
+						</div>
+					</div>
+
+					<% } %>
+
+					
+				</div>
+
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary btn-sm">
+						<i class="fa fa-dot-circle-o"></i> Editar
+					</button>
+					
+				</div>
+			
+			</form>
+
+		</div>
+		
+		
+		
+			
+
+          
+
+
+    </div> <!-- .content -->
+  </div><!-- /#right-panel -->
+
+  <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>

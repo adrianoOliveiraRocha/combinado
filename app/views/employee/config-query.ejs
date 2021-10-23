@@ -1,0 +1,181 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bem Vindo!</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%-include('./include/top-links.ejs')%>
+
+</head>
+
+<body onload="callNotifications()">
+
+
+    <!-- Left Panel -->
+
+    <%-include('./include/left-panel.ejs')%>
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+      <!-- Header-->
+      <%-include('./include/header.ejs')%>
+      <!-- Header-->
+
+      <div class="content mt-3">
+        <% if(typeof message != 'undefined' && message != '') { %>
+        <div class="col-sm-12">
+          <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Success</span> <%=message%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <% } %>    
+
+        <% if(typeof error != 'undefined' && error != '') { %>
+        <div class="col-sm-12">
+          <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-danger">Erro! </span> <%=error%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <% } %>      
+        
+        <div class="card">
+          <div class="card-header">Configurar Consulta</div>
+          
+          <div class="card-body card-block">
+
+            <form method="POST" action="/edit-query-config">
+
+              <div class="card-body card-block">              
+
+                <div class="row form-group">
+                  
+                  <div class="col col-md-3">
+                    <label>Tempo de Duração</label>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <input type="number" class="form-control" name="queryTime" min="10"
+                      id="time" placeholder="Somente números" required 
+                      <% if(currentQueryTime != null) {
+                        %> value="<%=currentQueryTime()%>" <%
+                      } %>
+                      >
+                    <small id="timeHelp" class="form-text text-muted">
+                    Quantos minutos aproximadamente dura sua consulta</small>
+                  </div>
+                </div>  
+
+                <hr> <hr>
+                <!--day-->
+                <% for(var day in days) {%>
+                <% currentDay = getCurrentDay(day)%>
+                <div class="row form-group"> 
+                  
+                  <div class="col col-md-3">
+                    <label class="form-control" style="text-align: center">
+                      <%=days[day]%> 
+                      
+                    </label>
+                  </div>
+
+                  <div class="col-12 col-md-9">
+                    
+                    <div class="row">
+                      <div class="col col-md-3">
+                        Manhã
+                      </div>
+                      <div class="col col-md-5">
+                        <p>
+                          <input type="time" name="morningInit<%=day%>" id="morningInit<%=day%>"                            
+                            <% if(currentDay != null) {
+                              %> value="<%=currentDay.morningInit%>" <%
+                            } %>
+                            >
+                          <small class="form-text text-muted">
+                            Início</small> 
+                        </p>
+                        <p>
+                          <input type="time" name="morningEnd<%=day%>" id="morningEnd<%=day%>"
+                          <% if(currentDay != null) {
+                            %> value="<%=currentDay.morningEnd%>" <%
+                          } %>
+                          >
+                          <small class="form-text text-muted/">
+                            Fim</small> 
+                        </p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col col-md-3">
+                        Tarde
+                      </div>
+                      <div class="col col-md-5">
+                        <p>
+                          <input type="time" name="afternoonInit<%=day%>" id="afternoonInit<%=day%>"
+                          <% if(currentDay != null) {
+                            %> value="<%=currentDay.afternoonInit%>" <%
+                          } %>
+                          >
+                          <small class="form-text text-muted">
+                            Início</small> 
+                        </p>
+                        <p>
+                          <input type="time" name="afternoonEnd<%=day%>" id="afternoonEnd<%=day%>"
+                          <% if(currentDay != null) {
+                            %> value="<%=currentDay.afternoonEnd%>" <%
+                          } %>
+                          >
+                          <small class="form-text text-muted/">
+                            Fim</small> 
+                        </p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+                </div> 
+
+                <hr>
+
+                <% } %>
+                <!--//day-->                 
+                
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>              
+              </div>
+            </form>
+            
+          </div>
+        </div>
+
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+
+    <script src="admin/helper.js"></script>
+
+    <%-include('./include/bottom-links.ejs')%>       
+
+</body>
+
+</html>
