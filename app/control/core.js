@@ -1,5 +1,5 @@
 module.exports.index = (req, res) => {
-    res.render('core/index.ejs')
+  res.render('core/index.ejs')
 }
 
 module.exports.register = (req, res, application) => {
@@ -47,7 +47,7 @@ module.exports.login = (req, res, application) => {
                     res.redirect('/user-home')
                 }
 
-            } else { // it is a employee				
+            } else { // it is a employee
                 res.redirect('home-employee')
             }
 
@@ -80,7 +80,7 @@ module.exports.login = (req, res, application) => {
                     req.session.message = `Bem vindo ${req.session.user.username}`
                     req.session.loged = true
                     res.redirect('/login')
-                } else { // loking for it in employee table	
+                } else { // loking for it in employee table
                     const Employee = application.app.models.Employee
                     const connect = application.config.connect()
                     Employee.verify(data, connect, (errEmployee, resultEmployee) => {
@@ -138,17 +138,17 @@ module.exports.schedule = (req, res, application) => {
 
 			Service.getServicesOfThisEmployeers(connect, employeers, (err, servicesEmployeers) => {
 				if (err) {
-						reject(err)
+					reject(err)
 				} else {
 					var EmployeersServices = []
 					if (employeers.length == 1) { // It has just one employee
 						employeers[0].services = []
 						if (servicesEmployeers.length == 1) // this employee has just one service
-								employeers[0].services.push(servicesEmployeers[0].service)
+							employeers[0].services.push(servicesEmployeers[0].service)
 						else { // this employee has more then one service
-								servicesEmployeers.forEach(se => {
-										employeers[0].services.push(se.service)
-								})
+							servicesEmployeers.forEach(se => {
+								employeers[0].services.push(se.service)
+							})
 						}
 
 						EmployeersServices.push(employeers[0])
@@ -157,11 +157,11 @@ module.exports.schedule = (req, res, application) => {
 						employeers.forEach(employee => {
 							employee.services = []
 							servicesEmployeers.forEach(se => {
-									se.forEach(se1 => {
-											if (employee.id == se1.employeeId) {
-													employee.services.push(se1.service)
-											}
-									})
+								se.forEach(se1 => {
+									if (employee.id == se1.employeeId) {
+										employee.services.push(se1.service)
+									}
+								})
 							})
 							EmployeersServices.push(employee)
 						})
@@ -176,12 +176,12 @@ module.exports.schedule = (req, res, application) => {
 
 	getServices().then(EmployeersServices => {
 		res.render('core/schedule.ejs', {
-				EmployeersServices: EmployeersServices
+			EmployeersServices: EmployeersServices
 		})
 	}).catch(err => {
 		console.error(err)
 		res.render('core/error.ejs', {
-				error: 'Esse usuário ainda não tem colaboradores cadastrados'
+			error: 'Esse usuário ainda não tem colaboradores cadastrados'
 		})
 	}).then(() => {
 		connect.end()
@@ -211,8 +211,8 @@ module.exports.schedule1 = (req, res, application) => {
             if (err) reject(err)
             else if (result.length == 0) {
                 let error = `
-                Esse colaborador ainda não definiu 
-                seu horário de atendimento. Por favor, 
+                Esse colaborador ainda não definiu
+                seu horário de atendimento. Por favor,
                 escolha outro colaborador.`
                 reject(error)
             } else {
