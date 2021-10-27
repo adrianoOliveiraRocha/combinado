@@ -48,7 +48,7 @@
           <div class="alert alert-secondary">
             <strong><%=portuguesedateTime(today).split(' ')[0]%></strong>
           </div>
-          <div class="form-control c1">
+          <div class="form-control c2">
             Manhã
           </div>
 
@@ -62,7 +62,7 @@
                 class="btn btn-danger"><%=timeMorning%></a>
               <% } else { %>
               <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=today.getFullYear()%>-<%=today.getMonth() + 1%>-<%=today.getDate()%>&_time=<%=timeMorning%>"
-                class="btn btn-primary"><%=timeMorning%></a>
+                class="btn"><%=timeMorning%></a>
               <% } %>
             </div>
 
@@ -72,7 +72,7 @@
             <% } %>
           </div>
 
-          <div class="form-control c1">
+          <div class="form-control c2">
             Tarde
           </div>
 
@@ -86,7 +86,7 @@
                 class="btn btn-danger"><%=timeAfternoon%></a>
               <% } else { %>
               <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=today.getFullYear()%>-<%=today.getMonth() + 1%>-<%=today.getDate()%>&_time=<%=timeAfternoon%>"
-                class="btn btn-primary"><%=timeAfternoon%></a>
+                class="btn"><%=timeAfternoon%></a>
               <% } %>
             </div>
 

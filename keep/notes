@@ -39,15 +39,15 @@ Usuário para conexão: (mesmo nome da base de dados)
 
 Javascript date
 
-var today = new Date().toLocaleDateString('pt-BR', {  
+var today = new Date().toLocaleDateString('pt-BR', {
 	day : 'numeric',
 	month : 'short',
 	year : 'numeric'
 }) ;
 
 var today = new Date().toLocaleString('pt-BR', {
-	day: '2-digit', 
-	month: '2-digit', 
+	day: '2-digit',
+	month: '2-digit',
 	year: 'numeric'}
 );
 
@@ -77,10 +77,3 @@ favicon:
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-
-
-
-mysq: 453231
-453231@W3s
-
-

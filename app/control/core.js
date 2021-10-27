@@ -357,7 +357,8 @@ module.exports.coreChangeDate = (req, res, application) => {
 					currentDate: jsDate,
 					validDate: application.app.helpers.validDateTime(jsDate),
 					isItBusyTime: testBusyTime,
-					portuguesedateTime: application.app.helpers.portugueseDateTime
+					portuguesedateTime: application.app.helpers.portugueseDateTime,
+          colors: req.session.colors[0]
 				})
 
 			})

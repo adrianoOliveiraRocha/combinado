@@ -35,14 +35,14 @@
         <input type="hidden" name="employeeId" value="<%=employee.id%>">
         <input type="hidden" name="sqlDateTime" value="<%=sqlDateTime%>">
 
-        <div class="card-body card-block c1">
+        <div class="card-body card-block">
 
           <div class="row form-group">
             <div class="col col-md-3">
               <label for="name">Agendar com</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="text" class="form-control" name="employeeName"
+              <input type="text" class="form-control c2" name="employeeName"
               readonly value="<%=employee.name%>">
 
             </div>
@@ -53,10 +53,10 @@
               <label for="name">Data</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="hidden" class="form-control" name="_dateTime"
+              <input type="hidden" class="form-control c2" name="_dateTime"
               readonly value="<%=jsDate.toLocaleString()%>">
 
-              <input type="text" class="form-control" name="_dateTimeShow"
+              <input type="text" class="form-control c2" name="_dateTimeShow"
               readonly value="<%=portugueseDateTime(jsDate)%>">
 
             </div>
@@ -67,7 +67,7 @@
               <label for="phone">Seu Telefone</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="text" class="form-control" name="clientPhone" id="phone"
+              <input type="text" class="form-control c2" name="clientPhone" id="phone"
               aria-describedby="somente números" placeholder="Telefone"
               required >
               <p id="phoneHelp" class="form-text text-muted">
@@ -80,7 +80,7 @@
               <label for="email">Seu Email</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="email" class="form-control" name="clientEmail"
+              <input type="email" class="form-control c2" name="clientEmail"
               aria-describedby="exemplo@emil.com" placeholder="Email"
               required >
 
@@ -92,7 +92,7 @@
               <label for="address">Observações</label>
             </div>
             <div class="col-12 col-md-9">
-              <textarea class="form-control" name="comments"></textarea>
+              <textarea class="form-control c2" name="comments"></textarea>
             </div>
           </div>
 
