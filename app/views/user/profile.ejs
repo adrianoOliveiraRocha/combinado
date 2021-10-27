@@ -102,7 +102,31 @@
 							<span class="form-text text-muted">
 								https://www.seusite.com.br</span>
 						</div>
-					</div>					
+					</div>
+					
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="color1" class=" form-control-label">Côr Principal</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="text" name="color1" placeholder="Digite o código hexadecimal da côr principal"
+							 class="form-control" value="<%=user.color1%>" maxlength="7"/>
+							<span class="form-text text-muted">
+								Ex: #4565aa</span>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label for="color2" class=" form-control-label">Côr Secundária</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<input type="text" name="color2" placeholder="Digite o código hexadecimal da côr secundária"
+							 class="form-control" value="<%=user.color2%>" maxlength="7"/>
+							<span class="form-text text-muted">
+								Ex: #aa45bb</span>
+						</div>
+					</div>
 
 					<% if(typeof user.image == 'undefined' || user.image == null) { %>
 					<div class="row form-group">

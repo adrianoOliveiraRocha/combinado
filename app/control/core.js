@@ -114,7 +114,19 @@ module.exports.schedule = (req, res, application) => {
 	const userId = req.query.userId
 	const connect = application.config.connect()
 
-	function getEmployes() {
+	async function getColors() {
+		const User = application.app.models.User;
+		return new Promise((resolve, reject) => {
+			User.getColors(userId, connect, (err, colors) => {
+				if(err) reject(err);
+				else resolve(colors);
+			})
+		})
+
+	}
+
+	async function getEmployes() {
+		req.session.colors = await getColors();
 		const Employee = application.app.models.Employee
 		return new Promise((resolve, reject) => {
 			// get all employeers of this user
@@ -176,7 +188,8 @@ module.exports.schedule = (req, res, application) => {
 
 	getServices().then(EmployeersServices => {
 		res.render('core/schedule.ejs', {
-			EmployeersServices: EmployeersServices
+			EmployeersServices: EmployeersServices,
+			colors: req.session.colors[0]
 		})
 	}).catch(err => {
 		console.error(err)
@@ -190,88 +203,89 @@ module.exports.schedule = (req, res, application) => {
 }
 
 module.exports.schedule1 = (req, res, application) => {
-    const employeeId = req.query.employeeId
-    var jsDate = new Date()
-    const sqlDate = application.app.helpers.createSQLDate(jsDate)
+	const employeeId = req.query.employeeId
+	var jsDate = new Date()
+	const sqlDate = application.app.helpers.createSQLDate(jsDate)
 
-    const connect = application.config.connect()
-    const Scheduling = application.app.models.Scheduling
-    const Employee = application.app.models.Employee
+	const connect = application.config.connect()
+	const Scheduling = application.app.models.Scheduling
+	const Employee = application.app.models.Employee
 
-    const getSchedulings = new Promise((resolve, reject) => {
-        Scheduling.getSchedulings(sqlDate,
-            employeeId, connect, (err, result) => {
-                if (err) reject(err)
-                else resolve(result)
-            })
-    })
+	const getSchedulings = new Promise((resolve, reject) => {
+		Scheduling.getSchedulings(sqlDate,
+			employeeId, connect, (err, result) => {
+				if (err) reject(err)
+				else resolve(result)
+			})
+	})
 
-    const getThisDay = new Promise((resolve, reject) => {
-        Employee.getThisDay(employeeId, jsDate.getDay(), connect, (err, result) => {
-            if (err) reject(err)
-            else if (result.length == 0) {
-                let error = `
-                Esse colaborador ainda não definiu
-                seu horário de atendimento. Por favor,
-                escolha outro colaborador.`
-                reject(error)
-            } else {
-                let queryTime = result[0].queryTime
-                let morningInit = result[0].morningInit
-                let morningEnd = result[0].morningEnd
-                let afternoonInit = result[0].afternoonInit
-                let afternoonEnd = result[0].afternoonEnd
+	const getThisDay = new Promise((resolve, reject) => {
+		Employee.getThisDay(employeeId, jsDate.getDay(), connect, (err, result) => {
+			if (err) reject(err)
+			else if (result.length == 0) {
+				let error = `
+				Esse colaborador ainda não definiu
+				seu horário de atendimento. Por favor,
+				escolha outro colaborador.`
+				reject(error)
+			} else {
+				let queryTime = result[0].queryTime
+				let morningInit = result[0].morningInit
+				let morningEnd = result[0].morningEnd
+				let afternoonInit = result[0].afternoonInit
+				let afternoonEnd = result[0].afternoonEnd
 
-                const calculateHours = application.app.helpers.calculateHours
+				const calculateHours = application.app.helpers.calculateHours
 
-                var morning = null
-                var afternoon = null
+				var morning = null
+				var afternoon = null
 
-                if (typeof morningInit == 'string' && typeof morningEnd == 'string') {
-                    var morning = calculateHours(queryTime, morningInit, morningEnd)
-                }
+				if (typeof morningInit == 'string' && typeof morningEnd == 'string') {
+					var morning = calculateHours(queryTime, morningInit, morningEnd)
+				}
 
-                if (typeof afternoonInit == 'string' && typeof afternoonEnd == 'string') {
-                    var afternoon = calculateHours(queryTime, afternoonInit, afternoonEnd)
-                }
+				if (typeof afternoonInit == 'string' && typeof afternoonEnd == 'string') {
+					var afternoon = calculateHours(queryTime, afternoonInit, afternoonEnd)
+				}
 
-                var response = {
-                    morning: morning,
-                    afternoon: afternoon,
-                    queryTime: queryTime
-                }
+				var response = {
+					morning: morning,
+					afternoon: afternoon,
+					queryTime: queryTime
+				}
 
-                resolve(response)
+				resolve(response)
 
-            }
-        })
-    })
+			}
+		})
+	})
 
-    Promise.all([getSchedulings, getThisDay])
-        .then(([schedulings, dayConfigs]) => {
-            const schedulingHours = application.app.helpers.getSchedulingHours(schedulings)
-            const testBusyTime = (_time) => {
-                return application.app.helpers.isItBusyTime(_time, schedulingHours)
-            }
+	Promise.all([getSchedulings, getThisDay])
+		.then(([schedulings, dayConfigs]) => {
+			const schedulingHours = application.app.helpers.getSchedulingHours(schedulings)
+			const testBusyTime = (_time) => {
+				return application.app.helpers.isItBusyTime(_time, schedulingHours)
+			}
 
-            res.render('core/schedule1.ejs', {
-                employeeId: employeeId,
-                morning: dayConfigs.morning,
-                afternoon: dayConfigs.afternoon,
-                today: jsDate,
-                validDate: application.app.helpers.validDateTime(jsDate),
-                isItBusyTime: testBusyTime,
-                portuguesedateTime: application.app.helpers.portugueseDateTime
-            })
-        })
-        .catch(err => {
-            res.render('core/error.ejs', {
-                error: err
-            })
-        })
-        .then(() => {
-            connect.end()
-        })
+			res.render('core/schedule1.ejs', {
+				employeeId: employeeId,
+				morning: dayConfigs.morning,
+				afternoon: dayConfigs.afternoon,
+				today: jsDate,
+				validDate: application.app.helpers.validDateTime(jsDate),
+				isItBusyTime: testBusyTime,
+				portuguesedateTime: application.app.helpers.portugueseDateTime,
+        colors: req.session.colors[0]
+			})
+		})
+		.catch(err => {
+			res.render('core/error.ejs', {
+				error: err
+			})
+		})
+		.then(() => {
+			connect.end()
+		})
 
 }
 
@@ -294,139 +308,140 @@ module.exports.coreChangeDate = (req, res, application) => {
     })
 
     const getThisDay = new Promise((resolve, reject) => {
-        Employee.getThisDay(employeeId, dayCode, connect, (err, result) => {
-            if (err) reject(err)
-            else {
+			Employee.getThisDay(employeeId, dayCode, connect, (err, result) => {
+				if (err) reject(err)
+				else {
 
-                let queryTime = result[0].queryTime
-                let morningInit = result[0].morningInit
-                let morningEnd = result[0].morningEnd
-                let afternoonInit = result[0].afternoonInit
-                let afternoonEnd = result[0].afternoonEnd
+					let queryTime = result[0].queryTime
+					let morningInit = result[0].morningInit
+					let morningEnd = result[0].morningEnd
+					let afternoonInit = result[0].afternoonInit
+					let afternoonEnd = result[0].afternoonEnd
 
-                const calculateHours = application.app.helpers.calculateHours
+					const calculateHours = application.app.helpers.calculateHours
 
-                var morning = null
-                var afternoon = null
+					var morning = null
+					var afternoon = null
 
-                if (typeof morningInit == 'string' && typeof morningEnd == 'string') {
-                    var morning = calculateHours(queryTime, morningInit, morningEnd)
-                }
+					if (typeof morningInit == 'string' && typeof morningEnd == 'string') {
+						var morning = calculateHours(queryTime, morningInit, morningEnd)
+					}
 
-                if (typeof afternoonInit == 'string' && typeof afternoonEnd == 'string') {
-                    var afternoon = calculateHours(queryTime, afternoonInit, afternoonEnd)
-                }
+					if (typeof afternoonInit == 'string' && typeof afternoonEnd == 'string') {
+						var afternoon = calculateHours(queryTime, afternoonInit, afternoonEnd)
+					}
 
-                var response = {
-                    morning: morning,
-                    afternoon: afternoon,
-                    queryTime: queryTime
-                }
+					var response = {
+						morning: morning,
+						afternoon: afternoon,
+						queryTime: queryTime
+					}
 
-                resolve(response)
+					resolve(response)
 
-            }
-        })
+				}
+			})
     })
 
     Promise.all([getSchedulings, getThisDay])
-        .then(([schedulings, dayConfigs]) => {
-            const schedulingHours = application.app.helpers.getSchedulingHours(schedulings)
-            const testBusyTime = (_time) => {
-                return application.app.helpers.isItBusyTime(_time, schedulingHours)
-            }
+			.then(([schedulings, dayConfigs]) => {
+				const schedulingHours = application.app.helpers.getSchedulingHours(schedulings)
+				const testBusyTime = (_time) => {
+					return application.app.helpers.isItBusyTime(_time, schedulingHours)
+				}
 
-            res.render('core/change-date.ejs', {
-                employeeId: employeeId,
-                morning: dayConfigs.morning,
-                afternoon: dayConfigs.afternoon,
-                currentDate: jsDate,
-                validDate: application.app.helpers.validDateTime(jsDate),
-                isItBusyTime: testBusyTime,
-                portuguesedateTime: application.app.helpers.portugueseDateTime
-            })
+				res.render('core/change-date.ejs', {
+					employeeId: employeeId,
+					morning: dayConfigs.morning,
+					afternoon: dayConfigs.afternoon,
+					currentDate: jsDate,
+					validDate: application.app.helpers.validDateTime(jsDate),
+					isItBusyTime: testBusyTime,
+					portuguesedateTime: application.app.helpers.portugueseDateTime
+				})
 
-        })
-        .catch(err => {
-            res.json(err)
-        })
-        .then(() => {
-            connect.end()
-        })
+			})
+			.catch(err => {
+				res.json(err)
+			})
+			.then(() => {
+				connect.end()
+			})
 
 }
 
 module.exports.schedule2 = (req, res, application) => {
-    var data = req.query
-    const jsDate = new Date(`${data._date} ${data._time}`)
-    const sqlDateTime = application.app.helpers.createSQLDateTime(jsDate)
+	var data = req.query
+	const jsDate = new Date(`${data._date} ${data._time}`)
+	const sqlDateTime = application.app.helpers.createSQLDateTime(jsDate)
 
-    const employeeId = req.query.employeeId
-    const Employee = application.app.models.Employee
-    const connect = application.config.connect()
+	const employeeId = req.query.employeeId
+	const Employee = application.app.models.Employee
+	const connect = application.config.connect()
 
-    Employee.getThis(employeeId, connect, (err, result) => {
-        if (err) {
-            console.error(err.sqlMessage)
-            res.redirect('/')
-        } else {
-            res.render('core/formScheduling.ejs', {
-                jsDate: jsDate,
-                employee: result[0],
-                sqlDateTime: sqlDateTime,
-                portugueseDateTime: application.app.helpers.portugueseDateTime
-            })
-        }
-    })
+	Employee.getThis(employeeId, connect, (err, result) => {
+		if (err) {
+			console.error(err.sqlMessage)
+			res.redirect('/')
+		} else {
+			res.render('core/formScheduling.ejs', {
+				jsDate: jsDate,
+				employee: result[0],
+				sqlDateTime: sqlDateTime,
+				portugueseDateTime: application.app.helpers.portugueseDateTime,
+        colors: req.session.colors[0]
+			})
+		}
+	})
 }
 
 module.exports.confirmScheduling = (req, res, application) => {
 
-    const data = req.body
-    const Scheduling = application.app.models.Scheduling
-    connect = application.config.connect()
+	const data = req.body
+	const Scheduling = application.app.models.Scheduling
+	connect = application.config.connect()
 
-    Scheduling.save(data, connect, (err, result) => {
-        if (err) {
-            res.json(err)
-        } else {
-            var msg = `Agendamento realizado com sucesso!`
-            res.render('core/confirm-scheduling.ejs', {
-                message: msg
-            })
-        }
-    })
+	Scheduling.save(data, connect, (err, result) => {
+		if (err) {
+			res.render('core/error.ejs', {error: err})
+		} else {
+			var msg = `Agendamento realizado com sucesso!`
+			res.render('core/confirm-scheduling.ejs', {
+				message: msg
+			})
+		}
+	})
 
 }
 
 module.exports.testSchedule = (req, res, application) => {
 
-    const User = application.app.models.User
-    const connect = application.config.connect()
+	const User = application.app.models.User
+	const connect = application.config.connect()
 
-    User.getAllUsers(connect, (err, result) => {
-        if (err) res.send(err)
-        else {
-            res.render('core/test-schedule.ejs', {
-                users: result
-            })
-        }
-    })
+	User.getAllUsers(connect, (err, result) => {
+		if (err) res.send(err)
+		else {
+			res.render('core/test-schedule.ejs', {
+				users: result
+			})
+		}
+	})
 
 }
 
 module.exports.mySchedulings = (req, res, application) => {
-    const Scheduling = application.app.models.Scheduling
-    connect = application.config.connect()
-
-    Scheduling.getMySchedulings(req.body.clientEmail, connect, (err, result) => {
-        if (err) res.json(err)
-        else {
-            res.render('core/my-schedulings.ejs', {
-                mySchedulings: result
-            })
-        }
-    })
+  const Scheduling = application.app.models.Scheduling
+  connect = application.config.connect()
+  Scheduling.getMySchedulings(req.body.clientEmail, connect, (err, result) => {
+    if (err) res.json(err)
+    else {
+      res.render('core/my-schedulings.ejs', {
+        mySchedulings: result,
+        colors: req.session.colors[0]
+      })
+    }
+  })
 }
 
 module.exports.cancelScheduling = (req, res, application) => {

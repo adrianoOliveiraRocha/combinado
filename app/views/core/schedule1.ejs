@@ -10,22 +10,32 @@
 
   <title>Bem-Vindo!</title>
 
-<!-- <link href="core/main.550dcf66.css" rel="stylesheet"></head> -->
+  <style>
+    .c1 {
+     color: <%=colors.color1%>;
+     font-weight: bold;
+    }
+    .c2 {
+      color: <%=colors.color2%>
+    }
+  </style>
+
+  <!-- <link href="core/main.550dcf66.css" rel="stylesheet"> -->
+</head>
 <link rel="stylesheet" type="text/css" href="core/jsCalendar/simple-jscalendar/source/jsCalendar.css">
 
 <body> <!-- Add your content of header -->
 
   <div class="container text-center">
-    <h1>Agendamento</h1>
-    <h3>Nome da Empresa</h3> 
+    <h1 class="c1">Agendamento</h1>
   </div>
 
   <hr>
-  
+
   <div class="section-container">
-    <div class="container text-center">      
+    <div class="container text-center">
       <input type="hidden" id="employeeId" value="<%=employeeId%>">
-      
+
       <div class="row">
 
         <div class="col-sm-6">
@@ -33,25 +43,25 @@
             <div id="my-calendar"></div>
           </div>
         </div>
-        
+
         <div class="col-sm-6" id="responseChangeDate">
           <div class="alert alert-secondary">
             <strong><%=portuguesedateTime(today).split(' ')[0]%></strong>
           </div>
-          <div class="form-control">
+          <div class="form-control c1">
             Manhã
           </div>
 
           <div class="d-flex flex-wrap">
             <% if(morning != null) {%>
             <%for(timeMorning of morning) { %>
-            
+
             <div class="p-2">
               <% if(isItBusyTime(timeMorning)) { %>
               <a href="#" title="INDISPONÍVEL" onclick="unAvailable();"
                 class="btn btn-danger"><%=timeMorning%></a>
               <% } else { %>
-              <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=today.getFullYear()%>-<%=today.getMonth() + 1%>-<%=today.getDate()%>&_time=<%=timeMorning%>" 
+              <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=today.getFullYear()%>-<%=today.getMonth() + 1%>-<%=today.getDate()%>&_time=<%=timeMorning%>"
                 class="btn btn-primary"><%=timeMorning%></a>
               <% } %>
             </div>
@@ -59,23 +69,23 @@
             <% } %>
             <% } else { %>
             <i style="color:red">Indisponível</i>
-            <% } %>             
+            <% } %>
           </div>
-          
-          <div class="form-control">
+
+          <div class="form-control c1">
             Tarde
           </div>
-          
+
           <div class="d-flex flex-wrap">
             <% if(afternoon != null) {%>
             <%for(timeAfternoon of afternoon) { %>
-            
+
             <div class="p-2">
               <% if(isItBusyTime(timeAfternoon)) { %>
               <a href="#" title="INDISPONÍVEL" onclick="unAvailable();"
                 class="btn btn-danger"><%=timeAfternoon%></a>
               <% } else { %>
-              <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=today.getFullYear()%>-<%=today.getMonth() + 1%>-<%=today.getDate()%>&_time=<%=timeAfternoon%>" 
+              <a href="/schedule2?employeeId=<%=employeeId%>&_date=<%=today.getFullYear()%>-<%=today.getMonth() + 1%>-<%=today.getDate()%>&_time=<%=timeAfternoon%>"
                 class="btn btn-primary"><%=timeAfternoon%></a>
               <% } %>
             </div>
@@ -83,12 +93,12 @@
             <% } %>
             <% } else { %>
             <i style="color:red">Indisponível</i>
-            <% } %>             
+            <% } %>
           </div>
-                                         
+
         </div>
-          
-        </div>       
+
+        </div>
 
       </div>
 
@@ -102,7 +112,7 @@
           Desenvoldido por <a href="#">W3_Software</a>
         </div>
         <div class="col">
-          <a href="https://www.facebook.com/w3SoftwareNetBr" 
+          <a href="https://www.facebook.com/w3SoftwareNetBr"
             class="social-round-icon fa-icon" title="" target="_blank">
             Visite nossa página no facebook
           </a>
@@ -114,7 +124,7 @@
     </div>
   </footer>
   <hr>
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID
 
 <script>
   (function (i, s, o, g, r, a, m) {
@@ -127,7 +137,7 @@
   ga('send', 'pageview');
 </script>
 
---> 
+-->
 <script src="core/jsCalendar/simple-jscalendar/source/jsCalendar.js"></script>
 
 <script src="core/jsCalendar/js/create-calendar.js"></script>

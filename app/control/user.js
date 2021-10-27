@@ -48,7 +48,7 @@ module.exports.logout = (req, res, application) => {
 module.exports.profile = (req, res, application) => {
 	if (req.session.user.admin == 0) {
 		res.render('user/profile.ejs', {
-				user: req.session.user
+			user: req.session.user
 		})
 	} else {
 		const Message = application.app.models.Message
@@ -71,72 +71,72 @@ module.exports.profile = (req, res, application) => {
 
 module.exports.editProfile = (req, res, application) => {
 
-    const User = application.app.models.User
-    const connect = application.config.connect()
-    var data = req.body
-    const userId = data.id
-    var imageName
-    const SecurityPassword = application.app.helpers.SecurityPassword
+	const User = application.app.models.User
+	const connect = application.config.connect()
+	var data = req.body
+	const userId = data.id
+	var imageName
+	const SecurityPassword = application.app.helpers.SecurityPassword
 
-    if (req.files != null) {
-			var folder = 'admin/images/profile_images'
-			const UploadImage = application.app.helpers.UploadImage
-			imageName = UploadImage(req.files.image, folder)
+	if (req.files != null) {
+		var folder = 'admin/images/profile_images'
+		const UploadImage = application.app.helpers.UploadImage
+		imageName = UploadImage(req.files.image, folder)
 
-			if (data.currentImage.length > 0) {
-				const DeleteImage = application.app.helpers.DeleteImage
-				DeleteImage(folder, data.currentImage)
-			} else {
-				console.log('No image to delete')
-			}
+		if (data.currentImage.length > 0) {
+			const DeleteImage = application.app.helpers.DeleteImage
+			DeleteImage(folder, data.currentImage)
+		} else {
+			console.log('No image to delete')
+		}
 
-    }
+	}
 
-    function updateUser() {
+	function updateUser() {
 
-			return new Promise((resolve, reject) => {
-				data.encryptPwd = SecurityPassword.encrypt(data.pwd)
-				User.update(data, imageName, connect, (errUpd, resultUpd) => {
-					if (errUpd) {
-						reject(errUpd)
-					} else {
-						resolve(resultUpd)
-					}
-				})
+		return new Promise((resolve, reject) => {
+			data.encryptPwd = SecurityPassword.encrypt(data.pwd)
+			User.update(data, imageName, connect, (errUpd, resultUpd) => {
+				if (errUpd) {
+					reject(errUpd)
+				} else {
+					resolve(resultUpd)
+				}
 			})
+		})
 
-    }
+	}
 
-    updateUser().then(resultUpd => { // get the updated user
+	updateUser().then(resultUpd => { // get the updated user
 
-			return new Promise((resolve, reject) => {
-				User.getThis(userId, connect, (errUser, resultUser) => {
-					if (errUser) {
-						reject(errUser)
-					} else {
-						resolve(resultUser[0])
-					}
-				})
+		return new Promise((resolve, reject) => {
+			User.getThis(userId, connect, (errUser, resultUser) => {
+				if (errUser) {
+					reject(errUser)
+				} else {
+					resolve(resultUser[0])
+				}
 			})
+		})
 
-    }).then(user => { // does update the session 
+	}).then(user => { // does update the session 
 
-			req.session.user = user // update the user in the session
-			req.session.user.pwdDecrypted = SecurityPassword.decrypt(user.pwd)
-			req.session.message = 'Informações atualizadas com sucesso!'
-			if (user.admin == 0) res.redirect('/user-home')
-			else res.redirect('/admin')
+		req.session.user = user // update the user in the session
+		req.session.user.pwdDecrypted = SecurityPassword.decrypt(user.pwd)
+		req.session.message = 'Informações atualizadas com sucesso!'
+		if (user.admin == 0) res.redirect('/user-home')
+		else res.redirect('/admin')
 
-    }).catch(err => {
-			console.error(err.sqlMessage)
-			let errorMessage = err.sqlMessage
-			res.render('user/error.ejs', {
-				user: req.session.user,
-				error: errorMessage
-			})
-    }).then(() => {
-      connect.end()
-    })
+	}).catch(err => {
+		console.error(err.sqlMessage)
+		let errorMessage = err.sqlMessage
+		res.render('user/error.ejs', {
+			user: req.session.user,
+			error: errorMessage
+		})
+	}).then(() => {
+		connect.end()
+	})
 
 }
 

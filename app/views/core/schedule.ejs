@@ -9,21 +9,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/5d0a8c3950.js"></script>
-
+  <style>
+    .c1 {
+     color: <%=colors.color1%>;
+     font-weight: bold;
+    }
+    .c2 {
+      color: <%=colors.color2%>
+    }
+  </style>
 </head>
 <body>
 
   <div class="container text-center">
-    <h1>Agendamento</h1>
-    <h3>Nome da Empresa</h3> 
+    <h1 class="c1">Agendamento</h1>
   </div>
 
-  <div class="section-container">
+  <hr>
+  <div class="section-container c1">
     <div class="container text-center">
 
       <div class="row section-container-spacer">
         <div class="col-xs-12 col-md-12">
-          <h2>Verificar Meus Agendamentos</h2>
+          <h2 class="c2">Verificar Meus Agendamentos</h2>
+           </br>
           <form method="post" action="/my-schedulings">
             <p>
               <input type="email" placeholder="Email"
@@ -42,7 +51,7 @@
 
       <div class="row section-container-spacer">
         <div class="col-xs-12 col-md-12">
-          <h2>Agendar Online</h2>
+          <h2 class="c2">Agendar Online</h2>
           <p>Seja bem-vindo ao nosso sistema de agendamento on-line.
           <br>Por favor, escolha um de nossos colaboradores.</p>
         </div>
@@ -50,7 +59,7 @@
 
       <hr>
 
-    </div>  
+    </div>
 
   </div>
   <!-- Employeers -->
@@ -62,10 +71,10 @@
           <img src="admin/images/profile_images/<%=employee.image%>" alt=""
           width="200px;">
         </a>
-        <h3><a href="/schedule1?employeeId=<%=employee.id%>"><%=employee.name%></a></h3>
+        <h3><a href="/schedule1?employeeId=<%=employee.id%>" class="c1"><%=employee.name%></a></h3>
         <h4>
           <% for(index in employee.services) {  %>
-          <strong><%=employee.services[index]%>|</strong>
+          <strong class="c2"><%=employee.services[index]%>|</strong>
           <% } %>
         </h4>
         <p><%=employee.aboutMe%></p>
@@ -94,7 +103,7 @@
           Desenvoldido por <a href="#">W3_Software</a>
         </div>
         <div class="col">
-          <a href="https://www.facebook.com/w3SoftwareNetBr" 
+          <a href="https://www.facebook.com/w3SoftwareNetBr"
             class="social-round-icon fa-icon" title="" target="_blank">
             Visite nossa página no facebook
           </a>
