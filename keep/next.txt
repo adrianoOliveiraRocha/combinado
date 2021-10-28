@@ -1,0 +1,4 @@
+permit that the user cancel a scheduling or all scheduling of one
+specific employees. Because the user can delete a employee only if the employee don't have any scheduling
+
+** problems in my-scheduling

@@ -64,8 +64,8 @@ module.exports.profile = (req, res, application) => {
 			})
 			}
 		})
-		
-				
+
+
 	}
 }
 
@@ -119,7 +119,7 @@ module.exports.editProfile = (req, res, application) => {
 			})
 		})
 
-	}).then(user => { // does update the session 
+	}).then(user => { // does update the session
 
 		req.session.user = user // update the user in the session
 		req.session.user.pwdDecrypted = SecurityPassword.decrypt(user.pwd)
@@ -378,7 +378,7 @@ module.exports.deleteService = (req, res, application) => {
 		if (err) {
 			console.error(err.sqlMessage)
 			if (err.errno == 1451) {
-				let errorMessage = `Você não pode deletar esse serviço porque 
+				let errorMessage = `Você não pode deletar esse serviço porque
 				pelo menos um de seus colaboradores presta esse tipo de serviço`
 				res.render('user/error.ejs', {
 					user: req.session.user,
@@ -404,7 +404,7 @@ module.exports.deleteEmployee = (req, res, application) => {
 	const connect = application.config.connect()
 	const employeeId = req.query.id
 
-	// verify wheter this employee have any scheduling attached 
+	// verify wheter this employee have any scheduling attached
 	function itHasSomeSheduling() {
 		return new Promise((resolve, reject) => {
 			Employee.itHasSomeSheduling(employeeId, connect, (err, result) => {
@@ -486,7 +486,10 @@ module.exports.deleteEmployee = (req, res, application) => {
 		console.error(err)
 		var errorMessage
 		if (err == 'itHasScheduling') {
-			errorMessage = 'Você não pode deletar esse colaborador porque ele possui agendamentos'
+			errorMessage = `
+			Você não pode deletar esse colaborador porque ele possui pelo menos um agendamento não cancelado.
+			Para deletar esse colaborador, você precisa cancelar todos os seus agendamentos
+			`
 		} else {
 			errorMessage = "Não foi possível deletar esse colaborador"
 		}

@@ -3,15 +3,15 @@ const User = (function() {
 	return {
 
 		save: function(data, connect, callback) {
-				var stm = `
-						insert into user (username, pwd, email)
-						values('${data.userName}', '${data.pwd}', '${data.email}')`;
-				connect.query(stm, callback);
+			var stm = `
+				insert into user (username, pwd, email)
+				values('${data.userName}', '${data.pwd}', '${data.email}')`;
+			connect.query(stm, callback);
 		},
 
 		verify: function(data, connect, callback) {
 				let stm = `
-				select * from user 
+				select * from user
 				where email = '${data.email}' and pwd = '${data.pwd}'`;
 				connect.query(stm, callback);
 		},
@@ -59,7 +59,7 @@ const User = (function() {
 
 		getAllSchedulings: function(userId, connect, callback) {
 				const query = `
-						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime 
+						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime
 						from scheduling, employee, user
 						where scheduling.employeeId = employee.id and employee.userid = user.id
 						and user.id = ${userId}
@@ -69,7 +69,7 @@ const User = (function() {
 
 		getOldSchedulings: function(userId, connect, callback) {
 				const query = `
-						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime 
+						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime
 						from scheduling, employee, user
 						where scheduling.employeeId = employee.id and employee.userid = user.id
 						and user.id = ${userId}
@@ -80,7 +80,7 @@ const User = (function() {
 
 		getNewSchedulings: function(userId, connect, callback) {
 				const query = `
-						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime 
+						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime
 						from scheduling, employee, user
 						where scheduling.employeeId = employee.id and employee.userid = user.id
 						and user.id = ${userId}
@@ -91,7 +91,7 @@ const User = (function() {
 
 		getCanceledSchedulings: function(userId, connect, callback) {
 				const query = `
-						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime 
+						select employee.id as employeeId, scheduling.id as schedulingId, employee.name, scheduling._datetime
 						from scheduling, employee, user
 						where scheduling.employeeId = employee.id and employee.userid = user.id
 						and user.id = ${userId}
@@ -125,7 +125,7 @@ const User = (function() {
 				let todayDate = new Date().getDate();
 				if (todayDate > 28) todayDate = 1;
 				let query = `
-						select count(id) as quantity from user 
+						select count(id) as quantity from user
 						where day(creationDate) = '${todayDate}'`;
 				connect.query(query, callback);
 		},
@@ -137,7 +137,7 @@ const User = (function() {
 
 		isTrialFinished: function(userId, connect, callback) {
 				let query = `
-						select (date_add(creationDate, interval 10 day) < curdate()) as trialFinshed 
+						select (date_add(creationDate, interval 10 day) < curdate()) as trialFinshed
 						from user where id = ${userId}`;
 				connect.query(query, callback);
 		},

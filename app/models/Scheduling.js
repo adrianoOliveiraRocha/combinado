@@ -4,16 +4,16 @@ const Scheduling = (function() {
 
 		save: function(data, connect, callback) {
 			let stm = `
-			insert into scheduling 
+			insert into scheduling
 			(_datetime, comments, clientPhone, clientEmail, employeeId)
-			values('${data.sqlDateTime}', '${data.comments}', 
+			values('${data.sqlDateTime}', '${data.comments}',
 			'${data.clientPhone}', '${data.clientEmail}', ${data.employeeId})`;
 			connect.query(stm, callback);
 		},
 
 		getSchedulings: function(_datetime, employeeId, connect, callback) {
 			let query = `
-				select * from scheduling 
+				select * from scheduling
 				where employeeid = ${employeeId}
 				and _datetime like '${_datetime}%'
 				and canceled = 0
@@ -23,7 +23,7 @@ const Scheduling = (function() {
 
 		getAllSchedulings: function(employeeId, connect, callback) {
 			let query = `
-				select * from scheduling 
+				select * from scheduling
 				where employeeid = ${employeeId}
 				order by _datetime ASC`;
 			connect.query(query, callback);
@@ -31,7 +31,7 @@ const Scheduling = (function() {
 
 		getOldSchedulings: function(employeeId, connect, callback) {
 			let query = `
-				select * from scheduling 
+				select * from scheduling
 				where employeeid = ${employeeId}
 				and curdate() > _datetime
 				order by _datetime ASC`;
@@ -40,7 +40,7 @@ const Scheduling = (function() {
 
 		getNewSchedulings: function(employeeId, connect, callback) {
 			let query = `
-				select * from scheduling 
+				select * from scheduling
 				where employeeid = ${employeeId}
 				and curdate() <= _datetime
 				order by _datetime ASC`;
@@ -80,9 +80,9 @@ const Scheduling = (function() {
 
 		getNotifications: function(currentDate, employeeId, connect, callback) {
 			let query = `
-				select id, _datetime 
-				from scheduling 
-				where _datetime >= '${currentDate}' 
+				select id, _datetime
+				from scheduling
+				where _datetime >= '${currentDate}'
 				and employeeId = ${employeeId}
 				order by _datetime;`;
 			connect.query(query, callback);
@@ -90,12 +90,13 @@ const Scheduling = (function() {
 
 		getUserSchedulingNotifications: function(currentDate, userId, connect, callback) {
 			let query = `
-				select scheduling.id as schedulingId, scheduling._datetime 
+				select scheduling.id as schedulingId, scheduling._datetime
 				from scheduling, employee, user
-				where user.id = ${userId} 
-				and user.id = employee.userId 
+				where user.id = ${userId}
+				and user.id = employee.userId
 				and scheduling.employeeId = employee.id
 				and scheduling._datetime >= '${currentDate}'
+				and canceled = 0
 				order by _datetime;`;
 			connect.query(query, callback);
 		},
@@ -115,24 +116,24 @@ const Scheduling = (function() {
 		showSchedulingToUser: function(schedulingId, connect, callback) {
 			let query = `
 				select scheduling.id as schedulingId, scheduling._datetime, scheduling.clientPhone, scheduling.clientEmail, scheduling.comments, scheduling.canceled,
-				employee.name as employeeName, employee.email as employeeEmail, employee.phone as employeePhone  
-				from scheduling, employee 
+				employee.name as employeeName, employee.email as employeeEmail, employee.phone as employeePhone
+				from scheduling, employee
 				where scheduling.employeeId = employee.id and scheduling.id = ${schedulingId}`;
 			connect.query(query, callback);
 		},
 
 		getThisForDateTimeEmployee: function(params, connect, callback) {
 			let query = `
-				select * from scheduling 
-				where _date = '${params.date}' 
-				and employeeId = ${params.employeeId} 
+				select * from scheduling
+				where _date = '${params.date}'
+				and employeeId = ${params.employeeId}
 				order by _time`;
 			connect.query(query, callback);
 		},
 
 		getThisCancellable: function(schedulingId, connect, callback) {
 			let query = `
-				select count(*) as ICan from scheduling 
+				select count(*) as ICan from scheduling
 				where id = ${schedulingId} and _datetime >= curdate()`;
 			connect.query(query, callback);
 		},
@@ -144,14 +145,15 @@ const Scheduling = (function() {
 			connect.query(stm, callback);
 		},
 
-		getMySchedulings: function(clientEmail, connect, callback) {
+		getMySchedulings: function(clientEmail, connect, userId, callback) {
 			let query = `
-				select scheduling.id as schedulingId, scheduling._datetime, 
+				select scheduling.id as schedulingId, scheduling._datetime,
 				employee.name as employeeName, user.website
-				from scheduling, employee, user 
+				from scheduling, employee, user
 				where clientEmail = '${clientEmail}'
 				and scheduling.employeeId = employee.id
-				and user.id = employee.userid
+				and user.id = ${userId}
+				and employee.userid = user.id
 				and _datetime >= curdate()
 				and canceled = 0`;
 			connect.query(query, callback);

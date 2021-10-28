@@ -3,30 +3,30 @@ module.exports.index = (req, res) => {
 }
 
 module.exports.register = (req, res, application) => {
-    if (req.method == 'GET') {
-        res.render('core/register.ejs')
-    } else {
-        const connect = application.config.connect()
-        const User = application.app.models.User
-        var data = req.body
-        const SecurityPassword = application.app.helpers.SecurityPassword
-        data.pwd = SecurityPassword.encrypt(data.pwd)
+  if (req.method == 'GET') {
+    res.render('core/register.ejs')
+  } else {
+    const connect = application.config.connect()
+    const User = application.app.models.User
+    var data = req.body
+    const SecurityPassword = application.app.helpers.SecurityPassword
+    data.pwd = SecurityPassword.encrypt(data.pwd)
 
-        User.save(data, connect, (err, result) => {
-            if (err) {
-                console.error(err)
-                res.render('core/register.ejs', {
-                    error: err
-                })
-            } else {
-                let message = 'Usuário registrado com sucesso!'
-                res.render('core/login.ejs', {
-                    message: message
-                })
-            }
+    User.save(data, connect, (err, result) => {
+      if (err) {
+        console.error(err)
+        res.render('core/register.ejs', {
+            error: err
         })
+      } else {
+        let message = 'Usuário registrado com sucesso!'
+        res.render('core/login.ejs', {
+            message: message
+        })
+      }
+    })
 
-    }
+  }
 }
 
 module.exports.login = (req, res, application) => {
@@ -112,6 +112,7 @@ module.exports.login = (req, res, application) => {
 
 module.exports.schedule = (req, res, application) => {
 	const userId = req.query.userId
+  req.session.userId = userId;
 	const connect = application.config.connect()
 
 	async function getColors() {
@@ -280,7 +281,8 @@ module.exports.schedule1 = (req, res, application) => {
 		})
 		.catch(err => {
 			res.render('core/error.ejs', {
-				error: err
+				error: err,
+        colors: req.session.colors[0]
 			})
 		})
 		.then(() => {
@@ -432,9 +434,10 @@ module.exports.testSchedule = (req, res, application) => {
 }
 
 module.exports.mySchedulings = (req, res, application) => {
+  const userId = req.session.userId;
   const Scheduling = application.app.models.Scheduling
   connect = application.config.connect()
-  Scheduling.getMySchedulings(req.body.clientEmail, connect, (err, result) => {
+  Scheduling.getMySchedulings(req.body.clientEmail, connect, userId, (err, result) => {
     if (err) res.json(err)
     else {
       res.render('core/my-schedulings.ejs', {
