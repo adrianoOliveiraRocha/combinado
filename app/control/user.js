@@ -850,3 +850,16 @@ module.exports.sendWhatsappMessageClient = (req, res, application) => {
 	let wappLink = application.app.helpers.getWhatsappLink(number, message)
 	res.redirect(wappLink)
 }
+
+module.exports.employeeScheduling = (req, res, application) => {
+	const employeeId = req.query.id;
+	const Employee = application.app.models.Employee
+	const connect = application.config.connect()
+	Employee.getEmployeeScheduling(employeeId, connect, (err, result) => {
+		if(err) {
+			res.json({err})
+		} else {
+			res.json({result})
+		}
+	})
+}

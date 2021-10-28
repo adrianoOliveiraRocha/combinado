@@ -167,6 +167,11 @@ const Employee = (function() {
           connect.query(query, callback);
       },
 
+      getEmployeeScheduling: function(employeeId, connect, callback) {
+        let query = `select * from scheduling where employeeId = ${employeeId}`
+        connect.query(query, callback)
+      },
+
       itHasSomeSheduling: function(employeeId, connect, callback) {
         let query = `
           select count(id) as howMany from scheduling

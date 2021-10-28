@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%-include('include/top-showemp.ejs')%>
-    
+
 </head>
 
 <body onload="callNotifications()">
@@ -48,23 +48,23 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Email</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% for(employee of employees) { %>
                                         <tr>
                                             <td>
-                                                <a href="#" 
+                                                <a href="#"
                                                 title="Detalhes"
-                                                data-toggle="modal" 
+                                                data-toggle="modal"
                                                 data-target="#mediumModal<%=employee.id%>"
                                                 >
                                                     <%=employee.name%>
-                                                </a> 
+                                                </a>
                                             </td>
                                             <td><%=employee.email%></td>
-                                            
+
                                         </tr>
                                         <% } %>
                                     </tbody>
@@ -78,7 +78,7 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-        
+
         <!--Modal-->
         <% for(employee of employees) {%>
         <div class="modal fade" id="mediumModal<%=employee.id%>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -97,7 +97,7 @@
                                 <strong>Detalhes</strong>
                             </div>
 
-                            <div class="card-body card-block"> 
+                            <div class="card-body card-block">
 
                                 <div class="row form-group">
                                     <div class="col col-md-3">
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="col-12 col-md-9">
                                     <% if(employee.aboutMe != null) {%>
-                                        <textarea cols="17" readonly class="form-control"><%=employee.aboutMe%></textarea>                                        
+                                        <textarea cols="17" readonly class="form-control"><%=employee.aboutMe%></textarea>
                                     <% } else {%>
                                         <p class="form-control" style="text-align: center; color: red">
                                             <i>Não enviado</i>
@@ -186,24 +186,38 @@
                                 </div>
 
                             </div>
-                            <div class="card-footer">
-                                <a class="btn btn-primary btn-sm" href="/send-login-pass?id=<%=employee.id%>">
-                                    Enviar Login e Senha
+
+                            <div class="card-footer row">
+                              <div class="col-sm-3">
+                                <a class="btn btn-primary" href="/send-login-pass?id=<%=employee.id%>">
+                                    Enviar
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="/delete_employee?id=<%=employee.id%>">
+                              </div>
+                              <div class="col-sm-3">
+                                <a class="btn btn-primary" href="/employee-sheduling?id=<%=employee.id%>">
+                                    Agendamentos
+                                </a>
+                              </div>
+
+                              <div class="col-sm-3">
+                                <a class="btn btn-danger" href="/delete_employee?id=<%=employee.id%>">
                                     Deletar
                                 </a>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                              </div>
+                              <div class="col-sm-3">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                              </div>
+
                             </div>
 
-                           
 
-                        </div>                        
+
+                        </div>
                     </div>
 
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>

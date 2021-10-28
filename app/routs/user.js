@@ -127,6 +127,10 @@ module.exports = (application) => {
 		application.app.control.user.sendWhatsappMessageEmployee(req, res, application)
 	})
 
+	application.get('/employee-sheduling', (req, res) => {
+		application.app.control.user.employeeScheduling(req, res, application)
+	})
+
 	application.get('/send-whatsapp-message-client', (req, res) => {
 		application.app.control.user.sendWhatsappMessageClient(req, res, application)
 	})
