@@ -16,7 +16,7 @@
     .center {
       display: block;
       margin-left: auto;
-      margin-right: auto;      
+      margin-right: auto;
       width: 50%;
     }
   </style>
@@ -41,7 +41,7 @@
       <%-include('./include/header.ejs')%>
       <!-- Header-->
 
-      <div class="content mt-3">
+      <div class="content mt-3" id="divResponse">
 
         <% if(typeof message != 'undefined' && message != '') { %>
         <div class="col-sm-12">
@@ -52,7 +52,7 @@
             </button>
           </div>
         </div>
-        <% } %>  
+        <% } %>
 
         <div class="panel" style="text-align: center">
           <% if(paymentRequests.length > 0) { %>
@@ -61,23 +61,23 @@
               <div class="card-header bg-primary text-white">Requisição de Pagamento</div>
               <div class="card-body">
                 <h4><%=pr.message%></h4>
-                <h4>Para efetuar o pagamento 
+                <h4>Para efetuar o pagamento
                   <a href="<%=pr.paymentLink%>" class="btn btn-success">Click Aqui</a></h4>
               </div>
               <div class="card-footer"><h4>Dúvidas ou sugestões: w3software@gmail.com</h4></div>
             </div>
 
-          <% } else { %>                 
+          <% } else { %>
             <img src="core/assets/images/logo3-combinado.svg" class="center"alt="logo">
           <% } %>
-          
-        </div>   
+
+        </div>
 
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
-    <%-include('./include/bottom-links-table.ejs')%>       
+    <%-include('./include/bottom-links-table.ejs')%>
 
 </body>
 

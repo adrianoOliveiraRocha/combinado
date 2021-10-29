@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <%-include('./include/top-links-table.ejs')%>
-  
+
 </head>
 
 <body onload="callNotifications()">
@@ -51,25 +51,25 @@
                   </thead>
                   <tbody>
                     <% for(let scheduling of schedulings) {  %>
-                    <tr>                    
+                    <tr>
                       <td>
                         <a href="/user-show-scheduling?schedulingId=<%=scheduling.schedulingId%>">
                           <% if(isFuture(scheduling._datetime)) { %>
                           <div class="alert alert-primary" style="text-align: center">
-                            <%=portugueseDateTime(scheduling._datetime)%>                            
+                            <%=portugueseDateTime(scheduling._datetime)%>
                           </div>
                           <% } else { %>
                           <div class="alert alert-secondary" style="text-align: center">
-                            <%=portugueseDateTime(scheduling._datetime)%>  
+                            <%=portugueseDateTime(scheduling._datetime)%>
                           </div>
-                          <% } %>                          
+                          <% } %>
                         </a>
                       </td>
                       <td>
                         <a href="#"><%=scheduling.name%></a>
-                      </td>                    
-                    </tr>                                  
-                    <% } %>            
+                      </td>
+                    </tr>
+                    <% } %>
                   </tbody>
                 </table>
               </div>
@@ -81,8 +81,8 @@
     </div> <!-- .content -->
   </div><!-- /#right-panel -->
 
-  <%-include('./include/bottom-links-table.ejs')%>      
-  
+  <%-include('./include/bottom-links-table.ejs')%>
+
 
 </body>
 

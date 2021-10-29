@@ -34,7 +34,7 @@
 
         <div class="content mt-3">
 
-            <div class="animated fadeIn">
+            <div class="animated fadeIn" id="divResponse">
                 <div class="row">
 
                     <div class="col-md-12">
@@ -189,18 +189,26 @@
 
                             <div class="card-footer row">
                               <div class="col-sm-3">
-                                <a class="btn btn-primary" href="/send-login-pass?id=<%=employee.id%>">
+                                <a class="btn btn-primary"
+                                href="/send-login-pass?id=<%=employee.id%>">
                                     Enviar
                                 </a>
                               </div>
                               <div class="col-sm-3">
-                                <a class="btn btn-primary" href="/employee-sheduling?id=<%=employee.id%>">
+                                <a class="btn btn-primary"
+                                 href="#"
+                                 onclick="showEmployeeScheduling(<%=employee.id%>);"
+                                 data-dismiss="modal">
                                     Agendamentos
                                 </a>
                               </div>
 
                               <div class="col-sm-3">
-                                <a class="btn btn-danger" href="/delete_employee?id=<%=employee.id%>">
+                                <a
+                                  onclick="deleteEmployee(<%=employee.id%>)"
+                                  class="btn btn-danger"
+                                  href="#"
+                                  data-dismiss="modal">
                                     Deletar
                                 </a>
                               </div>

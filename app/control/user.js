@@ -487,13 +487,13 @@ module.exports.deleteEmployee = (req, res, application) => {
 		var errorMessage
 		if (err == 'itHasScheduling') {
 			errorMessage = `
-			Você não pode deletar esse colaborador porque ele possui pelo menos um agendamento não cancelado.
-			Para deletar esse colaborador, você precisa cancelar todos os seus agendamentos
+			Aviso: Esse colaborador tem agendamentos não cancelados.
+			Para deletar esse colaborador...
 			`
 		} else {
 			errorMessage = "Não foi possível deletar esse colaborador"
 		}
-		res.render('user/error.ejs', {
+		res.render('user/error-ajax.ejs', {
 			user: req.session.user,
 			error: errorMessage
 		})
@@ -815,7 +815,6 @@ module.exports.processAgreement = function(req, res, application) {
 
 	User.agreement(userId, token, connect, (err, result) => {
 		if (err) {
-			res.json(err)
 			let errorMessage = "Erro: " + err.sqlMessage
 			res.render('user/error.ejs', {
 				user: req.session.user,
@@ -857,9 +856,17 @@ module.exports.employeeScheduling = (req, res, application) => {
 	const connect = application.config.connect()
 	Employee.getEmployeeScheduling(employeeId, connect, (err, result) => {
 		if(err) {
-			res.json({err})
+			let errorMessage = "Erro: " + err.sqlMessage
+			res.render('user/error-ajax.ejs', {
+				error: errorMessage
+			})
 		} else {
-			res.json({result})
+			console.log(result);
+			res.render('user/employee-scheduling.ejs', {
+				schedulings: result,
+				isFuture: application.app.helpers.validDateTime,
+				portugueseDateTime: application.app.helpers.portugueseDateTime,
+			})
 		}
 	})
 }
