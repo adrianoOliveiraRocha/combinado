@@ -34,7 +34,7 @@
       <%-include('./include/header.ejs')%>
       <!-- Header-->
 
-      <div class="content mt-3">
+      <div class="content mt-3" id="divResponse">
         <% if(scheduling.canceled) {%>
         <div class="alert alert-warning" role="alert">
           <strong>Aviso!</strong> Esse agendamento foi cancelado!
@@ -44,19 +44,19 @@
         <div class="card">
           <div class="card-header">Detalhes do Agendamento</div>
           <div class="card-body card-block">
-            
+
             <form method="POST" action="/user-cancel-scheduling">
               <input type="hidden" name="schedulingId" value="<%=scheduling.schedulingId%>">
-              <div class="card-body card-block">  
+              <div class="card-body card-block">
 
                 <div class="row form-group">
                   <div class="col col-md-3">
                     <label for="test">Data</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="date" readonly 
+                    <input type="text" class="form-control" name="date" readonly
                     value="<%=portugueseDateTime(scheduling._datetime)%>">
-                  </div>                    
+                  </div>
                 </div>
 
                 <div class="row form-group">
@@ -64,9 +64,9 @@
                     <label for="test">Telefone do Cliente</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="clientPhone" readonly 
+                    <input type="text" class="form-control" name="clientPhone" readonly
                     value="<%=scheduling.clientPhone%>">
-                  </div>                    
+                  </div>
                 </div>
 
                 <div class="row form-group">
@@ -74,9 +74,9 @@
                     <label for="clientEmail">Email do Cliente</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="email" class="form-control" name="clientEmail" readonly 
+                    <input type="email" class="form-control" name="clientEmail" readonly
                     value="<%=scheduling.clientEmail%>">
-                  </div>                    
+                  </div>
                 </div>
 
                 <div class="row form-group">
@@ -84,9 +84,9 @@
                     <label for="employeeName">Colaborador</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="employeeName" readonly 
+                    <input type="text" class="form-control" name="employeeName" readonly
                     value="<%=scheduling.employeeName%>">
-                  </div>                    
+                  </div>
                 </div>
 
                 <div class="row form-group">
@@ -94,9 +94,9 @@
                     <label for="employeePhone">Telefone do Colaborador</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="employeePhone" readonly 
+                    <input type="text" class="form-control" name="employeePhone" readonly
                     value="<%=scheduling.employeePhone%>">
-                  </div>                    
+                  </div>
                 </div>
 
                 <div class="row form-group">
@@ -104,26 +104,26 @@
                     <label for="employeeEmail">Email do Colaborador</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="email" class="form-control" name="employeeEmail" readonly 
+                    <input type="email" class="form-control" name="employeeEmail" readonly
                     value="<%=scheduling.employeeEmail%>">
-                  </div>                    
+                  </div>
                 </div>
-                
+
                 <div class="row form-group">
                   <div class="col col-md-3">
                     <label for="address">Observações do Cliente</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <textarea class="form-control" name="comments" 
+                    <textarea class="form-control" name="comments"
                       rows="4" readonly><%=scheduling.comments%></textarea>
                   </div>
                 </div>
-                
+
                 <hr>
 
                 <% if(isItCancellable && !scheduling.canceled) {%>
                 <div class="form-group">
-                
+
                   <div class="btn-group">
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -142,22 +142,22 @@
                     </div>
                   </div>
 
-                  <button type="submit" class="btn btn-danger">Cancelar</button>   
+                  <button type="submit" class="btn btn-danger">Cancelar</button>
 
-                   
 
-                </div>   
-                <% } %> 
+
+                </div>
+                <% } %>
 
               </div>
             </form>
-                        
+
           </div>
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
-    <%-include('./include/bottom-links.ejs')%>       
+    <%-include('./include/bottom-links.ejs')%>
 
 </body>
 

@@ -34,7 +34,7 @@
       <%-include('./include/header.ejs')%>
       <!-- Header-->
 
-      <div class="content mt-3">
+      <div class="content mt-3" id="divResponse">
         <% if(typeof message != 'undefined' && message != '') { %>
         <div class="col-sm-12">
           <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -44,14 +44,14 @@
             </button>
           </div>
         </div>
-        <% } %>          
+        <% } %>
 
         <div class="card">
           <div class="card-header">Novo Serviço</div>
           <div class="card-body card-block">
 
-            <form method="POST" 
-              enctype="multipart/form-data" 
+            <form method="POST"
+              enctype="multipart/form-data"
               action="/new-service">
 
               <div class="card-body card-block">
@@ -66,25 +66,25 @@
                     Digite o nome do novo serviço</span>
                   </div>
                 </div>
-              </div>              
-              
+              </div>
+
               <hr>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Enviar</button>
-              </div>              
+              </div>
 
             </form>
-            
+
           </div>
-        </div> 
-        
-           
+        </div>
+
+
 
 
     </div> <!-- .content -->
   </div><!-- /#right-panel -->
 
-  <%-include('./include/bottom-links.ejs')%>       
+  <%-include('./include/bottom-links.ejs')%>
 
 </body>
 

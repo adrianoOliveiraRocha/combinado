@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%-include('include/top-showemp.ejs')%>
-    
+
 </head>
 
 <body onload="callNotifications()">
@@ -32,7 +32,7 @@
         <%-include('include/header.ejs')%>
         <!-- Header-->
 
-        <div class="content mt-3">
+        <div class="content mt-3" id="divResponse">
 
             <% if(typeof message != 'undefined' && message != '') { %>
             <div class="col-sm-12">
@@ -43,7 +43,7 @@
                     </button>
                 </div>
             </div>
-            <% } %> 
+            <% } %>
 
             <div class="animated fadeIn">
                 <div class="row">
@@ -52,30 +52,30 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Serviços Cadastrados</strong>
-                                
+
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                                                                        
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% for(service of services) { %>
                                         <tr>
                                             <td>
-                                                <a href="#" 
+                                                <a href="#"
                                                 title="Click para editar"
-                                                data-toggle="modal" 
+                                                data-toggle="modal"
                                                 data-target="#mediumModal<%=service.id%>"
                                                 >
                                                     <%=service.name%>
-                                                </a> 
+                                                </a>
                                             </td>
-                                            
-                                            
+
+
                                         </tr>
                                         <% } %>
                                     </tbody>
@@ -89,7 +89,7 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-        
+
         <!--Modal-->
         <% for(service of services) {%>
         <div class="modal fade" id="mediumModal<%=service.id%>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -102,35 +102,35 @@
                     </div>
                     <div class="modal-body">
                         <div id="responseEditService<%=service.id%>"></div>
-                        
+
                         <div class="card">
                             <div class="card-header">
                                 <strong>Detalhes</strong>
                             </div>
 
-                            <form action="/edit-service" method="post" id="form<%=service.id%>" 
+                            <form action="/edit-service" method="post" id="form<%=service.id%>"
                                 class="form-horizontal">
-                            
-                            <div class="card-body card-block">                                
+
+                            <div class="card-body card-block">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="name" class="form-control-label">Nome</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" name="name" 
-                                            placeholder="Nome do serviço." 
+                                        <input type="text" name="name"
+                                            placeholder="Nome do serviço."
                                             class="form-control"
                                             value="<%=service.name%>">
                                         <span class="help-block">Nome do serviço</span>
                                     </div>
-                                </div>                                
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-primary btn-sm"
                                     onClick="editService(<%=service.id%>);">
                                     Editar
                                 </button>
-                                <button type="reset" class="btn btn-danger btn-sm" 
+                                <button type="reset" class="btn btn-danger btn-sm"
                                     onClick="deleteService(<%=service.id%>)">
                                     Deletar
                                 </button>
@@ -138,10 +138,10 @@
 
                             </form>
 
-                        </div>                        
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <a type="button" 
+                        <a type="button"
                             class="btn btn-secondary"
                             href="/show-services">Fechar</a>
                     </div>

@@ -33,14 +33,14 @@
       <%-include('./include/header.ejs')%>
       <!-- Header-->
 
-      <div class="content mt-3">
+      <div class="content mt-3" id="divResponse">
         <div class="card">
           <div class="card-header">Enviar Credencials por WhatSapp</div>
           <div class="card-body card-block">
 
             <form method="POST" action="/send-login-pass">
                 <input type="hidden" name="name" value="<%=data.name%>">
-              <div class="card-body card-block">              
+              <div class="card-body card-block">
 
                 <div class="row form-group">
 
@@ -48,12 +48,12 @@
                     <label for="email">Email do Colaborador</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="email" class="form-control" value="<%=data.email%>" 
+                    <input type="email" class="form-control" value="<%=data.email%>"
                         name="email" readonly>
                     <small id="emailHelp" class="form-text text-muted">
                     Esse é email é o login do colaborador</small>
-                  </div>                 
-                  
+                  </div>
+
                 </div>
 
                 <div class="row form-group">
@@ -62,13 +62,13 @@
                     <label for="pwd">Senha do Colaborador</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" value="<%=data.pwd%>" 
+                    <input type="text" class="form-control" value="<%=data.pwd%>"
                         name="pwd" readonly>
                     <small id="emailHelp" class="form-text text-muted">
                         O colaborador pode alterar essa senha</small>
-                  </div>                 
-                  
-                </div> 
+                  </div>
+
+                </div>
 
                 <div class="row form-group">
 
@@ -76,29 +76,29 @@
                     <label for="phone">Telefone do Colaborador</label>
                   </div>
                   <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" value="<%=data.phone%>" 
+                    <input type="text" class="form-control" value="<%=data.phone%>"
                         name="phone" id="phone">
                     <small id="emailHelp" class="form-text text-muted">
                         Somente númoros com DDD</small>
-                  </div>                 
-                  
-                </div> 
-                
+                  </div>
+
+                </div>
+
                 <hr>
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>              
+                </div>
               </div>
             </form>
-            
+
           </div>
-        </div>    
+        </div>
 
 
     </div> <!-- .content -->
   </div><!-- /#right-panel -->
 
-  <%-include('./include/bottom-links.ejs')%>       
+  <%-include('./include/bottom-links.ejs')%>
   <script src="phoneNumber.js"></script>
 </body>
 

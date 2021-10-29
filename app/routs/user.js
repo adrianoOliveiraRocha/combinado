@@ -27,6 +27,10 @@ module.exports = (application) => {
 		application.app.control.user.showEmployees(req, res, application);
 	});
 
+	application.get('/employee-detail', (req, res) => {
+		application.app.control.user.employeeDetail(req, res, application)
+	})
+
 	application.get('/send-login-pass', (req, res) => {
 		application.app.control.user.sendLoginPass(req, res, application);
 	});

@@ -20,44 +20,44 @@
 <body>
 
 
-    
+
     <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
 
-      <div class="content mt-3">  
+      <div class="content mt-3" id="divResponse">  
 
-            
-                
+
+
         <div class="panel" style="text-align: center">
 
             <div class="card">
                 <div class="card-header">
                   <h4>Olá <%=user.username%>!</h4></div>
-                </div>                
-                                
+                </div>
+
                 <div class="card-body">
 
                     <% if(notifications.length > 0) { %>
                       <div class="alert alert-info">
-                        Você tem <%=notifications.length%> 
+                        Você tem <%=notifications.length%>
                         <%=(notifications.length > 1 ? 'notificações': 'notificação')%>
                       </div>
                       <% for(let notification of notifications) {%>
                       <div class="alert alert-warning">
                         <%=notification.message%>
                       </div>
-                      <% } %>                      
-                      
+                      <% } %>
+
                     <% } else { %>
                       <div class="alert alert-warning">
                         Conta bloqueada
                       </div>
-                    <% } %> 
+                    <% } %>
                 </div>
-                <div class="card-footer">                   
+                <div class="card-footer">
 
-                  <div class="btn-group-vertical" style="color: white">                    
+                  <div class="btn-group-vertical" style="color: white">
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         Opções
@@ -68,19 +68,19 @@
                         <a class="dropdown-item" href="/logout">Sair</a>
                       </div>
                     </div>
-                  </div> 
+                  </div>
 
                 </div>
             </div>
 
-            
-          
-        </div>   
+
+
+        </div>
 
       </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
-    <%-include('./include/bottom-links.ejs')%>       
+    <%-include('./include/bottom-links.ejs')%>
 
 </body>
 

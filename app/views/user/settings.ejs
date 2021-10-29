@@ -35,13 +35,13 @@
         <!-- Header-->
 
         <div class="breadcrumbs">
-            <div class="col-sm-3">
+            <div class="col-sm-3" id="divResponse">
             <div class="page-header float-left">
                 <div class="page-title">
                 <h1><i class="fa fa-cog"></i> Configurações</h1>
                 </div>
             </div>
-            </div>        
+            </div>
         </div>
 
         <div class="content mt-3">
@@ -49,17 +49,17 @@
                 <form action='/updateSettings' method="POST">
 
                     <div class="card-header">
-                        <div class="panel" style="text-align: center">                
-                            <h4>Quem recebe clientes na sua empresa?</h4> 
+                        <div class="panel" style="text-align: center">
+                            <h4>Quem recebe clientes na sua empresa?</h4>
                         </div>
                     </div>
 
-                    <div class="card-body">                                            
-                        
+                    <div class="card-body">
+
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="IReceiveClients" 
-                                <% if (user.IReceiveClients == 1){ %> 
+                                <input type="checkbox" class="form-check-input" name="IReceiveClients"
+                                <% if (user.IReceiveClients == 1){ %>
                                 checked="checked" <% } %>>
                                     Eu
                             </label>
@@ -67,29 +67,29 @@
                         <div class="form-check-inline">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="IHaveEmployeers"
-                                <% if (user.IHaveEmployeers == 1){ %> 
+                                <% if (user.IHaveEmployeers == 1){ %>
                                 checked="checked" <% } %>>
                                 Meus colaboradores
                             </label>
-                        </div>  
-                        
+                        </div>
+
                     </div>
                     <div class="card-footer">
-                        <div class="panel" style="text-align: center">                
+                        <div class="panel" style="text-align: center">
                             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                         </div>
                     </div>
-                </form>               
+                </form>
             </div>
             <hr>
 
-               
+
 
         </div> <!-- .content -->
 
     </div><!-- /#right-panel -->
 
-    <%-include('./include/bottom-links.ejs')%>       
+    <%-include('./include/bottom-links.ejs')%>
 
 </body>
 

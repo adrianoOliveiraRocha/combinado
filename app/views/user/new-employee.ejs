@@ -34,7 +34,7 @@
       <%-include('./include/header.ejs')%>
       <!-- Header-->
 
-      <div class="content mt-3">
+      <div class="content mt-3" id="divResponse">
         <% if(typeof message != 'undefined' && message != '') { %>
         <div class="col-sm-12">
           <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -44,9 +44,9 @@
             </button>
           </div>
         </div>
-        <% } %>          
+        <% } %>
 
-        <div class="card"> 
+        <div class="card">
 			<div class="card-header">
 				<strong>Novo Colaborador</strong>
 			</div>
@@ -85,8 +85,8 @@
 							<select name="service" class="form-control" multiple required>
 								<% for(service of services) {%>
 								<option value="<%=service.id%>">
-									<%=service.name%> 
-								</option>								
+									<%=service.name%>
+								</option>
 								<% } %>
 							</select>
 							<span class="form-text text-muted">
@@ -106,7 +106,7 @@
 							Essa senha será usado pelo colaborador para entrar no sistema.
 							Mas ele pode mudá-la a qualquer momento</span>
 						</div>
-					</div>				
+					</div>
 				</div>
 				<div class="card-footer">
 					<button type="submit" class="btn btn-primary btn-sm">
@@ -118,13 +118,13 @@
 				</div>
 
 			</form>
-		</div>   
+		</div>
 
 
     </div> <!-- .content -->
   </div><!-- /#right-panel -->
 
-  <%-include('./include/bottom-links.ejs')%>       
+  <%-include('./include/bottom-links.ejs')%>
 
 </body>
 

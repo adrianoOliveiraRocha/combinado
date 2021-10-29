@@ -253,6 +253,10 @@ module.exports.showEmployees = (req, res, application) => {
 
 }
 
+module.exports.employeeDetail = (req, res, application) => {
+
+}
+
 module.exports.sendLoginPass = (req, res, application) => {
 
 	if (req.method == "GET") {

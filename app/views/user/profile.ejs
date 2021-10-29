@@ -34,7 +34,7 @@
       <%-include('./include/header.ejs')%>
       <!-- Header-->
 
-      <div class="content mt-3">
+      <div class="content mt-3" id="divResponse">
         <% if(typeof message != 'undefined' && message != '') { %>
         <div class="col-sm-12">
           <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -44,7 +44,7 @@
             </button>
           </div>
         </div>
-        <% } %>  
+        <% } %>
 
 
         <div class="card">
@@ -55,7 +55,7 @@
 			<form action="/edit-profile" method="post" class="form-horizontal"
 					enctype="multipart/form-data">
 
-				<div class="card-body card-block">				
+				<div class="card-body card-block">
 
 					<input type="hidden" name="id" value="<%=user.id%>">
 					<input type="hidden" name="currentImage" value="<%=user.image%>">
@@ -103,7 +103,7 @@
 								https://www.seusite.com.br</span>
 						</div>
 					</div>
-					
+
 					<div class="row form-group">
 						<div class="col col-md-3">
 							<label for="color1" class=" form-control-label">Côr Principal</label>
@@ -140,7 +140,7 @@
 						</div>
 					</div>
 					<% } else { %>
-					
+
 					<div class="row form-group">
 						<div class="col col-md-3">
 							<label for="image" class=" form-control-label">Imagem</label>
@@ -148,8 +148,8 @@
 						<div class="col-12 col-md-9">
 							<img src="admin/images/profile_images/<%=user.image%>" width="100px;" />
 							<hr>
-							<label for="image" class="form-control-label">Substituir Imagem</label>	
-							<hr>					
+							<label for="image" class="form-control-label">Substituir Imagem</label>
+							<hr>
 							<input type="file" name="image"/>
 							<span class="form-text text-muted">
 								Por favor, selecione uma imagem se você deseja substituir a imagem atual</span>
@@ -158,31 +158,31 @@
 
 					<% } %>
 
-					
+
 				</div>
 
 				<div class="card-footer">
 					<button type="submit" class="btn btn-primary btn-sm">
 						Editar
 					</button>
-					
+
 				</div>
-			
+
 			</form>
 
 		</div>
-		
-		
-		
-			
 
-          
+
+
+
+
+
 
 
     </div> <!-- .content -->
   </div><!-- /#right-panel -->
 
-  <%-include('./include/bottom-links.ejs')%>       
+  <%-include('./include/bottom-links.ejs')%>
 
 </body>
 

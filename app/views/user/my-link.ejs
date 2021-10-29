@@ -42,28 +42,28 @@
             </div>
           </div>
         </div>
-        
+
       </div>
 
-      <div class="content mt-3">
-              
+      <div class="content mt-3" id="divResponse">
+
 
          <!-- The text field -->
         <div class="alert" style="text-align: center">
-            <p>Esse é o link compartilhável. Copie e cole esse código no seu site. 
-            Você também pode compartilhar nas suas redes sociais ou enviar 
+            <p>Esse é o link compartilhável. Copie e cole esse código no seu site.
+            Você também pode compartilhar nas suas redes sociais ou enviar
             por email</p>
             <br>
-            <input type="text" readonly  
-            value="<%=link%>" id="myInput" 
+            <input type="text" readonly
+            value="<%=link%>" id="myInput"
             style="text-align: center" class="form-control">
             <br>
             <!-- The button used to copy the text -->
-            <button class="btn btn-primary"  onclick="myFunction()">Copiar</button> 
-        </div> 
-            
-       
-        
+            <button class="btn btn-primary"  onclick="myFunction()">Copiar</button>
+        </div>
+
+
+
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
@@ -81,9 +81,9 @@
 
             /* Alert the copied text */
             alert("Copiado com sucesso!");
-        } 
+        }
     </script>
-    <%-include('./include/bottom-links.ejs')%>       
+    <%-include('./include/bottom-links.ejs')%>
 
 </body>
 
