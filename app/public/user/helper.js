@@ -17,7 +17,7 @@ function simpleGetAjax(url, container) {
 function simplePostAjax(form, container) {
   var xhr = new XMLHttpRequest();
   var formData = new FormData(form)
-
+	
   xhr.onreadystatechange = function() {
     if(xhr.readyState == 4 && xhr.status == 200) {
       container.innerHTML = xhr.response;
@@ -48,10 +48,78 @@ function saveNewEmployee() {
 	simplePostAjax(form, container)
 }
 
-function employeeDetail() {
-	let url = '/employee-detail'
+function employeeDetail(employeeId) {
 	let container = document.getElementById("divResponse");
-	simpleGetAjax(url, container)
+	let form = document.getElementById('form_' + employeeId);
+	let inputs = document.getElementsByClassName("id");
+	let ids = []
+	for(let i = 0; i < inputs.length; i++) {
+		ids.push(parseInt(inputs.item(i).value));
+	}
+	ids.forEach((id) => {
+		// id
+		let el = document.createElement('input')
+		el.name = 'id_' + id; 
+		el.value = id; 
+		form.appendChild(el);
+		
+		// email
+		el = document.createElement('input')
+		el.name = 'email_' + id; 
+		el.value = document.getElementById('email_' + id).value; 
+		form.appendChild(el)
+		
+		// pwd
+		el = document.createElement('input')
+		el.name = 'pwd_' + id; 
+		el.value = document.getElementById('pwd_' + id).value; 
+		form.appendChild(el)
+
+		// name
+		el = document.createElement('input')
+		el.name = 'name_' + id; 
+		el.value = document.getElementById('name_' + id).value; 
+		form.appendChild(el)
+
+		// phone
+		el = document.createElement('input')
+		el.name = 'phone_' + id; 
+		el.value = document.getElementById('phone_' + id).value; 
+		form.appendChild(el)
+
+		// address
+		el = document.createElement('input')
+		el.name = 'address_' + id; 
+		el.value = document.getElementById('address_' + id).value; 
+		form.appendChild(el)
+
+		// userid
+		el = document.createElement('input')
+		el.name = 'userid_' + id; 
+		el.value = document.getElementById('userid_' + id).value; 
+		form.appendChild(el)
+
+		// aboutMe
+		el = document.createElement('input')
+		el.name = 'aboutMe_' + id; 
+		el.value = document.getElementById('aboutMe_' + id).value; 
+		form.appendChild(el)
+
+		// image
+		el = document.createElement('input')
+		el.name = 'image_' + id; 
+		el.value = document.getElementById('image_' + id).value; 
+		form.appendChild(el)
+
+		// type
+		el = document.createElement('input')
+		el.name = 'type_' + id; 
+		el.value = document.getElementById('type_' + id).value; 
+		form.appendChild(el)
+	
+	})
+
+	simplePostAjax(form, container)
 }
 
 function cancel() {

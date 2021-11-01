@@ -256,7 +256,6 @@ module.exports.showEmployees = (req, res, application) => {
 					error: errorMessage
 			})
 		} else {
-			console.log(result)
 			res.render('user/show-employees.ejs', {
 				user: req.session.user,
 				employees: result
@@ -267,8 +266,9 @@ module.exports.showEmployees = (req, res, application) => {
 }
 
 module.exports.employeeDetail = (req, res, application) => {
+	let data = req.body
 	res.json({
-		messag: "I am testing one more thing"
+		data: data
 	})
 }
 
