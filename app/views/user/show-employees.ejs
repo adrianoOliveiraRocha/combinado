@@ -1,39 +1,45 @@
-<div class="animated fadeIn" id="divResponse">
-    <div class="row">
+<div class="animated fadeIn">
+	<div class="row">
 
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <strong class="card-title">Todos os Colaboradores</strong>
-                </div>
-                <div class="card-body">
-                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+						<strong class="card-title">Todos os Colaboradores</strong>
+				</div>
+				<div class="card-body">
+					<table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(employee of employees) { %>
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="">
-                                      <%=employee.name%>
-                                    </a>
-                                </td>
-                                <td><%=employee.email%></td>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(employee of employees) { %>
+							<form action="/employee-details" id="form_<%=employee.id%>">
+								
+							</form>
+							<tr>
+								<td>
+									<a href="#" onclick="employeeDetail()">
+										<%=employee.name%>
+									</a>
+								</td>
+								<td>
+									<a href="#" onclick="employeeDetail()">
+										<%=employee.email%>
+									</a>
+								</td>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
 
-                            </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
+				</div>
+			</div>
+		</div>
 
 
-    </div>
+	</div>
 </div><!-- .animated -->

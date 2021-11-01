@@ -1,3 +1,5 @@
+const { application } = require('express')
+
 module.exports.home = (req, res, application) => {
 	var message = req.session.message
 	req.session.message = ''
@@ -140,6 +142,13 @@ module.exports.editProfile = (req, res, application) => {
 
 }
 
+module.exports.cancel = (req, res, application) => {
+	res.render('user/advise.ejs', {
+		advise: "Operação cancelada!",
+		type: "warning"
+	})
+}
+
 module.exports.newEmployee = (req, res, application) => {
 	const connect = application.config.connect()
 	const Service = application.app.models.Service
@@ -149,7 +158,7 @@ module.exports.newEmployee = (req, res, application) => {
 		Service.getAll(req.session.user.id, connect, (errService, resultService) => {
 			if (errService) {
 				let errorMessage = "Não foi possível recuperar os serviços"
-				res.render('user/error.ejs', {
+				res.render('user/error-ajax.ejs', {
 						user: req.session.user,
 						error: errorMessage
 				})
@@ -161,7 +170,7 @@ module.exports.newEmployee = (req, res, application) => {
 			}
 		})
 
-	} else {
+	} else { // POST
 
 		function saveEmployee() {
 			return new Promise((resolve, reject) => {
@@ -216,12 +225,15 @@ module.exports.newEmployee = (req, res, application) => {
 		}
 
 		saveES().then(resultES => {
-			res.redirect('/show-employees')
+			res.render('user/advise.ejs', {
+				advise: "Os dados do colaborador foram salvos com sucesso!",
+				type: "success"
+			})
 		}).catch(err => {
-			let errorMessage = err.sqlMessage
-			res.render('user/error.ejs', {
+			let error = err.sqlMessage ? err.sqlMessage : err
+			res.render('user/error-ajax.ejs', {
 				user: req.session.user,
-				error: errorMessage
+				error: error
 			})
 		}).then(() => {
 			connect.end()
@@ -244,6 +256,7 @@ module.exports.showEmployees = (req, res, application) => {
 					error: errorMessage
 			})
 		} else {
+			console.log(result)
 			res.render('user/show-employees.ejs', {
 				user: req.session.user,
 				employees: result
@@ -254,7 +267,9 @@ module.exports.showEmployees = (req, res, application) => {
 }
 
 module.exports.employeeDetail = (req, res, application) => {
-
+	res.json({
+		messag: "I am testing one more thing"
+	})
 }
 
 module.exports.sendLoginPass = (req, res, application) => {

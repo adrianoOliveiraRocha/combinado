@@ -1,2 +1,5 @@
-permit that the user cancel a scheduling or all scheduling of one
-specific employees. Because the user can delete a employee only if the employee don't have any scheduling
+All pages must be called via ajax
+  Eache employee need a form: show-employees.ejs line 21
+ 
+  permit that the user cancel a scheduling or all scheduling of one
+  specific employees. Because the user can delete a employee only if the employee don't have any scheduling

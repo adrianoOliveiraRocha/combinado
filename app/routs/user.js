@@ -19,6 +19,10 @@ module.exports = (application) => {
 		application.app.control.user.newEmployee(req, res, application);
 	});
 
+	application.get('/user-cancel', (req, res) => {
+		application.app.control.user.cancel(req, res, application)
+	})
+
 	application.post('/new-employee', (req, res) => {
 		application.app.control.user.newEmployee(req, res, application);
 	});
