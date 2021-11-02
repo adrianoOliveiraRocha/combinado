@@ -1,0 +1,116 @@
+<div class="card">
+  <div class="card-header">Detalhes do Colaborador</div>
+  
+  <div class="card-body card-block">
+    
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">ID</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" class="form-control" name="id" readonly
+          value="<%=employeeData.id%>">
+      </div>
+    </div> 
+    
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">E-Mail</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" class="form-control" name="email" readonly
+          value="<%=employeeData.email%>">
+      </div>
+    </div> 
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">Nome</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" class="form-control" name="name" readonly
+          value="<%=employeeData.name%>">
+      </div>
+    </div> 
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">Telefone</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" class="form-control" name="phone" readonly
+          value="<%=employeeData.phone%>">
+      </div>
+    </div> 
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">Endereço</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" class="form-control" name="address" readonly
+          value="<%=employeeData.address%>">
+      </div>
+    </div> 
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">Apresentação</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <textarea name="about" cols="30" rows="10" class="form-control"><%=employeeData.aboutMe%></textarea>
+      </div>
+    </div> 
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="test">Image</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <%if(employeeData.image) { %>
+        <img src="admin/images/profile_images/<%=employeeData.image%>" width="200px;"/>
+        <% } else { %>
+        <div class="alert alert-warning">Sem imagem</div>
+        <% } %>        
+      </div>
+    </div> 
+
+  </div>
+
+  <div class="card card-footer">
+    <div class="btn-group">
+      <button type="button" class="btn btn-danger" 
+        data-toggle="modal" data-target="#deleteEmployee">
+        Deletar</button>
+    </div> 
+  </div>
+
+</div> <!-- .content -->
+
+<!-- Deactivate Modal -->
+<div class="modal" id="deleteEmployee">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Aviso</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Ao deletar um colaborador, todos os agendamentos serão perdidos
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal"
+          onclick="deleteEmployee('<%=employeeData.id%>', '<%=employeeData.image%>')">
+          Continuar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

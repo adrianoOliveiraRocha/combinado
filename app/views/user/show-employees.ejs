@@ -17,20 +17,17 @@
 						</thead>
 						<tbody>
 							<% for(employee of employees) { %>
-							
-							<form action="/employee-detail" id="form_<%=employee.id%>">
-								<input type="hidden" class="id" value="<%=employee.id%>">
-								<input type="hidden" id="email_<%=employee.id%>" value="<%=employee.email%>">
-								<input type="hidden" id="pwd_<%=employee.id%>" value="<%=employee.pwd%>">
-								<input type="hidden" id="name_<%=employee.id%>" value="<%=employee.name%>">
-								<input type="hidden" id="phone_<%=employee.id%>" value="<%=employee.phone%>">
-								<input type="hidden" id="address_<%=employee.id%>" value="<%=employee.address%>">
-								<input type="hidden" id="userid_<%=employee.id%>" value="<%=employee.userid%>">
-								<input type="hidden" id="aboutMe_<%=employee.id%>" value="<%=employee.aboutMe%>">
-								<input type="hidden" id="image_<%=employee.id%>" value="<%=employee.image%>">
-								<input type="hidden" id="type_<%=employee.id%>" value="<%=employee.type%>">
-							</form>
-
+							<!-- user data -->
+							<input type="hidden" id="email_<%=employee.id%>" value="<%=employee.email%>">
+							<input type="hidden" id="pwd_<%=employee.id%>" value="<%=employee.pwd%>">
+							<input type="hidden" id="name_<%=employee.id%>" value="<%=employee.name%>">
+							<input type="hidden" id="phone_<%=employee.id%>" value="<%=employee.phone%>">
+							<input type="hidden" id="address_<%=employee.id%>" value="<%=employee.address%>">
+							<input type="hidden" id="userid_<%=employee.id%>" value="<%=employee.userid%>">
+							<input type="hidden" id="aboutMe_<%=employee.id%>" value="<%=employee.aboutMe%>">
+							<input type="hidden" id="image_<%=employee.id%>" value="<%=employee.image%>">
+							<input type="hidden" id="type_<%=employee.id%>" value="<%=employee.type%>">
+							<!-- end user data -->
 							<tr>
 								<td>
 									<a href="#" onclick="employeeDetail('<%=employee.id%>')">

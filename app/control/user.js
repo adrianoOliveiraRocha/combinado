@@ -266,10 +266,8 @@ module.exports.showEmployees = (req, res, application) => {
 }
 
 module.exports.employeeDetail = (req, res, application) => {
-	let data = req.body
-	res.json({
-		data: data
-	})
+	let employeeData = req.body;
+	res.render('user/employee-detail.ejs', {employeeData})
 }
 
 module.exports.sendLoginPass = (req, res, application) => {
@@ -421,69 +419,14 @@ module.exports.deleteEmployee = (req, res, application) => {
 	const Employee = application.app.models.Employee
 
 	const connect = application.config.connect()
-	const employeeId = req.query.id
-
-	// verify wheter this employee have any scheduling attached
-	function itHasSomeSheduling() {
-		return new Promise((resolve, reject) => {
-			Employee.itHasSomeSheduling(employeeId, connect, (err, result) => {
-				if (err) reject(err.sqlMessage)
-				else {
-					if (result[0].howMany > 0) resolve(true)
-					else resolve(false)
-				}
-			})
-		})
-	}
-
-	async function deleteED() {
-		let itHas = await itHasSomeSheduling()
-
-		return new Promise((resolve, reject) => {
-			if (itHas) reject('itHasScheduling') // This employee has scheduling
-
-			Employee.deleteED(employeeId, connect, (err, result) => {
-				if (err) {
-					reject(err.sqlMessage)
-				} else {
-					resolve(result)
-				}
-			})
-		})
-	}
-
-	async function deleteES() {
-		let result = await deleteED()
-		return new Promise((resolve, reject) => {
-			Employee.deleteES(employeeId, connect, (err, result) => {
-				if (err) {
-					reject(err.sqlMessage)
-				} else {
-					resolve(result)
-				}
-			})
-		})
-	}
-
-	async function getImageName() {
-		let result = await deleteES()
-		return new Promise((resolve, reject) => {
-			Employee.getImageName(connect, employeeId, (errorIN, resultIN) => {
-				if (errorIN) {
-					reject(errorIN.sqlMessage)
-				} else {
-					resolve(resultIN[0].image)
-				}
-			})
-		})
-	}
-
+	let employeeId = req.query.employeeId;
+	let image = req.query.image; 
+	
 	async function deleteEmployee() {
-		const imageName = await getImageName()
-				// delete image
-		if (imageName != null) {
+		// delete image
+		if (image.length > 0) {
 			const DeleteImage = application.app.helpers.DeleteImage
-			DeleteImage('admin/images/profile_images', imageName)
+			DeleteImage('admin/images/profile_images', image)
 		}
 
 		return new Promise((resolve, reject) => {
@@ -500,21 +443,13 @@ module.exports.deleteEmployee = (req, res, application) => {
 
 	deleteEmployee().then(result => {
 		connect.end()
-		res.redirect('/show-employees')
+		res.render('user/advise.ejs', {
+			type: 'success', advise: "Colaborador deletado com sucesso!"
+		})
 	}).catch(err => {
-		console.error(err)
-		var errorMessage
-		if (err == 'itHasScheduling') {
-			errorMessage = `
-			Aviso: Esse colaborador tem agendamentos não cancelados.
-			Para deletar esse colaborador...
-			`
-		} else {
-			errorMessage = "Não foi possível deletar esse colaborador"
-		}
 		res.render('user/error-ajax.ejs', {
 			user: req.session.user,
-			error: errorMessage
+			error: err
 		})
 	})
 

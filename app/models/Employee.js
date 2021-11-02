@@ -79,8 +79,10 @@ const Employee = (function() {
 
     deleteEmployee: function(employeeId, connect, callback) {
       let query = `
-      delete from employee_service where employeeid = ${employeeId};
-      delete from employee where id = ${employeeId}
+      delete from employee_day where employeeId = ${employeeId};
+      delete from employee_service where employeeId = ${employeeId};
+      delete from scheduling where employeeId = ${employeeId};
+      delete from employee where id = ${employeeId};
       `;
       connect.query(query, callback);
     },
