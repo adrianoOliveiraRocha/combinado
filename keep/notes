@@ -1,4 +1,5 @@
-
+problem after install the system usong MySQL 8.x -> Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protoco
+solution -> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 
 https://www.hostinger.com.br/tutoriais/como-configurar-chaves-ssh/
 já gerou as chaves em /home/adriano/hostinger
