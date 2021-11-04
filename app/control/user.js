@@ -314,10 +314,10 @@ module.exports.newService = (req, res, application) => {
 	var message = req.session.message
 	req.session.message = ''
 	if (req.method == 'GET') {
-			res.render('user/new-service.ejs', {
-					user: req.session.user,
-					message: message
-			})
+		res.render('user/new-service.ejs', {
+			user: req.session.user,
+			message: message
+		})
 	} else {
 		const Service = application.app.models.Service
 		const connect = application.config.connect()
@@ -328,13 +328,15 @@ module.exports.newService = (req, res, application) => {
 			if (err) {
 				console.error(err.sqlMessage)
 				let errorMessage = "Não foi possível registrar o serviço"
-				res.render('user/error.ejs', {
+				res.render('user/error-ajax.ejs', {
 					user: req.session.user,
 					error: errorMessage
 				})
 			} else {
-				req.session.message = 'Serviço cadastrado com sucesso!'
-				res.redirect(req.originalUrl)
+				res.render('user/advise.ejs', {
+					type: 'success',
+					advise: "Serviço registrado com sucesso!"
+				})
 			}
 		})
 	}
@@ -348,7 +350,7 @@ module.exports.showServices = (req, res, application) => {
 		if (err) {
 			console.error(err.sqlMessage)
 			let errorMessage = "Não foi possível recuperar os serviços"
-			res.render('user/error.ejs', {
+			res.render('user/error-ajax.ejs', {
 				user: req.session.user,
 				error: errorMessage
 			})

@@ -1,4 +1,5 @@
-delete from employee_day where employeeId > 19;
-delete from employee_service where employeeId > 19;
-delete from scheduling where employeeId > 19;
-delete from employee where id > 19;
+select employee.name, service.name 
+from employee, service, employee_service
+where employee.id = employee_service.employeeid
+and service.id = employee_service.serviceid
+and employee.id = 31;
