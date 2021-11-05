@@ -55,6 +55,10 @@ module.exports = (application) => {
 		application.app.control.user.showServices(req, res, application);
 	});
 
+	application.get('/service-detail', (req, res) => {
+		application.app.control.user.serviceDetail(req, res);
+	});
+
 	application.post('/edit-service', (req, res) => {
 		application.app.control.user.editService(req, res, application);
 	});

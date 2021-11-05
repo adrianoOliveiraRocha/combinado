@@ -154,8 +154,26 @@ const Service = (function () {
 			simpleGetAjax(url, container);
 		}, 
 
-		edit(serviceId) {
-			alert(serviceId);
+		detail(serviceId, serviceName) {
+			let url = '/service-detail?id=' + serviceId + '&name=' + serviceName;
+			let container = document.getElementById('divResponse')
+			simpleGetAjax(url, container)
+		},
+
+		edit() {
+			
+			let container = document.getElementById('divResponse');
+
+			let form = document.createElement('form');
+			form.action = '/edit-service';
+
+			let inputId = document.getElementById('id')
+			form.appendChild(inputId);
+
+			let inputName = document.getElementById('name')
+			form.appendChild(inputName);
+
+			simplePostAjax(form, container);
 		}
 
 	}

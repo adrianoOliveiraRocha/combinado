@@ -12,19 +12,16 @@
 						<thead>
 							<tr>
 								<th>Name</th>
-
 							</tr>
 						</thead>
 						<tbody>
 							<% for(service of services) { %>
 							<tr>
 								<td>
-									<a href="#" onclick="Service.edit('<%=service.id%>')">
+									<a href="#" onclick="Service.detail('<%=service.id%>', '<%=service.name%>')">
 										<%=service.name%>
 									</a>
 								</td>
-
-
 							</tr>
 							<% } %>
 						</tbody>

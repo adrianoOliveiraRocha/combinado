@@ -15,9 +15,10 @@ const Service = (function() {
 		},
 
 		edit: function(data, connect, callback) {
-				let query = `update service set name = '${data.name}' 
-				where id = ${data.id}`;
-				connect.query(query, callback);
+			let query = `update service set name = '${data.name}' 
+			where id = ${data.id}`;
+			console.log(query);
+			connect.query(query, callback);
 		},
 
 		delete: function(serviceId, connect, calback) {

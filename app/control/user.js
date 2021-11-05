@@ -364,26 +364,28 @@ module.exports.showServices = (req, res, application) => {
 
 }
 
+module.exports.serviceDetail = (req, res) => {
+	let service = req.query;
+	res.render('user/service-detail.ejs', { service });
+}
+
 module.exports.editService = (req, res, application) => {
-	var data = req.body
+	var data = req.body;
+	console.log(data)
 	const Service = application.app.models.Service
 	const connect = application.config.connect()
 	Service.edit(data, connect, (err, result) => {
+		connect.end();
 		if (err) {
-			console.error(err.sqlMessage)
-			let errorMessage = "Não foi possível editar as informações desse serviço"
-			res.render('user/error.ejs', {
-				user: req.session.user,
+			let errorMessage = "Não foi possível editar as informações desse serviço: " + err;
+			res.render('user/error-ajax.ejs', {
 				error: errorMessage
 			})
 		} else {
-			var msg = `
-			<div class="alert alert-success alert-dismissible">
-			<button type="button" class="close" data-dismiss="alert">&times</button>
-			<strong>Sucesso!</strong> Atualizado com sucesso!
-			</div>
-			`
-			res.send(msg)
+			res.render('user/advise', {
+				type: "success", 
+				advise: "Atualizado com sucesso!" 
+			})
 		}
 	})
 }
