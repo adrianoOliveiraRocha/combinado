@@ -371,7 +371,6 @@ module.exports.serviceDetail = (req, res) => {
 
 module.exports.editService = (req, res, application) => {
 	var data = req.body;
-	console.log(data)
 	const Service = application.app.models.Service
 	const connect = application.config.connect()
 	Service.edit(data, connect, (err, result) => {
@@ -468,7 +467,7 @@ module.exports.userAllSchedulings = (req, res, application) => {
 		if (err) {
 			console.error(err.sqlMessage)
 			let errorMessage = 'Não foi possível recuperar as informações dos agendamentos'
-			res.render('user/error.ejs', {
+			res.render('user/error-ajax.ejs', {
 					user: req.session.user,
 					error: errorMessage
 			})

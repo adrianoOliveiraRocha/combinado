@@ -178,3 +178,13 @@ const Service = (function () {
 
 	}
 })();
+
+const Scheduling = (function() {
+	return {
+		all() {
+			let container = document.getElementById('divResponse')
+			let url = '/user-all-schedulings'
+			simpleGetAjax(url, container)
+		}
+	}
+})();

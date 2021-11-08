@@ -4,7 +4,7 @@
   
   <div class="card-body card-block">
     
-    <input type="hidden" id="id">
+    <input type="hidden" id="id" name="id" value="<%=service.id%>">
     
     <div class="row form-group">
       <div class="col col-md-3">
@@ -12,6 +12,7 @@
       </div>
       <div class="col-12 col-md-9">
         <input type="text" class="form-control" id="name"
+        name="name"
           value="<%=service.name%>">
       </div>
     </div> 
