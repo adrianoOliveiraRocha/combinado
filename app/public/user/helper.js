@@ -181,10 +181,38 @@ const Service = (function () {
 
 const Scheduling = (function() {
 	return {
-		all() {
-			let container = document.getElementById('divResponse')
-			let url = '/user-all-schedulings'
-			simpleGetAjax(url, container)
+		showScheduling(schedulingId) {
+			let url = '/user-show-scheduling?schedulingId=' + schedulingId;
+			let container = document.getElementById('divResponse');
+			simpleGetAjax(url, container);
 		}
 	}
 })();
+
+const User = (function () {
+	return {
+		makeLink() {
+			let url = '/make-link'
+			let container = document.getElementById('divResponse');
+			simpleGetAjax(url, container)
+		},
+
+		copyLink() {
+			/* Get the text field */
+			var copyText = document.getElementById("myInput");
+			/* Select the text field */
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+			/* Copy the text inside the text field */
+			document.execCommand("copy");
+			
+			/* Alert the copied text */
+			alert("Copiado com sucesso!");
+		},
+
+		testLink() {
+			let url = '/test-link', container = document.getElementById('divResponse')
+			simpleGetAjax(url, container)
+		}
+	}
+})()

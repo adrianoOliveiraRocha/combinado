@@ -53,7 +53,7 @@
                     <% for(let scheduling of schedulings) {  %>
                     <tr>
                       <td>
-                        <a href="/user-show-scheduling?schedulingId=<%=scheduling.schedulingId%>">
+                        <a href="#" onclick="Scheduling.showScheduling('<%=scheduling.schedulingId%>')">
                           <% if(isFuture(scheduling._datetime)) { %>
                           <div class="alert alert-primary" style="text-align: center">
                             <%=portugueseDateTime(scheduling._datetime)%>
@@ -66,7 +66,7 @@
                         </a>
                       </td>
                       <td>
-                        <a href="#"><%=scheduling.name%></a>
+                        <a href="#" onclick="Scheduling.showScheduling('<%=scheduling.schedulingId%>')"><%=scheduling.name%></a>
                       </td>
                     </tr>
                     <% } %>
@@ -80,7 +80,7 @@
 
     </div> <!-- .content -->
   </div><!-- /#right-panel -->
-
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <%-include('./include/bottom-links-table.ejs')%>
 
 

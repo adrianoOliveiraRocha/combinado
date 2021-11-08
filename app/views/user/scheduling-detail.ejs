@@ -1,164 +1,120 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
+<% if(scheduling.canceled) {%>
+<div class="alert alert-warning" role="alert">
+  <strong>Aviso!</strong> Esse agendamento foi cancelado!
+</div>
+<% } %>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bem Vindo!</title>
-  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="card">
+  <div class="card-header">Detalhes do Agendamento</div>
+  <div class="card-body card-block">
 
-  <%-include('./include/top-links.ejs')%>
+    <form method="POST" action="/user-cancel-scheduling">
+      <input type="hidden" name="schedulingId" value="<%=scheduling.schedulingId%>">
+      <div class="card-body card-block">
 
-</head>
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="test">Data</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" class="form-control" name="date" readonly
+            value="<%=portugueseDateTime(scheduling._datetime)%>">
+          </div>
+        </div>
 
-<body onload="callNotifications()">
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="test">Telefone do Cliente</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" class="form-control" name="clientPhone" readonly
+            value="<%=scheduling.clientPhone%>">
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="clientEmail">Email do Cliente</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="email" class="form-control" name="clientEmail" readonly
+            value="<%=scheduling.clientEmail%>">
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="employeeName">Colaborador</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" class="form-control" name="employeeName" readonly
+            value="<%=scheduling.employeeName%>">
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="employeePhone">Telefone do Colaborador</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="text" class="form-control" name="employeePhone" readonly
+            value="<%=scheduling.employeePhone%>">
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="employeeEmail">Email do Colaborador</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <input type="email" class="form-control" name="employeeEmail" readonly
+            value="<%=scheduling.employeeEmail%>">
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3">
+            <label for="address">Observações do Cliente</label>
+          </div>
+          <div class="col-12 col-md-9">
+            <textarea class="form-control" name="comments"
+              rows="4" readonly><%=scheduling.comments%></textarea>
+          </div>
+        </div>
+
+        <hr>
+
+        <% if(isItCancellable && !scheduling.canceled) {%>
+        <div class="form-group">
+
+          <div class="btn-group">
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Lembrete Via WhatSapp
+              </button>
+              <div class="dropdown-menu">
+                <%if(scheduling.employeePhone != '' && typeof scheduling.employeePhone != 'undefined') { %>
+                <a class="dropdown-item" href="/send-whatsapp-message-employee?employeePhone=<%=scheduling.employeePhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&employeeName=<%=scheduling.employeeName%>">
+                  Para o Colaborador</a>
+                <% } else { %>
+                <i class="dropdown-item" style="color: red" title="Telefone Não Cadastrado">Para o Colaborador</i>
+                <% } %>
+                <a class="dropdown-item" href="/send-whatsapp-message-client?clientPhone=<%=scheduling.clientPhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&clientEmail=<%=scheduling.clientEmail%>">
+                  Para o Cliente</a>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-danger">Cancelar</button>
 
 
-    <!-- Left Panel -->
 
-    <%-include('./include/left-panel.ejs')%>
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-      <!-- Header-->
-      <%-include('./include/header.ejs')%>
-      <!-- Header-->
-
-      <div class="content mt-3" id="divResponse">
-        <% if(scheduling.canceled) {%>
-        <div class="alert alert-warning" role="alert">
-          <strong>Aviso!</strong> Esse agendamento foi cancelado!
         </div>
         <% } %>
 
-        <div class="card">
-          <div class="card-header">Detalhes do Agendamento</div>
-          <div class="card-body card-block">
+      </div>
+    </form>
 
-            <form method="POST" action="/user-cancel-scheduling">
-              <input type="hidden" name="schedulingId" value="<%=scheduling.schedulingId%>">
-              <div class="card-body card-block">
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="test">Data</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="date" readonly
-                    value="<%=portugueseDateTime(scheduling._datetime)%>">
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="test">Telefone do Cliente</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="clientPhone" readonly
-                    value="<%=scheduling.clientPhone%>">
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="clientEmail">Email do Cliente</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <input type="email" class="form-control" name="clientEmail" readonly
-                    value="<%=scheduling.clientEmail%>">
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="employeeName">Colaborador</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="employeeName" readonly
-                    value="<%=scheduling.employeeName%>">
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="employeePhone">Telefone do Colaborador</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <input type="text" class="form-control" name="employeePhone" readonly
-                    value="<%=scheduling.employeePhone%>">
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="employeeEmail">Email do Colaborador</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <input type="email" class="form-control" name="employeeEmail" readonly
-                    value="<%=scheduling.employeeEmail%>">
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col col-md-3">
-                    <label for="address">Observações do Cliente</label>
-                  </div>
-                  <div class="col-12 col-md-9">
-                    <textarea class="form-control" name="comments"
-                      rows="4" readonly><%=scheduling.comments%></textarea>
-                  </div>
-                </div>
-
-                <hr>
-
-                <% if(isItCancellable && !scheduling.canceled) {%>
-                <div class="form-group">
-
-                  <div class="btn-group">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        Lembrete Via WhatSapp
-                      </button>
-                      <div class="dropdown-menu">
-                        <%if(scheduling.employeePhone != '' && typeof scheduling.employeePhone != 'undefined') { %>
-                        <a class="dropdown-item" href="/send-whatsapp-message-employee?employeePhone=<%=scheduling.employeePhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&employeeName=<%=scheduling.employeeName%>">
-                          Para o Colaborador</a>
-                        <% } else { %>
-                        <i class="dropdown-item" style="color: red" title="Telefone Não Cadastrado">Para o Colaborador</i>
-                        <% } %>
-                        <a class="dropdown-item" href="/send-whatsapp-message-client?clientPhone=<%=scheduling.clientPhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&clientEmail=<%=scheduling.clientEmail%>">
-                          Para o Cliente</a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button type="submit" class="btn btn-danger">Cancelar</button>
-
-
-
-                </div>
-                <% } %>
-
-              </div>
-            </form>
-
-          </div>
-
-        </div> <!-- .content -->
-    </div><!-- /#right-panel -->
-
-    <%-include('./include/bottom-links.ejs')%>
-
-</body>
-
-</html>
+  </div>
+</div>
+</div>

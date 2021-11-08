@@ -580,7 +580,7 @@ module.exports.showScheduling = (req, res, application) => {
 	}).catch(err => {
 		console.error(err)
 		let errorMessage = 'Não foi possível recuperar as informações desse agendamento'
-		res.render('user/error.ejs', {
+		res.render('user/error-ajax.ejs', {
 			user: req.session.user,
 			error: errorMessage
 		})
