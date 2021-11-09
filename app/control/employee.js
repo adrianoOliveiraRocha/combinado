@@ -1,89 +1,86 @@
 module.exports.index = (req, res, application) => {
-    var message = req.session.message
-    req.session.message = ''
-    var error = req.session.error
-    req.session.error = ''
+	var message = req.session.message
+	req.session.message = ''
+	var error = req.session.error
+	req.session.error = ''
 
-    res.render('employee/index.ejs', {
-        employee: req.session.employee,
-        message: message,
-        error: error
-    })
+	res.render('employee/index.ejs', {
+		employee: req.session.employee,
+		message: message,
+		error: error
+	})
 
 }
 
-module.exports.profile = (req, res, application) => {
-    var message = req.session.message
-    req.session.message = ''
-    res.render('employee/profile.ejs', {
-        employee: req.session.employee,
-        message: message
-    })
+module.exports.profile = (req, res) => {
+	res.render('employee/profile.ejs', {
+		employee: req.session.employee
+	})
 }
 
 module.exports.editProfile = (req, res, application) => {
 
-    const Employee = application.app.models.Employee
-    const connect = application.config.connect()
-    var data = req.body
-    const employeeId = data.id
-    var imageName
-    const SecurityPassword = application.app.helpers.SecurityPassword
+	const Employee = application.app.models.Employee
+	const connect = application.config.connect()
+	var data = req.body
+	const employeeId = data.id
+	var imageName
+	const SecurityPassword = application.app.helpers.SecurityPassword
 
-    if (req.files != null) {
+	if (req.files != null) {
 
-        var folder = 'admin/images/profile_images'
-        const UploadImage = application.app.helpers.UploadImage
-        imageName = UploadImage(req.files.image, folder)
+		var folder = 'admin/images/profile_images'
+		const UploadImage = application.app.helpers.UploadImage
+		imageName = UploadImage(req.files.image, folder)
 
-        if (data.currentImage.length > 0) {
-            const DeleteImage = application.app.helpers.DeleteImage
-            DeleteImage(folder, data.currentImage)
-        } else {
-            console.log('No image to delete')
-        }
+		if (data.currentImage.length > 0) {
+				const DeleteImage = application.app.helpers.DeleteImage
+				DeleteImage(folder, data.currentImage)
+		} else {
+				console.log('No image to delete')
+		}
 
-    }
+	}
 
-    function updateEmployee() {
+	function updateEmployee() {
 
-        return new Promise((resolve, reject) => {
-            data.encryptPwd = SecurityPassword.encrypt(data.pwd)
-            Employee.update(data, imageName, connect, (errUpd, resultUpd) => {
-                if (errUpd) {
-                    reject(errUpd)
-                } else {
-                    resolve(resultUpd)
-                }
-            })
-        })
+		return new Promise((resolve, reject) => {
+			data.encryptPwd = SecurityPassword.encrypt(data.pwd)
+			Employee.update(data, imageName, connect, (errUpd, resultUpd) => {
+				if (errUpd) {
+					reject(errUpd)
+				} else {
+					resolve(resultUpd)
+				}
+			})
+		})
 
-    }
+	}
 
-    updateEmployee().then(resultUpd => { // get the updated user
-        return new Promise((resolve, reject) => {
-            Employee.getThis(req.session.employee.id, connect, (errEmployee, resultEmployee) => {
-                if (errEmployee) {
-                    reject(errEmployee)
-                } else {
-                    resolve(resultEmployee[0])
-                }
-            })
-        })
+	updateEmployee().then(resultUpd => { // get the updated user
+		return new Promise((resolve, reject) => {
+			Employee.getThis(req.session.employee.id, connect, (errEmployee, resultEmployee) => {
+				if (errEmployee) {
+					reject(errEmployee)
+				} else {
+					resolve(resultEmployee[0])
+				}
+			})
+		})
 
-    }).then(employee => { // does update the session
-        req.session.employee = employee // update the user in the session
-        req.session.employee.pwdDecrypted = SecurityPassword.decrypt(employee.pwd)
-        req.session.message = 'Informações atualizadas com sucesso!'
-        res.redirect('/employee-profile')
+	}).then(employee => { // does update the session
+			req.session.employee = employee // update the user in the session
+			req.session.employee.pwdDecrypted = SecurityPassword.decrypt(employee.pwd)
+			req.session.message = 'Informações atualizadas com sucesso!'
+			res.redirect('/employee-profile')
 
-    }).catch(err => {
-        console.error(err)
-        req.session.error = err.sqlMessage
-        res.redirect('/home-employee')
-    }).then(() => {
-        connect.end()
-    })
+	}).catch(err => {
+			console.error(err)
+			req.session.error = err.sqlMessage
+			res.redirect('/home-employee')
+	}).then(() => {
+			connect.end()
+	})
 
 }
 

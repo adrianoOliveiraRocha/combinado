@@ -45,32 +45,11 @@
         
       </div>
 
-      <div class="content mt-3">
-        <% if(typeof message != 'undefined' && message != '') { %>
-        <div class="col-sm-12">
-          <div class="alert  alert-success alert-dismissible fade show" role="alert">
-            <%=message%>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-        <% } %>    
+      <div class="content mt-3" id="divResponse">
+        
+        <strong>My content will live here!</strong>    
 
-        <% if(typeof error != 'undefined' && error != '') { %>
-        <div class="col-sm-12">
-          <div class="alert  alert-danger alert-dismissible fade show" role="alert">
-            <%=error%>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-        <% } %>      
-
-        <!--<strong>My content will live here!</strong>-->    
-
-        </div> <!-- .content -->
+      </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
     <%-include('./include/bottom-links.ejs')%>          

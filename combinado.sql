@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: combinado
 -- ------------------------------------------------------
--- Server version	8.0.26-0ubuntu0.20.04.3
+-- Server version	8.0.27-0ubuntu0.20.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -97,7 +97,7 @@ CREATE TABLE `employee` (
   KEY `userid` (`userid`),
   KEY `employeeId` (`id`),
   CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `employee_day` (
   KEY `employeeId` (`employeeId`),
   KEY `employeeDayId` (`id`),
   CONSTRAINT `employee_day_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `employee_service` (
   CONSTRAINT `employee_service_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`),
   CONSTRAINT `employee_service_ibfk_2` FOREIGN KEY (`employeeid`) REFERENCES `employee` (`id`),
   CONSTRAINT `employee_service_ibfk_3` FOREIGN KEY (`serviceid`) REFERENCES `service` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +224,7 @@ CREATE TABLE `service` (
   KEY `userid` (`userid`),
   KEY `serviceId` (`id`),
   CONSTRAINT `service_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +233,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'Service 1',4),(2,'Service 2',4),(3,'Service 3',4),(4,'Service 4',4),(5,'Service 5',4),(6,'Hair Stylist',5),(7,'Manicure',5),(8,'Pedicure',5),(9,'Eyebrow Design',5),(16,'Service1',6),(17,'Service2',6),(18,'Service3',6);
+INSERT INTO `service` VALUES (1,'Service 1',4),(2,'Service 2',4),(3,'Service 3',4),(4,'Service 4',4),(5,'Service 5',4),(6,'Hair Stylist',5),(7,'Manicure',5),(8,'Pedicure',5),(9,'Eyebrow Design',5),(16,'Service1',6),(17,'Service2',6),(18,'Service3',6),(23,'Service 6',4);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('8zgeyegEt8hfGjOav_26Q0YSNqFAeLFk',1635947218,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"message\":\"\",\"error\":\"\",\"user\":{\"id\":4,\"username\":\"Marcos Silva\",\"pwd\":\"2a17f94cc5c3946e5500689dd2933657\",\"creationDate\":\"2019-07-07T12:25:41.000Z\",\"website\":\"https://www.google.com\",\"color1\":null,\"color2\":null,\"email\":\"mar@email.com\",\"admin\":0,\"image\":\"1569587616897.jpg\",\"blocked\":0,\"joinedToken\":\"EC-9HU263647L0407615\",\"pwdDecrypted\":\"mar123\"},\"loged\":true}'),('o3iLuZzv4g_RIbvTs2nOjDucX8KDC3E_',1635873676,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"message\":\"\",\"error\":\"\",\"user\":{\"id\":4,\"username\":\"Marcos Silva\",\"pwd\":\"2a17f94cc5c3946e5500689dd2933657\",\"creationDate\":\"2019-07-07T12:25:41.000Z\",\"website\":\"https://www.google.com\",\"color1\":null,\"color2\":null,\"email\":\"mar@email.com\",\"admin\":0,\"image\":\"1569587616897.jpg\",\"blocked\":0,\"joinedToken\":\"EC-9HU263647L0407615\",\"pwdDecrypted\":\"mar123\"},\"loged\":true}'),('pdA2RkMrIIT5tH-5Lyb2Fshvw0GxCDRs',1635880960,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"message\":\"\",\"error\":\"\",\"user\":{\"id\":4,\"username\":\"Marcos Silva\",\"pwd\":\"2a17f94cc5c3946e5500689dd2933657\",\"creationDate\":\"2019-07-07T12:25:41.000Z\",\"website\":\"https://www.google.com\",\"color1\":null,\"color2\":null,\"email\":\"mar@email.com\",\"admin\":0,\"image\":\"1569587616897.jpg\",\"blocked\":0,\"joinedToken\":\"EC-9HU263647L0407615\",\"pwdDecrypted\":\"mar123\"},\"loged\":true}'),('sMvDo-twOzgvsxqzm8TChGQG1gudOMKa',1635879448,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"message\":\"\",\"error\":\"\",\"user\":{\"id\":4,\"username\":\"Marcos Silva\",\"pwd\":\"2a17f94cc5c3946e5500689dd2933657\",\"creationDate\":\"2019-07-07T12:25:41.000Z\",\"website\":\"https://www.google.com\",\"color1\":null,\"color2\":null,\"email\":\"mar@email.com\",\"admin\":0,\"image\":\"1569587616897.jpg\",\"blocked\":0,\"joinedToken\":\"EC-9HU263647L0407615\",\"pwdDecrypted\":\"mar123\"},\"loged\":true}');
+INSERT INTO `sessions` VALUES ('vVM-jlIe-BzMKLR0Ns38S-Vyb6UWBETy',1636570689,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"message\":\"\",\"error\":\"\",\"employee\":{\"id\":1,\"email\":\"ali@email.com\",\"pwd\":\"f5df4313797caf372fe62688f90c022c\",\"name\":\"Aline Moreira\",\"phone\":\"(85)999887766\",\"address\":\"Rua Almeida Prado 34\",\"userid\":4,\"aboutMe\":\"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\",\"image\":\"1570192902293.jpeg\",\"type\":2,\"pwdDecrypted\":\"ali123\"},\"loged\":true}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +295,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Adriano Oliveira','e77cb965bf3d3a67f1aacab36cf1e136','2019-01-01 00:00:00','',NULL,NULL,'adriano.qwe32@gmail.com',1,'1567768213162.png',0,'admin'),(4,'Marcos Silva','2a17f94cc5c3946e5500689dd2933657','2019-07-07 09:25:41','https://www.google.com',NULL,NULL,'mar@email.com',0,'1569587616897.jpg',0,'EC-9HU263647L0407615'),(5,'Jully Albuquerque','5ed0bf220c90d8ace24008f01f8038ca','2019-10-17 08:04:58','https://google.com',NULL,NULL,'jully@email.com',0,'1571310377179.jpg',0,'no-agreement'),(6,'Emma Thompsom','354d8f8528b672a914c00d1ebdba8318','2019-10-17 09:12:15','https://yahoo.com','#3322dd','#cc3445','emm@email.com',0,'1571314364800.jpeg',0,'no-agreement');
+INSERT INTO `user` VALUES (1,'Adriano Oliveira','e77cb965bf3d3a67f1aacab36cf1e136','2019-01-01 00:00:00','',NULL,NULL,'adriano.qwe32@gmail.com',1,'1567768213162.png',0,'admin'),(4,'Marcos Silva','2a17f94cc5c3946e5500689dd2933657','2019-07-07 09:25:41','https://www.google.com','#545632','#552233','mar@email.com',0,'1569587616897.jpg',0,'EC-9HU263647L0407615'),(5,'Jully Albuquerque','5ed0bf220c90d8ace24008f01f8038ca','2019-10-17 08:04:58','https://google.com',NULL,NULL,'jully@email.com',0,'1571310377179.jpg',0,'no-agreement'),(6,'Emma Thompsom','354d8f8528b672a914c00d1ebdba8318','2019-10-17 09:12:15','https://yahoo.com','#3322dd','#cc3445','emm@email.com',0,'1571314364800.jpeg',0,'no-agreement');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -308,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-02 13:31:50
+-- Dump completed on 2021-11-09 15:59:41

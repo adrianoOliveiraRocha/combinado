@@ -12,7 +12,7 @@ Problems with nodemon:
  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 MySQL
- - sudo mysqldump --databases qss > qss.sql;
+ - sudo mysqldump --databases combinado > combinado.sql;
 
  - alter table message add messageDate timestamp not null default current_timestamp;
 
