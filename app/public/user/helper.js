@@ -213,6 +213,18 @@ const User = (function () {
 		testLink() {
 			let url = '/test-link', container = document.getElementById('divResponse')
 			simpleGetAjax(url, container)
+		}, 
+
+		profile() {
+			let container = document.getElementById('divResponse')
+			let url = '/user-profile'
+			simpleGetAjax(url, container)
+		},
+
+		editProfile() {
+			let form = document.getElementById('profile-form')
+			let container = document.getElementById('divResponse')
+			simplePostAjax(form, container)
 		}
 	}
 })()

@@ -67,7 +67,6 @@ module.exports.profile = (req, res, application) => {
 			}
 		})
 
-
 	}
 }
 
@@ -125,14 +124,19 @@ module.exports.editProfile = (req, res, application) => {
 
 		req.session.user = user // update the user in the session
 		req.session.user.pwdDecrypted = SecurityPassword.decrypt(user.pwd)
-		req.session.message = 'Informações atualizadas com sucesso!'
-		if (user.admin == 0) res.redirect('/user-home')
+		
+		if (user.admin == 0) {
+			res.render('user/advise.ejs', {
+				advise: "Informações atualizadas com sucesso!",
+				type: 'success'
+			})
+		}
 		else res.redirect('/admin')
 
 	}).catch(err => {
 		console.error(err.sqlMessage)
 		let errorMessage = err.sqlMessage
-		res.render('user/error.ejs', {
+		res.render('user/error-ajax.ejs', {
 			user: req.session.user,
 			error: errorMessage
 		})
@@ -747,11 +751,11 @@ module.exports.billingAgremment = function(req, res, application) {
 		} else {
 			// Capture HATEOAS links
 			billingAgreement.links.forEach(linkObj => {
-						links[linkObj.rel] = {
-								href: linkObj.href,
-								method: linkObj.method
-						}
-				})
+					links[linkObj.rel] = {
+						href: linkObj.href,
+						method: linkObj.method
+					}
+			})
 				// If redirect url present, redirect user
 			if (links.hasOwnProperty('approval_url')) {
 				//REDIRECT USER TO links['approval_url'].href
