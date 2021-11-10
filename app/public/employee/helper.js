@@ -36,6 +36,36 @@ const Employee = (function () {
       let url = '/employee-profile'
       let container = document.getElementById('divResponse')
       simpleGetAjax(url, container)
+    },
+
+    edit() {
+      let form = document.getElementById('form-employee')
+      let container = document.getElementById('divResponse')
+      simplePostAjax(form, container)
+    },
+
+    services() {
+      let url = '/employee-services'
+      let container = document.getElementById('divResponse')
+      simpleGetAjax(url, container)
+    }, 
+
+    updateServices() {
+      let container = document.getElementById('divResponse')
+      let form = document.getElementById('services-form')
+      simplePostAjax(form, container)
+    }, 
+
+    configQuery() {
+      let url = '/config-query'
+      let container = document.getElementById('divResponse')
+      simpleGetAjax(url, container)
+    },
+
+    editConfigQuery() {
+      let container = document.getElementById('divResponse')
+      let form = document.getElementById('query-form')
+      simplePostAjax(form, container);
     }
   }
-})()
+})();

@@ -67,223 +67,226 @@ module.exports.editProfile = (req, res, application) => {
 				}
 			})
 		})
-
 	}).then(employee => { // does update the session
-			req.session.employee = employee // update the user in the session
-			req.session.employee.pwdDecrypted = SecurityPassword.decrypt(employee.pwd)
-			req.session.message = 'Informações atualizadas com sucesso!'
-			res.redirect('/employee-profile')
-
-	}).catch(err => {
-			console.error(err)
-			req.session.error = err.sqlMessage
-			res.redirect('/home-employee')
+		req.session.employee = employee // update the user in the session
+		req.session.employee.pwdDecrypted = SecurityPassword.decrypt(employee.pwd)
+		res.render('user/advise.ejs', {
+			type: "success",
+			advise: "Perfil atualizado com sucesso"
+		})
+	}).catch(err => {			
+		res.render('employee/error-ajax.ejs', {
+			error: "Não foi possível atualizar as informações do seu perfil: " + err
+		})
 	}).then(() => {
-			connect.end()
+		connect.end()
 	})
 
 }
 
 module.exports.employeeServices = (req, res, application) => {
-    const connect = application.config.connect()
-    const Service = application.app.models.Service
-    const Employee = application.app.models.Employee
+	const connect = application.config.connect()
+	const Service = application.app.models.Service
+	const Employee = application.app.models.Employee
 
-    function getServices() {
-        return new Promise((resolve, reject) => {
-            Service.getAll(req.session.employee.userid, connect, (err, services) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(services)
-                }
-            })
-        })
-    }
+	function getServices() {
+		return new Promise((resolve, reject) => {
+			Service.getAll(req.session.employee.userid, connect, (err, services) => {
+				if (err) {
+					reject(err)
+				} else {
+					resolve(services)
+				}
+			})
+		})
+	}
 
-    function getMyServices() {
-        return new Promise((resolve, reject) => {
-            Employee.getMyServices(req.session.employee.id, connect, (err, result) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
-    }
+	function getMyServices() {
+		return new Promise((resolve, reject) => {
+			Employee.getMyServices(req.session.employee.id, connect, (err, result) => {
+				if (err) {
+					reject(err)
+				} else {
+					resolve(result)
+				}
+			})
+		})
+	}
 
-    Promise.all([getServices(), getMyServices()])
-        .then(([services, myServices]) => {
+	Promise.all([getServices(), getMyServices()])
+		.then(([services, myServices]) => {
 
-            function isChecked(serviceId) {
-                for (let i in myServices) {
-                    if (myServices[i].serviceid == serviceId) {
-                        return 'checked'
-                    }
-                }
-            }
+			function isChecked(serviceId) {
+				for (let i in myServices) {
+					if (myServices[i].serviceid == serviceId) {
+						return 'checked'
+					}
+				}
+			}
 
-            res.render('employee/edit-myservices.ejs', {
-                employee: req.session.employee,
-                services: services,
-                myServices: myServices,
-                isChecked: isChecked
-            })
+			res.render('employee/edit-myservices.ejs', {
+				employee: req.session.employee,
+				services: services,
+				myServices: myServices,
+				isChecked: isChecked
+			})
 
 
-        }).catch(err => {
-            console.error(err)
-            req.session.error = 'Erro ao pesquisar os serviços cadastrados'
-            res.redirect('/home-employee')
-        }).then(() => {
-            connect.end()
-        })
+		}).catch(err => {
+			console.error(err)
+			req.session.error = 'Erro ao pesquisar os serviços cadastrados'
+			res.render('employee/error-ajax.ejs', {
+				error: "Não foi possível exibir a página de serviços: " + err
+			})
+		}).then(() => {
+			connect.end()
+		})
 }
 
 module.exports.updateMyServices = (req, res, application) => {
-    var data = req.body
-    const connect = application.config.connect()
-    const Employee = application.app.models.Employee
+	var data = req.body
+	const connect = application.config.connect()
+	const Employee = application.app.models.Employee
 
-    function deleteMyServices() {
-        return new Promise((resolve, reject) => {
-            Employee.deleteMyServices(req.session.employee.id, connect, (err, result) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
-    }
+	function deleteMyServices() {
+		return new Promise((resolve, reject) => {
+			Employee.deleteMyServices(req.session.employee.id, connect, (err, result) => {
+				if (err) {
+					reject(err)
+				} else {
+					resolve(result)
+				}
+			})
+		})
+	}
 
-    async function updateMyServices() {
-        var result = await deleteMyServices()
-        return new Promise((resolve, reject) => {
-            Employee.updateMyServices(req.session.employee.id, req.session.employee.userid,
-                data, connect, (err, result) => {
-                    if (err) {
-                        reject(err)
-                    } else {
-                        resolve(result)
-                    }
-                })
-        })
-    }
+	async function updateMyServices() {
+		var result = await deleteMyServices()
+		return new Promise((resolve, reject) => {
+			Employee.updateMyServices(req.session.employee.id, req.session.employee.userid,
+				data, connect, (err, result) => {
+					if (err) {
+						reject(err)
+					} else {
+						resolve(result)
+					}
+				})
+		})
+	}
 
-    updateMyServices().then(result => {
-        req.session.message = 'Atualizado com sucesso!'
-        res.redirect('/home-employee')
+	updateMyServices().then(result => {
+		res.render('employee/advise.ejs', {
+			advise: "Serviços atualizados com sucesso!",
+			type: "success"
+		})
 
-    }).catch(err => {
-        console.error(err)
-        if (err.errno == 1065) {
-            req.session.error = `
-                Você não registrou nenhum serviço. É importante que o cliente saiba que tipo de serviço
-                você presta. Você pode registrar um serviço no seu perfil a qualquer momento`
-            res.redirect('/home-employee')
-        } else {
-            req.session.error = 'Ocorreu um problema ao tentar atualizar os serviços!'
-            res.redirect('/home-employee')
-        }
-    })
+	}).catch(err => {
+		if (err.errno == 1065) {
+				let error = `
+					Você não registrou nenhum serviço. É importante que o cliente saiba que tipo de serviço
+					você presta. Você pode registrar um serviço no seu perfil a qualquer momento`
+				res.render('employee/error-ajax.ejs', {error})
+		} else {
+			let error = 'Ocorreu um problema ao tentar atualizar os serviços: ' + err
+			res.redirect('/home-employee')
+		}
+	})
 
 }
 
 module.exports.configQuery = (req, res, application) => {
-    const Employee = application.app.models.Employee
-    const connect = application.config.connect()
+	const Employee = application.app.models.Employee
+	const connect = application.config.connect()
 
-    Employee.getEmployeeDays(req.session.employee.id, connect, (err, result) => {
-        if (err) {
-            console.error(err.sqlMessage)
-            req.session.error = 'Erro tentando recuperar horários deste colaborador'
-            res.redirect('/home-employee')
-        } else {
+	Employee.getEmployeeDays(req.session.employee.id, connect, (err, result) => {
+		if (err) {
+			let error = 'Erro tentando recuperar horários deste colaborador: ' + err
+			res.render('employee/error-ajax.ejs', {error})
+		} else {
+			var configuratedDays = []
+			Object.keys(result).forEach(index => {
+				configuratedDays.push(result[index].dayCode)
+			})
 
-            var configuratedDays = []
-            Object.keys(result).forEach(index => {
-                configuratedDays.push(result[index].dayCode)
-            })
+			var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+			// the current day did be null, But now, it is not possible any more.
+			// So, this test, in this moment, is not necessary any more
+			function getCurrentDay(dayCode) {
+				if (Object.keys(result).length == 0) {
+					return null
+				} else {
+					var currentDay = null
+					if (configuratedDays.includes(parseInt(dayCode))) {
+						result.forEach(day => {
+							if (day.dayCode == dayCode) {
+								currentDay = day
+							}
+						})
+					}
+					return currentDay
+				}
+			}
 
-            var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
-                // the current day did be null, But now, it is not possible any more.
-                // So, this test, in this moment, is not necessary any more
-            function getCurrentDay(dayCode) {
-                if (Object.keys(result).length == 0) {
-                    return null
-                } else {
-                    var currentDay = null
-                    if (configuratedDays.includes(parseInt(dayCode))) {
-                        result.forEach(day => {
-                            if (day.dayCode == dayCode) {
-                                currentDay = day
-                            }
-                        })
-                    }
-                    return currentDay
-                }
-            }
-
-            res.render('employee/config-query.ejs', {
-                employee: req.session.employee,
-                days: days,
-                getCurrentDay: getCurrentDay,
-                currentQueryTime: function() {
-                    if (Object.keys(result).length > 0) {
-                        return result[0].queryTime
-                    } else {
-                        return null
-                    }
-                }
-            })
-        }
-    })
+			res.render('employee/config-query.ejs', {
+				employee: req.session.employee,
+				days: days,
+				getCurrentDay: getCurrentDay,
+				currentQueryTime: function() {
+					if (Object.keys(result).length > 0) {
+						return result[0].queryTime
+					} else {
+						return null
+					}
+				}
+			})
+		}
+	})
 
 }
 
 module.exports.editQueryConfig = (req, res, application) => {
 
-    const connect = application.config.connect()
-    var data = req.body
-    const Employee = application.app.models.Employee
+	const connect = application.config.connect()
+	var data = req.body
+	const Employee = application.app.models.Employee
 
-    Employee.editQueries(data, req.session.employee.id, connect, (err, result) => {
-        connect.end()
-        if (err) {
-            console.error(err.sqlMessage)
-            req.session.error = 'Não foi possível realizar essa operação'
-            res.redirect('/home-employee')
-        } else {
-            req.session.message = 'Configurado com sucesso!'
-            res.redirect('/home-employee')
-        }
-    })
+	Employee.editQueries(data, req.session.employee.id, connect, (err, result) => {
+		connect.end()
+		if (err) {
+			console.error(err.sqlMessage)
+			let error = 'Não foi possível realizar essa operação: ' + err
+			res.render('employee/error-ajax.ejs', {error})
+		} else {
+			res.render('employee/advise.ejs', {
+				advise: "Configurado com sucesso",
+				type: "success"
+			})
+		}
+	})
 
 }
 
 module.exports.showAllSchedulings = (req, res, application) => {
-    const employeeId = req.session.employee.id
-    const Scheduling = application.app.models.Scheduling
-    const connect = application.config.connect()
+	const employeeId = req.session.employee.id
+	const Scheduling = application.app.models.Scheduling
+	const connect = application.config.connect()
 
-    Scheduling.getAllSchedulings(employeeId, connect, (err, result) => {
-        connect.end()
-        if (err) {
-            console.error(err.sqlMessage)
-            req.session.error = 'Não foi possível recuperar os agendamentos'
-            res.redirect('/home-employee')
-        } else {
-            res.render('employee/view-schedulings.ejs', {
-                employee: req.session.employee,
-                isFuture: application.app.helpers.validDateTime,
-                schedulings: result,
-                status: 'Todos',
-                portugueseDateTime: application.app.helpers.portugueseDateTime
-            })
-        }
-    })
+	Scheduling.getAllSchedulings(employeeId, connect, (err, result) => {
+		connect.end()
+		if (err) {
+			console.error(err.sqlMessage)
+			let error = 'Não foi possível recuperar os agendamentos: ' + err;
+			res.redirect('employee/error-ajax.ejs', {error})
+		} else {
+			res.render('employee/view-schedulings.ejs', {
+				employee: req.session.employee,
+				isFuture: application.app.helpers.validDateTime,
+				schedulings: result,
+				status: 'Todos',
+				portugueseDateTime: application.app.helpers.portugueseDateTime
+			})
+		}
+	})
 }
 
 module.exports.showOldSchedulings = (req, res, application) => {

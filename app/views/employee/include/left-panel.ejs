@@ -5,8 +5,8 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fa fa-bars"></i>
       </button>
-      <a class="navbar-brand" href="/home-employee"><img src="admin/images/logo.png" alt="Logo"></a>
-      <a class="navbar-brand hidden" href="./"><img src="admin/images/logo2.png" alt="Logo"></a>
+      <a class="navbar-brand" href="/home-employee">Colaborador</a>
+      <a class="navbar-brand hidden" href="./">C</a>
     </div>
 
     <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -14,7 +14,7 @@
         <li class="menu-item-has-children dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Serviços</a>
           <ul class="sub-menu children dropdown-menu">
-            <li><i class="fa fa-save"></i><a href="employee-services">Exibir</a></li>
+            <li><i class="fa fa-save"></i><a href="#" onclick="Employee.services()">Exibir</a></li>
             
           </ul>
         </li>
@@ -22,7 +22,7 @@
         <li class="menu-item-has-children dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-agenda"></i>Agendamentos</a>
           <ul class="sub-menu children dropdown-menu">
-            <li><i class="menu-icon ti-settings"></i><a href="/config-query">Configurar</a></li>
+            <li><i class="menu-icon ti-settings"></i><a href="#" onclick="Employee.configQuery()">Configurar</a></li>
             <li><i class="menu-icon ti-layers-alt"></i><a href="/show-all-schedulings">Todos</a></li>
             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="/show-old-scheduling">Antigos</a></li>
             <li><i class="menu-icon fa fa-folder-o"></i><a href="/show-new-scheduling">Novos</a></li>
