@@ -7,8 +7,8 @@
   style="overflow: scroll; max-height: 250px;">
   <p class="bg-info" style="color: #fff">Novos Agendamentos</p>
   <%for(notification of notifications) {%>
-  <a class="dropdown-item media bg-flat-color-1" 
-    href="/show-scheduling?schedulingId=<%=notification.id%>">
+  <a class="dropdown-item media bg-flat-color-1" href="#"
+    onclick="Employee.showScheduling('<%=notification.id%>')">
     <i class="fa fa-calendar"></i>
     <p style="color: #000">
       <%=notification._datetime.toLocaleString()%>
