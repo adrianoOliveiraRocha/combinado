@@ -54,20 +54,20 @@ app.use(bodyParser.json());
 app.use(express.static('./app/public'));
 app.use('/upload', express.static('./app/public/upload'));
 app.use(expressSession({
-    cookieName: 'expressSession',
-    secret: 'weareprogrammers-frombrazil-thatisweareit',
-    store: sessionStore,
-    resave: false,
-    rolling: true,
-    saveUninitialized: true,
-    cookie: {},
-    unset: 'keep',
+	cookieName: 'expressSession',
+	secret: 'weareprogrammers-frombrazil-thatisweareit',
+	store: sessionStore,
+	resave: false,
+	rolling: true,
+	saveUninitialized: true,
+	cookie: {},
+	unset: 'keep',
 }));
 
-// if (app.get('env') === 'production') {
-//     app.set('trust proxy', 1) // trust first proxy
-//     expressSession.cookie.secure = true;
-// };
+if (app.get('env') === 'production') {
+	app.set('trust proxy', 1) // trust first proxy
+	expressSession.cookie.secure = true;
+};
 
 const path = require('path');
 consign()

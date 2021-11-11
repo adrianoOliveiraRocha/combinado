@@ -356,49 +356,48 @@ module.exports.shedulingNotifications = (req, res, application) => {
 }
 
 module.exports.showScheduling = (req, res, application) => {
-    var schedulingId = req.query.schedulingId
-    const Scheduling = application.app.models.Scheduling
-    const connect = application.config.connect()
+	var schedulingId = req.query.schedulingId
+	const Scheduling = application.app.models.Scheduling
+	const connect = application.config.connect()
 
-    const cancellable = () => {
-        // It test wether the datetime is future
-        return new Promise((resolve, reject) => {
-            Scheduling.getThisCancellable(schedulingId, connect, (err, result) => {
-                if (err) reject(err)
-                else resolve(result[0].ICan)
-            })
-        })
-    }
+	const cancellable = () => {
+		// It test wether the datetime is future
+		return new Promise((resolve, reject) => {
+			Scheduling.getThisCancellable(schedulingId, connect, (err, result) => {
+				if (err) reject(err)
+				else resolve(result[0].ICan)
+			})
+		})
+	}
 
-    async function show() {
-        const isItCancellable = await cancellable()
-        return new Promise((resolve, reject) => {
-            Scheduling.getThis(schedulingId, connect, (err, result) => {
-                if (err) reject(err)
-                else {
-                    const response = {
-                        isItCancellable: isItCancellable,
-                        scheduling: result[0]
-                    }
-                    resolve(response)
-                }
-            })
-        })
-    }
+	async function show() {
+		const isItCancellable = await cancellable()
+		return new Promise((resolve, reject) => {
+			Scheduling.getThis(schedulingId, connect, (err, result) => {
+				if (err) reject(err)
+				else {
+					const response = {
+						isItCancellable: isItCancellable,
+						scheduling: result[0]
+					}
+					resolve(response)
+				}
+			})
+		})
+	}
 
-    show().then(response => {
-        connect.end()
-        res.render('employee/scheduling-detail.ejs', {
-            employee: req.session.employee,
-            scheduling: response.scheduling,
-            isItCancellable: response.isItCancellable,
-            portugueseDateTime: application.app.helpers.portugueseDateTime
-        })
-    }).catch(err => {
-        console.error(err)
-        req.session.error = 'Não foi possível recuperar as informações desse agendamento'
-        res.redirect('/home-employee')
-    })
+	show().then(response => {
+		connect.end()
+		res.render('employee/scheduling-detail.ejs', {
+			employee: req.session.employee,
+			scheduling: response.scheduling,
+			isItCancellable: response.isItCancellable,
+			portugueseDateTime: application.app.helpers.portugueseDateTime
+		})
+	}).catch(err => {
+		let error = 'Não foi possível recuperar as informações desse agendamento: ' + err
+		res.render('employee/error-ajax.ejs', {error})
+	})
 
 }
 

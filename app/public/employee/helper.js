@@ -66,6 +66,12 @@ const Employee = (function () {
       let container = document.getElementById('divResponse')
       let form = document.getElementById('query-form')
       simplePostAjax(form, container);
+    },
+
+    showScheduling(schedulingId) {
+      let container = document.getElementById('divResponse')
+      let url = '/show-scheduling?schedulingId=' + schedulingId
+      simpleGetAjax(url, container)
     }
   }
 })();

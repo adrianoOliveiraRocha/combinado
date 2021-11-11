@@ -55,7 +55,7 @@
                     <% for(let scheduling of schedulings) {  %>
                     <tr>                    
                       <td>
-                        <a href="/show-scheduling?schedulingId=<%=scheduling.id%>">
+                        <a href="#" onclick="Employee.showScheduling('<%=scheduling.id%>')">
                           <% if(isFuture(scheduling._datetime)) { %>
                           <div class="alert alert-primary" style="text-align: center">
                             <%=portugueseDateTime(scheduling._datetime)%>                            
