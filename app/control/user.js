@@ -19,23 +19,34 @@ module.exports.home = (req, res, application) => {
 		})
 
 	} else {
-		const PaymentRequest = application.app.models.PaymentRequest
-		PaymentRequest.getForThisUser(req.session.user.id, connect, (err, paymentRequests) => {
-			if (err) {
-				res.render('user/error.ejs', {
-					user: req.session.user,
-					error: err
+		function getPaymentRequests() {
+			const PaymentRequest = application.app.models.PaymentRequest
+			return new Promise((resolve, reject) => {
+				PaymentRequest.getForThisUser(req.session.user.id, connect, (err, paymentRequests) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(paymentRequests)
+					}
 				})
-			} else {
+			})
+		}
+
+		getPaymentRequests()
+			.then((paymentRequests) => {
 				res.render('user/index.ejs', {
 					user: req.session.user,
-					paymentRequests,
-					message: message,
+					paymentRequests
+				})
+			})
+			.catch(error => {
+				res.render('user/error-ajax.ejs', {
+					user: req.session.user,
 					error: error
 				})
-
-			}
-		})
+			})
+		
+		
 	}
 
 }
