@@ -1,13 +1,22 @@
 module.exports.index = (req, res, application) => {
-	var message = req.session.message
-	req.session.message = ''
-	var error = req.session.error
-	req.session.error = ''
+	const Scheduling = application.app.models.Scheduling;
+	const employee = req.session.employee;
 
-	res.render('employee/index.ejs', {
-		employee: req.session.employee,
-		message: message,
-		error: error
+	const connect = application.config.connect();
+	Scheduling.getNewSchedulings(employee.id, connect, (err, result) => {
+		connect.end();
+		if(err) {
+			res.render('employee/error-ajax.ejs', {
+				error: "Não foi possível recuperar informações sobre novos agendamentos: " + err
+			})
+		} else {
+			console.log(result)
+			res.render('employee/index.ejs', {
+				employee,
+				schedulings: result,
+				portugueseDateTime: application.app.helpers.portugueseDateTime
+			})
+		}
 	})
 
 }

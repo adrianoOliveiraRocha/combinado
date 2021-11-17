@@ -1,6 +1,6 @@
 module.exports = (application) => {
 	application.get('/home-employee', (req, res) => {
-		application.app.control.employee.index(req, res);
+		application.app.control.employee.index(req, res, application);
 	});
 
 	application.get('/employee-profile', (req, res) => {

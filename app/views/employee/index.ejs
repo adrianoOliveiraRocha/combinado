@@ -13,7 +13,7 @@
   <meta name="description" content="Sufee Admin - HTML5 Admin Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <%-include('./include/top-links.ejs')%>
+  <%-include('./include/top-links-table.ejs')%>
 
 </head>
 
@@ -45,15 +45,58 @@
       </div>
 
       <div class="content mt-3" id="divResponse">
-        
-        <div class="card">
-          <div class="card-body">Basic card</div>
-        </div>    
+        <% if(schedulings.length == 0) { %>
+        <h3 class="text-center alert alert-warning">
+          Você não tem novos agendamentos
+        </h3>
+        <% } else { %>
+          
+
+          <div class="animated fadeIn">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <strong class="card-title">Novos Agendamentos</strong>
+                  </div>
+                  <div class="card-body">
+                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Data</th>
+                          <th>Cliente</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(let scheduling of schedulings) {  %>
+                        <tr>                    
+                          <td>
+                            <a href="#" onclick="Employee.showScheduling('<%=scheduling.id%>')">
+                              <div class="alert alert-primary" style="text-align: center">
+                                <%=portugueseDateTime(scheduling._datetime)%>                            
+                              </div>                          
+                            </a>
+                          </td>
+                          <td>
+                            <%=scheduling.clientEmail%>
+                          </td>                    
+                        </tr>                                  
+                        <% } %>            
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- .animated -->
+
+
+        <% } %>
 
       </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
-    <%-include('./include/bottom-links.ejs')%>          
+    <%-include('./include/bottom-links-table.ejs')%>          
 
 </body>
 

@@ -157,6 +157,20 @@ const Scheduling = (function() {
 				and _datetime >= curdate()
 				and canceled = 0`;
 			connect.query(query, callback);
+		},
+
+		getNewSchedulingsFromUser(userId, callback) {
+			let sql = `
+			select scheduling.id as schedulingId, scheduling._datetime, employee.name
+			from scheduling, employee, user
+			where curdate() > scheduling._datetime
+			and scheduling.employeeId = employee.id
+			and employee.userid = user.id
+			and user.id = ${userId} 
+			order by _datetime ASC;
+			`;
+			let connect = require('./../../config/connect')();
+			connect.query(sql, callback)
 		}
 
 	}

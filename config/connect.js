@@ -20,14 +20,14 @@ password = '453231';
 database = 'combinado';
 
 var connect = function() {
-    return mysql.createPool({
-        connectionLimit: 1000,
-        host: host,
-        user: user,
-        password: password,
-        database: database,
-        multipleStatements: true,
-    });
+	return mysql.createPool({
+		connectionLimit: 1000,
+		host: host,
+		user: user,
+		password: password,
+		database: database,
+		multipleStatements: true,
+	});
 }
 
 module.exports = function() {

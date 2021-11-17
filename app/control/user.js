@@ -1,5 +1,3 @@
-const { application } = require('express')
-
 module.exports.home = (req, res, application) => {
 	var message = req.session.message
 	req.session.message = ''
@@ -22,7 +20,7 @@ module.exports.home = (req, res, application) => {
 
 	} else {
 		const PaymentRequest = application.app.models.PaymentRequest
-		PaymentRequest.getForThisUser(req.session.user.id, connect, (err, result) => {
+		PaymentRequest.getForThisUser(req.session.user.id, connect, (err, paymentRequests) => {
 			if (err) {
 				res.render('user/error.ejs', {
 					user: req.session.user,
@@ -31,7 +29,7 @@ module.exports.home = (req, res, application) => {
 			} else {
 				res.render('user/index.ejs', {
 					user: req.session.user,
-					paymentRequests: result,
+					paymentRequests,
 					message: message,
 					error: error
 				})
