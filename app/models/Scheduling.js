@@ -159,17 +159,16 @@ const Scheduling = (function() {
 			connect.query(query, callback);
 		},
 
-		getNewSchedulingsFromUser(userId, callback) {
+		getNewSchedulingsFromUser(userId, connect, callback) {
 			let sql = `
-			select scheduling.id as schedulingId, scheduling._datetime, employee.name
+			select scheduling.id as schedulingId, scheduling._datetime, employee.name as employeeName
 			from scheduling, employee, user
-			where curdate() > scheduling._datetime
+			where curdate() <= scheduling._datetime
 			and scheduling.employeeId = employee.id
 			and employee.userid = user.id
 			and user.id = ${userId} 
 			order by _datetime ASC;
 			`;
-			let connect = require('./../../config/connect')();
 			connect.query(sql, callback)
 		}
 

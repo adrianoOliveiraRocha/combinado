@@ -19,33 +19,44 @@ module.exports.home = (req, res, application) => {
 		})
 
 	} else {
-		function getPaymentRequests() {
-			const PaymentRequest = application.app.models.PaymentRequest
+		async function getPaymentRequests() {
 			return new Promise((resolve, reject) => {
+				const PaymentRequest = application.app.models.PaymentRequest;
 				PaymentRequest.getForThisUser(req.session.user.id, connect, (err, paymentRequests) => {
-					if (err) {
-						reject(err);
-					} else {
-						resolve(paymentRequests)
-					}
+					if (err) reject(err)						
+					else resolve(paymentRequests)
 				})
 			})
 		}
 
-		getPaymentRequests()
-			.then((paymentRequests) => {
+		async function getNewSchedulingsFromUser() {
+			return new Promise((resolve, reject) => {
+				const Scheduling = application.app.models.Scheduling
+				Scheduling.getNewSchedulingsFromUser(req.session.user.id, connect, (err, schedulings) => {
+					if(err) reject(err)
+					else resolve(schedulings)
+				})
+			})
+		}
+
+		Promise.all([getPaymentRequests(), getNewSchedulingsFromUser()])
+			.then(([paymentRequests, schedulings]) => {
 				res.render('user/index.ejs', {
 					user: req.session.user,
-					paymentRequests
+					paymentRequests,
+					schedulings,
+					portugueseDateTime: application.app.helpers.portugueseDateTime,
 				})
 			})
 			.catch(error => {
-				res.render('user/error-ajax.ejs', {
+				res.render('user/error.ejs', {
 					user: req.session.user,
-					error: error
+					error
 				})
 			})
-		
+			.then(() => {
+				connect.end()
+			})	
 		
 	}
 
