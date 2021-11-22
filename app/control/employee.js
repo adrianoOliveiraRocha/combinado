@@ -10,7 +10,6 @@ module.exports.index = (req, res, application) => {
 				error: "Não foi possível recuperar informações sobre novos agendamentos: " + err
 			})
 		} else {
-			console.log(result)
 			res.render('employee/index.ejs', {
 				employee,
 				schedulings: result,
@@ -304,20 +303,20 @@ module.exports.showOldSchedulings = (req, res, application) => {
     const connect = application.config.connect()
 
     Scheduling.getOldSchedulings(employeeId, connect, (err, result) => {
-        connect.end()
-        if (err) {
-            console.error(err.sqlMessage)
-            req.session.error = 'Não foi possível recuperar os agendamentos'
-            res.redirect('/home-employee')
-        } else {
-            res.render('employee/view-schedulings.ejs', {
-                employee: req.session.employee,
-                isFuture: application.app.helpers.validDateTime,
-                schedulings: result,
-                status: 'Antigos',
-                portugueseDateTime: application.app.helpers.portugueseDateTime
-            })
-        }
+			connect.end()
+			if (err) {
+				console.error(err.sqlMessage)
+				req.session.error = 'Não foi possível recuperar os agendamentos'
+				res.redirect('/home-employee')
+			} else {
+				res.render('employee/view-schedulings.ejs', {
+					employee: req.session.employee,
+					isFuture: application.app.helpers.validDateTime,
+					schedulings: result,
+					status: 'Antigos',
+					portugueseDateTime: application.app.helpers.portugueseDateTime
+				})
+			}
     })
 }
 
@@ -396,6 +395,7 @@ module.exports.showScheduling = (req, res, application) => {
 	}
 
 	show().then(response => {
+		console.log(response.scheduling)
 		connect.end()
 		res.render('employee/scheduling-detail.ejs', {
 			employee: req.session.employee,

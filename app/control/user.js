@@ -842,7 +842,6 @@ module.exports.employeeScheduling = (req, res, application) => {
 				error: errorMessage
 			})
 		} else {
-			console.log(result);
 			res.render('user/employee-scheduling.ejs', {
 				schedulings: result,
 				isFuture: application.app.helpers.validDateTime,

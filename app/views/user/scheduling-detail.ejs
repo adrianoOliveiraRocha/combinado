@@ -94,12 +94,14 @@
               </button>
               <div class="dropdown-menu">
                 <%if(scheduling.employeePhone != '' && typeof scheduling.employeePhone != 'undefined') { %>
-                <a class="dropdown-item" href="/send-whatsapp-message-employee?employeePhone=<%=scheduling.employeePhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&employeeName=<%=scheduling.employeeName%>">
+                <a class="dropdown-item" target="_blank" 
+                  href="/send-whatsapp-message-employee?employeePhone=<%=scheduling.employeePhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&employeeName=<%=scheduling.employeeName%>">
                   Para o Colaborador</a>
                 <% } else { %>
                 <i class="dropdown-item" style="color: red" title="Telefone Não Cadastrado">Para o Colaborador</i>
                 <% } %>
-                <a class="dropdown-item" href="/send-whatsapp-message-client?clientPhone=<%=scheduling.clientPhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&clientEmail=<%=scheduling.clientEmail%>">
+                <a class="dropdown-item" target="_blank" 
+                  href="/send-whatsapp-message-client?clientPhone=<%=scheduling.clientPhone%>&_dt=<%=portugueseDateTime(scheduling._datetime)%>&clientEmail=<%=scheduling.clientEmail%>">
                   Para o Cliente</a>
               </div>
             </div>

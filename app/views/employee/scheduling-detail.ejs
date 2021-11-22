@@ -50,7 +50,8 @@
 
         <% if(isItCancellable && !scheduling.canceled) {%>
         <div class="form-group">
-          <a href="/send-whatsapp-message?shedulingId=<%=scheduling.id%>" class="btn btn-info">Lembrete Via WhatSapp</a>
+          <a href="/send-whatsapp-message?shedulingId=<%=scheduling.id%>" target="_blank"
+            class="btn btn-info">Lembrete Via WhatSapp</a>
           <button type="submit" class="btn btn-danger">Cancelar</button>
         </div>   
         <% } %>  
@@ -59,5 +60,6 @@
     </form>
     
   </div>
+  
                 
 </div>
