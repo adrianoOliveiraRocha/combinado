@@ -1,4 +1,5 @@
 const app = require('./config/server')
+const ClientNotification = require('./config/ClientNotification');
 
 if (process.env.USER == 'adriano') {
 	app.listen(8001, () => {
