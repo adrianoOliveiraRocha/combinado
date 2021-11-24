@@ -2,11 +2,11 @@ const app = require('./config/server')
 const ClientNotification = require('./config/ClientNotification');
 const cron = require('node-cron')
 
-cron.schedule('*/3 * * * * *', () => { 
+cron.schedule('* * * * * *', () => { 
 	// s = * * * * * *; m = * * * * *; h = * * * *; d = * * * 
-	ClientNotification.getTomorrowSheduling((err, result) => {
+	ClientNotification.getTomorrowSheduling((err, result, fields) => {
 		if(err) {
-			console.log("OOPS!");
+			console.log("OOPS!", err);
 		} else {
 			console.log(result)
 		}
