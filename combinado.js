@@ -1,5 +1,17 @@
 const app = require('./config/server')
 const ClientNotification = require('./config/ClientNotification');
+const cron = require('node-cron')
+
+cron.schedule('*/3 * * * * *', () => { 
+	// s = * * * * * *; m = * * * * *; h = * * * *; d = * * * 
+	ClientNotification.getTomorrowSheduling((err, result) => {
+		if(err) {
+			console.log("OOPS!");
+		} else {
+			console.log(result)
+		}
+	})
+})
 
 if (process.env.USER == 'adriano') {
 	app.listen(8001, () => {

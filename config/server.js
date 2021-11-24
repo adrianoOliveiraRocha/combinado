@@ -73,6 +73,7 @@ const path = require('path');
 consign()
 	.include(path.resolve('/app/routs'))
 	.then(path.resolve('/config/connect.js')) //you must put the extension
+	.then(path.resolve('/config/ClientNotification.js'))
 	.then(path.resolve('/app/models'))
 	.then(path.resolve('/app/control'))
 	.then(path.resolve('/app/helpers'))
