@@ -17,10 +17,19 @@ const ClientNotification = (function (application) {
       and day(_datetime) = day(ADDDATE(CURDATE(), INTERVAL 1 DAY))`
 
       connection.connect()
-      connection.query(sql, callback)
+
+      connection.query(sql, (err, result, fields) => {
+        if(err) {
+          console.log("OOPS!", err);
+        } else {
+          console.log(result)
+        }
+      })
+
       connection.end(() => {
         console.log('Data base closed')
       })
+      
     }
   }
 })()
