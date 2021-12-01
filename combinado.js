@@ -1,13 +1,13 @@
 const app = require('./config/server')
 const ClientNotification = require('./config/ClientNotification');
-/*
+
 const cron = require('node-cron')
 
-cron.schedule('* * * * * *', () => { 
+cron.schedule('*/10 * * * * *', () => { 
 	// s = * * * * * *; m = * * * * *; h = * * * *; d = * * * 
 	ClientNotification.getTomorrowSheduling()
 })
-*/
+
 if (process.env.USER == 'adriano') {
 	app.listen(8001, () => {
 		console.log("Server running on port 8001");

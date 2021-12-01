@@ -1,3 +1,1 @@
-* Problema quando o Usuário clica na nofificação (sininho)
- 
 * QUando o agendamento é futuro e não foi cancelado, o usuário ou o colaborador podem mandar lembrete via whatsapp

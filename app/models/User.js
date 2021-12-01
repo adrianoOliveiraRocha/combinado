@@ -23,13 +23,15 @@ const User = (function() {
 				query = `
 				update user set username = '${data.username}',
 				email = '${data.email}', pwd = '${data.encryptPwd}',
-				website = '${data.website}', color1 = '${data.color1}', color2 = '${data.color2}'
+				website = '${data.website}', color1 = '${data.color1}', color2 = '${data.color2}',
+				companyName = '${data.companyName}', companyEmail = '${data.companyEmail}'
 				where id = ${data.id}`;
 			} else {
 				query = `
 				update user set username = '${data.username}',
 				email = '${data.email}', pwd = '${data.encryptPwd}',
 				website = '${data.website}', color1 = '${data.color1}', color2 = '${data.color2}',
+				companyName = '${data.companyName}', companyEmail = '${data.companyEmail}',
 				image = '${imageName}' where id = ${data.id}`;
 			}
 

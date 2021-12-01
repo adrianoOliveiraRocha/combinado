@@ -30,7 +30,7 @@
 				<div class="col-12 col-md-9">
 					<input type="email" name="email" placeholder="Email" class="form-control"
 						value="<%=user.email%>" />
-					<span class="form-text text-muted">Por favor, digite seu email</span>
+					<span class="form-text text-muted">Esse email é o seu login</span>
 				</div>
 			</div>
 
@@ -45,15 +45,71 @@
 				</div>
 			</div>
 
+			<% if(typeof user.image == 'undefined' || user.image == null) { %>
+				<div class="row form-group">
+					<div class="col col-md-3">
+						<label for="image" class=" form-control-label">Imagem</label>
+					</div>
+					<div class="col-12 col-md-9">
+						<input type="file" name="image" class="form-control"/>
+						<span class="form-text text-muted">
+							Por favor, selecione uma imagem</span>
+					</div>
+				</div>
+			<% } else { %>	
+				<div class="row form-group">
+					<div class="col col-md-3">
+						<label for="image" class=" form-control-label">Imagem</label>
+					</div>
+					<div class="col-12 col-md-9">
+						<img src="admin/images/profile_images/<%=user.image%>" width="100px;" />
+						<hr>
+						<label for="image" class="form-control-label">Substituir Imagem</label>
+						<hr>
+						<input type="file" name="image"/>
+						<span class="form-text text-muted">
+							Por favor, selecione uma imagem se você deseja substituir a imagem atual</span>
+					</div>
+				</div>	
+			<% } %>
+
+			<hr>
+			
+			<div class="row form-group">
+				<div class="col col-md-3">
+					<label for="companyName" class=" form-control-label">Nome da Empresa</label>
+				</div>
+				<div class="col-12 col-md-9">
+					<input type="text" name="companyName" placeholder="Digite o nome da sua empresa"
+					class="form-control" value="<%=user.companyName%>"/>
+					<span class="form-text text-muted">
+						O nome da empresa aparecará na sua página de agendamentos e 
+						nas mensagens enviadas ao cliente</span>
+				</div>
+			</div>
+
+			<div class="row form-group">
+				<div class="col col-md-3">
+					<label for="companyEmail" class=" form-control-label">Email da Empresa</label>
+				</div>
+				<div class="col-12 col-md-9">
+					<input type="email" name="companyEmail" placeholder="Digite o email da sua empresa"
+					class="form-control" value="<%=user.companyEmail%>"/>
+					<span class="form-text text-muted">
+						O email da empresa aparecará na sua página de agendamentos e 
+						nas mensagens enviadas ao cliente</span>
+				</div>
+			</div>
+
 			<div class="row form-group">
 				<div class="col col-md-3">
 					<label for="website" class=" form-control-label">Site</label>
 				</div>
 				<div class="col-12 col-md-9">
-					<input type="url" name="website" placeholder="Digite o endereço do seu site"
+					<input type="url" name="website" placeholder="Digite o site da sua empresa"
 					class="form-control" value="<%=user.website%>"/>
 					<span class="form-text text-muted">
-						https://www.seusite.com.br</span>
+						https://www.minhaempresa.com.br</span>
 				</div>
 			</div>
 
@@ -65,7 +121,11 @@
 					<input type="text" name="color1" placeholder="Digite o código hexadecimal da côr principal"
 					class="form-control" value="<%=user.color1%>" maxlength="7"/>
 					<span class="form-text text-muted">
-						Ex: #4565aa</span>
+						Ex: #4565aa. 
+						<a href="#" data-toggle="modal" data-target="#colorExplanation" title="O que é isso?">
+							<i class="fa fa-question-circle-o" aria-hidden="true"></i>
+						</a>											
+					</span>
 				</div>
 			</div>
 
@@ -77,39 +137,13 @@
 					<input type="text" name="color2" placeholder="Digite o código hexadecimal da côr secundária"
 					class="form-control" value="<%=user.color2%>" maxlength="7"/>
 					<span class="form-text text-muted">
-						Ex: #aa45bb</span>
+						Ex: #aa45bb.
+						<a href="#" data-toggle="modal" data-target="#colorExplanation" title="O que é isso?">
+							<i class="fa fa-question-circle-o" aria-hidden="true"></i>
+						</a>
+					</span>
 				</div>
 			</div>
-
-			<% if(typeof user.image == 'undefined' || user.image == null) { %>
-			<div class="row form-group">
-				<div class="col col-md-3">
-					<label for="image" class=" form-control-label">Imagem</label>
-				</div>
-				<div class="col-12 col-md-9">
-					<input type="file" name="image" class="form-control"/>
-					<span class="form-text text-muted">
-						Por favor, selecione uma imagem</span>
-				</div>
-			</div>
-			<% } else { %>
-
-			<div class="row form-group">
-				<div class="col col-md-3">
-					<label for="image" class=" form-control-label">Imagem</label>
-				</div>
-				<div class="col-12 col-md-9">
-					<img src="admin/images/profile_images/<%=user.image%>" width="100px;" />
-					<hr>
-					<label for="image" class="form-control-label">Substituir Imagem</label>
-					<hr>
-					<input type="file" name="image"/>
-					<span class="form-text text-muted">
-						Por favor, selecione uma imagem se você deseja substituir a imagem atual</span>
-				</div>
-			</div>
-
-			<% } %>
 
 		</form>
 	</div>
@@ -121,4 +155,31 @@
 		</button>
 	</div>		
 
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="colorExplanation">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Cores</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+				Você pode definir duas cores (côr 1 e côr 2) para que sua página de agendamentos tenha 
+				a cara da sua empresa.
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+
+    </div>
+  </div>
 </div>
