@@ -1,4 +1,5 @@
-* Colocar o campo Nome no formulário de agendamento
-* Informações no email de lembrete:
-  Nome do cliente, datatime, link do usuário (para caso o cliente queira cancelar)
-* Quando o agendamento é futuro e não foi cancelado, o usuário ou o colaborador podem mandar lembrete via whatsapp
+* Put the Name field on the scheduling form
+* Information in the reminder email:
+   Customer name; 
+   datatime of the scheduling; 
+   user link (in case the customer wants to cancel).
