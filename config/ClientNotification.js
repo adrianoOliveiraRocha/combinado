@@ -1,3 +1,33 @@
+async function sendMail() {
+  const nodemailer = require('nodemailer')
+  const gmailConfig = require('./gmail-config.json')
+  
+  let transporter = nodemailer.createTransport({
+    host: gmailConfig.smtp,
+    port: gmailConfig.tls_port,
+    //secure: false, // true for 465, false for other ports
+    auth: {
+      user: gmailConfig.username, 
+      pass: gmailConfig.password, 
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: `"${companyName}" <${companyEmail}>`, // sender address
+    to: `${clientEmail}`, // list of receivers
+    subject: "Agendamento ✔", // Subject line
+    text: `Olá ${clientName}`, // plain text body
+    html: `
+    <h2>Olá ${clientName}</h2>
+    <p>Passando pra lembrar do nosso agendamento ${schedulingDatetime}</p>
+    <p>Caso queira cancelar, acesse o nosso link: ${companyLink}</p>
+    <p>Até lá</p>`, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
+}
 
 const ClientNotification = (function (application) {
   return {
@@ -27,8 +57,10 @@ const ClientNotification = (function (application) {
         if(err) {
           console.log("OOPS!", err);
         } else {
-          console.log("My result")
-          console.log(result)
+          for(let i = 0; i < result.length; i++) {
+            console.log(result[0].clientEmail)
+          }
+          
         }
       })
 

@@ -1,1 +1,4 @@
-* QUando o agendamento é futuro e não foi cancelado, o usuário ou o colaborador podem mandar lembrete via whatsapp
+* Colocar o campo Nome no formulário de agendamento
+* Informações no email de lembrete:
+  Nome do cliente, datatime, link do usuário (para caso o cliente queira cancelar)
+* Quando o agendamento é futuro e não foi cancelado, o usuário ou o colaborador podem mandar lembrete via whatsapp

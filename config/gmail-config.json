@@ -1,0 +1,8 @@
+{
+	"smtp": "smtp.gmail.com",
+	"name": "Agenda Fácil",
+	"username": "agendafacilvirtual@gmail.com",
+	"password": "453231@Af",
+	"tls_port": "587",
+	"ssl_port": "465"
+}
