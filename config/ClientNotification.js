@@ -11,12 +11,14 @@ const ClientNotification = (function (application) {
       })
 
       let sql = `
-      select scheduling.id, clientPhone, clientEmail user.companyName. user.companyEmail 
+      select scheduling.id, scheduling.clientPhone, scheduling.clientEmail, 
+      user.companyName, user.companyEmail 
       from scheduling, employee, user 
       where year(_datetime) = year(ADDDATE(CURDATE(), INTERVAL 1 DAY))
       and month(_datetime) = month(ADDDATE(CURDATE(), INTERVAL 1 DAY))
       and day(_datetime) = day(ADDDATE(CURDATE(), INTERVAL 1 DAY))
       and scheduling.employeeId = employee.id
+      and scheduling.canceled = 0
       and employee.userId = user.id`
 
       connection.connect()
@@ -25,6 +27,7 @@ const ClientNotification = (function (application) {
         if(err) {
           console.log("OOPS!", err);
         } else {
+          console.log("My result")
           console.log(result)
         }
       })
