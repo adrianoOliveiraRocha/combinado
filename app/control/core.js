@@ -399,7 +399,10 @@ module.exports.schedule2 = (req, res, application) => {
 }
 
 module.exports.confirmScheduling = (req, res, application) => {
-
+	/*
+	Acrescenta em data o link do usuário para caso o cliente queira vêr o agendamento ou 
+	cancelar
+	*/
 	const data = req.body
 	const Scheduling = application.app.models.Scheduling
 	connect = application.config.connect()

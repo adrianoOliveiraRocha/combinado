@@ -1,5 +1,5 @@
 * Put the Name field on the scheduling form
 * Information in the reminder email:
-   Customer name; 
-   datatime of the scheduling;
+   Customer name; ok 
+   datatime of the scheduling; ok
    user link (in case the customer wants to cancel).

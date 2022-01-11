@@ -5,9 +5,9 @@ const Scheduling = (function() {
 		save: function(data, connect, callback) {
 			let stm = `
 			insert into scheduling
-			(_datetime, comments, clientPhone, clientEmail, employeeId)
+			(_datetime, comments, clientName, clientPhone, clientEmail, employeeId)
 			values('${data.sqlDateTime}', '${data.comments}',
-			'${data.clientPhone}', '${data.clientEmail}', ${data.employeeId})`;
+			'${data.clientName}', '${data.clientPhone}', '${data.clientEmail}', ${data.employeeId})`;
 			connect.query(stm, callback);
 		},
 
