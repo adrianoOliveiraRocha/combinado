@@ -1,4 +1,4 @@
-async function sendMail() {
+async function sendMail(data) {
   const nodemailer = require('nodemailer')
   const gmailConfig = require('./gmail-config.json')
   
@@ -12,24 +12,26 @@ async function sendMail() {
     },
   });
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: `"${companyName}" <${companyEmail}>`, // sender address
-    to: `${clientEmail}`, // list of receivers
-    subject: "Agendamento ✔", // Subject line
-    text: `Olá ${clientName}`, // plain text body
-    html: `
-    <h2>Olá ${clientName}</h2>
-    <p>Passando pra lembrar do nosso agendamento ${schedulingDatetime}</p>
-    <p>Caso queira cancelar, acesse o nosso link: ${companyLink}</p>
-    <p>Até lá</p>`, // html body
-  });
+  for(let i = 0; i < data.length; i++) {
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: `"${data[i].companyName}" <${data[i].companyEmail}>`, // sender address
+      to: `${data[i].clientEmail}`, // list of receivers
+      subject: "Agendamento ✔", // Subject line
+      //text: `Olá ${data[i].clientName}`, // plain text body
+      html: `
+      <h2>Olá ${data[i].clientName}</h2>
+      <p>Passando pra lembrar do nosso agendamento ${data[i].schedulingDatetime}</p>
+      <p>Caso queira cancelar, acesse o nosso link: ${data[i].companyLink}</p>
+      <p>Até lá</p>`, // html body
+    });
 
-  console.log("Message sent: %s", info.messageId);
+    console.log("Message sent: %s", info.messageId);
+  }
 
 }
 
-const ClientNotification = (function (application) {
+const ClientNotification = (function () {
   return {
     getTomorrowSheduling: function(callback) {
       const mysql = require('mysql')
@@ -41,15 +43,15 @@ const ClientNotification = (function (application) {
       })
 
       let sql = `
-      select scheduling.id, scheduling.clientPhone, scheduling.clientEmail, 
-      user.companyName, user.companyEmail 
+      select scheduling.id, scheduling.clientPhone, scheduling._datetime, 
+      scheduling.clientEmail, user.companyName, user.companyEmail 
       from scheduling, employee, user 
       where year(_datetime) = year(ADDDATE(CURDATE(), INTERVAL 1 DAY))
       and month(_datetime) = month(ADDDATE(CURDATE(), INTERVAL 1 DAY))
       and day(_datetime) = day(ADDDATE(CURDATE(), INTERVAL 1 DAY))
       and scheduling.employeeId = employee.id
       and scheduling.canceled = 0
-      and employee.userId = user.id`
+      and employee.userId = user.id`;
 
       connection.connect()
 
@@ -58,7 +60,7 @@ const ClientNotification = (function (application) {
           console.log("OOPS!", err);
         } else {
           for(let i = 0; i < result.length; i++) {
-            console.log(result[0].clientEmail)
+            console.log(result)
           }
           
         }
