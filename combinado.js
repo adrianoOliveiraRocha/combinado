@@ -3,10 +3,10 @@ const ClientNotification = require('./config/ClientNotification');
 
 const cron = require('node-cron')
 
-cron.schedule('*/10 * * * * *', () => { 
-	// s = * * * * * *; m = * * * * *; h = * * * *; d = * * * 
-	ClientNotification.getTomorrowSheduling()
-})
+// cron.schedule('*/10 * * * * *', () => { 
+// 	// s = * * * * * *; m = * * * * *; h = * * * *; d = * * * 
+// 	ClientNotification.getTomorrowSheduling()
+// })
 
 app.listen(8001, () => {
 	console.log("Server running on port 8001");
