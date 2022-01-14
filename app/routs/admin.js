@@ -89,4 +89,8 @@ module.exports = (application) => {
         application.app.control.admin.deleteMessage(req, res, application)
     })
 
+    application.get('/delete-service', (req, res) => {
+        application.app.control.admin.deleteService(req, res, application)
+    })
+
 }

@@ -167,13 +167,20 @@ const Service = (function () {
 			let form = document.createElement('form');
 			form.action = '/edit-service';
 
-			let inputId = document.getElementById('id')
+			let inputId = document.getElementById('id');
 			form.appendChild(inputId);
 
 			let inputName = document.getElementById('name')
 			form.appendChild(inputName);
 
 			simplePostAjax(form, container);
+		},
+
+		delete() {
+			let container = document.getElementById('divResponse');
+			let serviceId = document.getElementById('id').value;
+			let url = '/delete-service?serviceId=' + serviceId;
+			simpleGetAjax(url, container);
 		}
 
 	}

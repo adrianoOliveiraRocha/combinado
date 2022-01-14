@@ -428,3 +428,19 @@ module.exports.deleteMessage = (req, res, application) => {
 		else res.redirect('/admin')	
 	})
 }
+
+module.exports.deleteService = (req, res, application) => {
+	let serviceId = req.query.serviceId;
+	const Service = application.app.models.Service
+	let connect = application.config.connect()
+	Service.delete(serviceId, connect, ((err) => {
+		if(!err) {
+			res.json({'meg': "Deletado"})
+		} else {
+			res.json({'err': err})
+		}
+		connect.end((err) => {
+			if(!err) console.log("Data base closed!");
+		})
+	}))
+}
