@@ -15,8 +15,9 @@ const Service = (function() {
 		},
 
 		edit: function(data, connect, callback) {
-			let query = `update service set name = '${data.name}' 
-			where id = ${data.id}`;
+			let query = `update service set name = '${data.name}', 
+			price = ${data.price.replace(',', '.')} where id = ${data.id}`;
+
 			connect.query(query, callback);
 		},
 

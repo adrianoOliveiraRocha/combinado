@@ -93,4 +93,8 @@ module.exports = (application) => {
         application.app.control.admin.deleteService(req, res, application)
     })
 
+    application.post('/edit-service', (req, res) => {
+        application.app.control.admin.editService(req, res, application)
+    })
+
 }

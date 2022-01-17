@@ -444,3 +444,26 @@ module.exports.deleteService = (req, res, application) => {
 		})
 	}))
 }
+
+module.exports.editService = (req, res, application) => {
+	let data = req.body;
+	const Service = application.app.models.Service;
+	const connect = application.config.connect();
+
+	Service.edit(data, connect, (err) => {
+		if(err) {
+			res.render('user/error-ajax.ejs', 
+			{"error": err.sqlMessage});
+		} else {
+			res.render('user/message-ajax.ejs', 
+			{"msg": "O preço do serviço foi atualizado!"})
+		}
+
+		connect.end((err) => {
+			if(err) console.error(err);
+			else console.log("Database closed");
+		});
+
+	});
+
+}

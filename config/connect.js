@@ -31,5 +31,5 @@ var connect = function() {
 }
 
 module.exports = function() {
-    return connect;
+  return connect;
 }

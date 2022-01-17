@@ -1,5 +1,16 @@
 'use strict'
 
+function fixPrice(obj) {
+	const possibilites = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+	let valueArray = obj.value.split('');
+	let lastElement = valueArray[valueArray.length - 1];
+	if(!(lastElement in possibilites) && lastElement !== ',' && lastElement !== '.') {
+		valueArray[valueArray.length - 1] = "";
+		var updateValue = valueArray.join("");
+		document.getElementById(obj.id).value = updateValue;
+	}
+}
+
 function simpleGetAjax(url, container) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -172,6 +183,9 @@ const Service = (function () {
 
 			let inputName = document.getElementById('name')
 			form.appendChild(inputName);
+
+			let inputPrice = document.getElementById('price')
+			form.appendChild(inputPrice)
 
 			simplePostAjax(form, container);
 		},
