@@ -255,7 +255,7 @@ module.exports.configQuery = (req, res, application) => {
 module.exports.editQueryConfig = (req, res, application) => {
 
 	const connect = application.config.connect()
-	var data = req.body
+	var data = req.body;
 	const Employee = application.app.models.Employee
 
 	Employee.editQueries(data, req.session.employee.id, connect, (err, result) => {

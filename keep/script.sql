@@ -1,7 +1,37 @@
-select scheduling.id as schedulingId, scheduling.clientPhone, scheduling.clientEmail, user.companyName, user.companyEmail 
-from scheduling, employee, user 
-where year(_datetime) = year(ADDDATE(CURDATE(), INTERVAL 1 DAY))
-and month(_datetime) = month(ADDDATE(CURDATE(), INTERVAL 1 DAY))
-and day(_datetime) = day(ADDDATE(CURDATE(), INTERVAL 1 DAY))
-and scheduling.employeeId = employee.id
-and employee.userId = user.id
+Não dá pra atualizar porque a tupla não existe. Tem que inserir 
+
+update employee_day set morningInit = '07:50', morningEnd = '12:45' 
+where employeeId = 2 and dayCode = 0;
+update employee_day set afternoonInit = '14:45', afternoonEnd = '19:50' 
+where employeeId = 2 and dayCode = 0; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 0; 
+update employee_day set morningInit = null, morningEnd = null 
+where employeeId = 2 and dayCode = 1; 
+update employee_day set afternoonInit = null, afternoonEnd = null 
+where employeeId = 2 and dayCode = 1; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 1; 
+update employee_day set morningInit = null, morningEnd = null where employeeId = 2 
+and dayCode = 2; 
+update employee_day set afternoonInit = null, afternoonEnd = null 
+where employeeId = 2 and dayCode = 2; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 2; 
+update employee_day set morningInit = null, morningEnd = null 
+where employeeId = 2 and dayCode = 3; 
+update employee_day set afternoonInit = null, afternoonEnd = null 
+where employeeId = 2 and dayCode = 3; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 3; 
+update employee_day set morningInit = null, morningEnd = null 
+where employeeId = 2 and dayCode = 4; 
+update employee_day set afternoonInit = null, afternoonEnd = null 
+where employeeId = 2 and dayCode = 4; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 4; 
+update employee_day set morningInit = null, morningEnd = null 
+where employeeId = 2 and dayCode = 5; 
+update employee_day set afternoonInit = null, afternoonEnd = null 
+where employeeId = 2 and dayCode = 5; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 5; 
+update employee_day set morningInit = null, morningEnd = null 
+where employeeId = 2 and dayCode = 6; 
+update employee_day set afternoonInit = null, afternoonEnd = null 
+where employeeId = 2 and dayCode = 6; 
+update employee_day set queryTime = 30 where employeeId = 2 and dayCode = 6;

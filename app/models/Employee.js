@@ -110,32 +110,33 @@ const Employee = (function() {
 
     editQueries: function(data, employeeId, connect, callback) {
 
-        var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-        var generalQuery = ``;
-        var queryTime = data.time;
+      var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+      var generalQuery = ``;
+      var queryTime = data.time;
 
-        for (let dayCode in days) {
-            if (data['morningInit' + dayCode].length > 0 &&
-                data['morningEnd' + dayCode].length > 0 &&
-                data['morningInit' + dayCode] < data['morningEnd' + dayCode]) {
-                generalQuery += `update employee_day set morningInit = '${data['morningInit' + dayCode]}', morningEnd = '${data['morningEnd' + dayCode]}' where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
-            } else {
-                generalQuery += `update employee_day set morningInit = null, morningEnd = null where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
-            }
-
-            if (data['afternoonInit' + dayCode].length > 0 &&
-                data['afternoonEnd' + dayCode].length > 0 &&
-                data['afternoonInit' + dayCode] < data['afternoonEnd' + dayCode]) {
-                generalQuery += `update employee_day set afternoonInit = '${data['afternoonInit' + dayCode]}', afternoonEnd = '${data['afternoonEnd' + dayCode]}' where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
-            } else {
-                generalQuery += `update employee_day set afternoonInit = null, afternoonEnd = null where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
-            }
-
-            if (data['queryTime'].length > 0) {
-                generalQuery += `update employee_day set queryTime = ${data['queryTime']} where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
-            }
+      for (let dayCode in days) {
+        if (data['morningInit' + dayCode].length > 0 &&
+          data['morningEnd' + dayCode].length > 0 &&
+          data['morningInit' + dayCode] < data['morningEnd' + dayCode]) {
+          generalQuery += `update employee_day set morningInit = '${data['morningInit' + dayCode]}', morningEnd = '${data['morningEnd' + dayCode]}' where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
+        } else {
+          generalQuery += `update employee_day set morningInit = null, morningEnd = null where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
         }
-        connect.query(generalQuery, callback);
+
+        if (data['afternoonInit' + dayCode].length > 0 &&
+          data['afternoonEnd' + dayCode].length > 0 &&
+          data['afternoonInit' + dayCode] < data['afternoonEnd' + dayCode]) {
+          generalQuery += `update employee_day set afternoonInit = '${data['afternoonInit' + dayCode]}', afternoonEnd = '${data['afternoonEnd' + dayCode]}' where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
+        } else {
+          generalQuery += `update employee_day set afternoonInit = null, afternoonEnd = null where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
+        }
+
+        if (data['queryTime'].length > 0) {
+          generalQuery += `update employee_day set queryTime = ${data['queryTime']} where employeeId = ${employeeId} and dayCode = ${dayCode}; `;
+        }
+      }
+      console.log(generalQuery);
+      connect.query(generalQuery, callback);
 
     },
 
