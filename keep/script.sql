@@ -1,4 +1,4 @@
-Não dá pra atualizar porque a tupla não existe. Tem que inserir 
+-- Não dá pra atualizar porque a tupla não existe. Tem que inserir 
 
 update employee_day set morningInit = '07:50', morningEnd = '12:45' 
 where employeeId = 2 and dayCode = 0;
